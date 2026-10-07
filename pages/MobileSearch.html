@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-page="MobileSearch">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile search — REWAP Brokerage concept</title>
+<meta name="description" content="Website concept: mobile search with a bottom sheet, shown in a 390 × 844 phone frame.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo/rewap-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Azeret+Mono:wght@400;500&family=Brygada+1918:ital,wght@0,400..700;1,400..700&display=swap">
+<style>
+:root{--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--ink:#121A2B;--paper:#F1F2EE;--paper-2:#E3E6E0;--slate:#4A5563;--stone-ink:#3D5A80;--rule:#C9CEC6;--white:#fff;
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:Archivo,system-ui,sans-serif;--f-mono:"Azeret Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+.stage{min-height:100vh;display:grid;grid-template-columns:minmax(0,420px) auto;gap:64px;align-items:center;justify-content:center;padding:24px 48px}
+.note{border-top:4px solid var(--navy);background:var(--white);padding:28px 28px 24px}
+.note .code{font:500 12px/1 var(--f-mono);letter-spacing:.06em;color:var(--stone-ink)}
+.note h1{font:600 clamp(2rem,3vw,2.75rem)/1 var(--f-serif);letter-spacing:-.02em;color:var(--navy);margin:14px 0 16px}
+.note p{font:400 17px/1.6 var(--f-serif);margin:0 0 16px;max-width:60ch}
+.note ul{margin:0 0 20px;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.note li{padding:12px 0;border-bottom:1px solid var(--rule);font:400 15px/1.45 var(--f-sans)}
+.note li b{font-weight:700;color:var(--navy)}
+.note dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font:400 12px/1.5 var(--f-mono);color:var(--slate)}
+.note dt{text-transform:uppercase;letter-spacing:.06em}
+.note dd{margin:0;color:var(--ink)}
+.note a{color:var(--navy);text-underline-offset:3px}
+.phone{width:414px;padding:12px;background:var(--ink);border-radius:52px;box-shadow:0 30px 60px rgba(15,35,66,.25),0 0 0 1px rgba(18,26,43,.6)}
+.phone iframe{display:block;width:390px;height:844px;border:0;border-radius:40px;background:var(--paper)}
+.demo{font:500 12px/1.4 var(--f-mono);color:var(--slate);text-align:center;margin-top:14px}
+@media (max-width:980px){.stage{grid-template-columns:minmax(0,1fr);justify-items:center;gap:32px;padding:32px 20px 96px}.note{max-width:560px}}
+@media (max-width:480px){
+  .stage{display:block;padding:0}
+  .note,.demo{display:none}
+  .phone{width:100%;padding:0;border-radius:0;box-shadow:none;background:none}
+  .phone iframe{width:100vw;height:100vh;height:100dvh;border-radius:0}
+}
+</style>
+</head>
+<body>
+<main class="stage">
+  <section class="note" aria-labelledby="t">
+    <div class="code">Sheet D5 · Website concept · 390 × 844</div>
+    <h1 id="t">Mobile search</h1>
+    <p>On a phone the map stays full screen and results live in a bottom sheet with three resting heights. Every pin is also a row in the list.</p>
+    <ul>
+      <li><b>Sheet.</b> Tap the handle to move between peek, half and full.</li>
+      <li><b>Legend.</b> Filter by building type, price, bedrooms and map overlays.</li>
+      <li><b>Pins.</b> Select a price pin to preview it, then open the listing view.</li>
+    </ul>
+    <dl>
+      <dt>Data</dt><dd>Demo listings, not live MLS data</dd>
+      <dt>Source</dt><dd><a href="https://github.com/CptNope/REWAP-Brokerage-Concept-2/blob/main/design/project/MobileSearch.dc.html">design/project/MobileSearch.dc.html</a></dd>
+    </dl>
+  </section>
+  <div>
+    <div class="phone"><iframe src="MobileSearch-app.html" title="REWAP mobile search, interactive concept"></iframe></div>
+    <p class="demo">Interactive · demo data labeled</p>
+  </div>
+</main>
+<script>
+// Fit the 868 px phone frame inside short desktop windows.
+(function(){var ph=document.querySelector('.phone');function fit(){if(innerWidth<=480){ph.style.zoom='';return;}var z=Math.min(1,(innerHeight-56)/868);ph.style.zoom=z<1?String(Math.max(.6,z)):'';}fit();addEventListener('resize',fit);})();
+</script>
+<script src="../assets/demo-nav.js" defer></script>
+</body>
+</html>

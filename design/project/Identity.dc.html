@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>REWAP Brand Book — Mark, Color and Type</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.sheet{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:56px;padding:112px 0 120px;border-top:1px solid var(--rule-strong)}
+.rail{display:flex;flex-direction:column;gap:12px;padding-top:14px}
+.h2{font-family:var(--f-serif);font-weight:600;font-size:clamp(2.25rem,3.8vw,3.5rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 28px;text-wrap:balance;color:var(--navy)}
+.h3{font-family:var(--f-sans);font-weight:700;font-size:1.25rem;margin:0;color:var(--navy)}
+.lede{font-family:var(--f-serif);font-size:1.375rem;line-height:1.5;max-width:48ch;margin:0}
+.note{font-size:.9375rem;line-height:1.5;color:var(--slate);margin:0}
+.logo-stage{display:flex;align-items:center;justify-content:center;min-height:240px;position:relative}
+.dont{display:flex;flex-direction:column;gap:12px}
+.dont-stage{height:150px;display:flex;align-items:center;justify-content:center;border:1px solid var(--rule);overflow:hidden;position:relative}
+.dont-x{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:var(--brick);display:flex;align-items:center;justify-content:center}
+.swatch-btn{appearance:none;border:0;padding:0;background:transparent;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:10px;min-width:0}
+.swatch-fill{height:112px;border:1px solid var(--rule);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.swatch-btn:hover .swatch-fill{transform:translateY(-3px)}
+.swatch-on .swatch-fill{outline:2px solid var(--navy);outline-offset:3px}
+.cgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px 20px}
+.pair{display:grid;grid-template-columns:120px minmax(0,1fr) 72px 60px;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:.9375rem}
+.badge{font-stretch:72%;font-weight:700;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;text-align:center}
+.face{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;padding:40px 0;border-top:1px solid var(--rule-strong)}
+.scale-row{display:grid;grid-template-columns:150px 110px minmax(0,1fr);gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule)}
+.seg{display:inline-flex;border:1px solid var(--navy)}
+.seg button{appearance:none;border:0;background:transparent;padding:10px 18px;min-height:44px;cursor:pointer;font-weight:600;color:var(--navy)}
+.seg .on{background:var(--navy);color:var(--paper)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.ts-display{font-family:var(--f-serif);font-weight:600;letter-spacing:-.028em;line-height:.96;color:var(--navy)}
+.ts-h1{font-family:var(--f-serif);font-weight:600;letter-spacing:-.022em;line-height:1;color:var(--navy)}
+.ts-h2{font-family:var(--f-serif);font-weight:600;letter-spacing:-.02em;line-height:1.02;color:var(--navy)}
+.ts-h3{font-family:var(--f-serif);font-weight:600;line-height:1.15;color:var(--navy)}
+.ts-h4{font-family:var(--f-sans);font-weight:700;color:var(--navy)}
+.ts-lede{font-family:var(--f-serif);line-height:1.5}
+.ts-body-ed{font-family:var(--f-serif);line-height:1.6}
+.ts-body-ui{font-family:var(--f-sans);line-height:1.5}
+.ts-label{font-family:var(--f-sans);font-stretch:72%;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--stone-ink)}
+.ts-price{font-family:var(--f-sans);font-stretch:75%;font-weight:700;font-variant-numeric:tabular-nums lining-nums;letter-spacing:-.01em;color:var(--ink)}
+.ts-address{font-family:var(--f-sans);font-weight:600;color:var(--ink)}
+.ts-data{font-family:var(--f-mono);letter-spacing:.02em;color:var(--slate)}
+@media (max-width:960px){
+  .wrap{padding:0 20px}
+  .sheet{grid-template-columns:minmax(0,1fr);row-gap:20px;padding:72px 0 80px}
+  .rail{flex-direction:row;flex-wrap:wrap;gap:8px 16px;padding-top:0}
+  .cgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:minmax(0,1fr) !important}
+  .g2{grid-template-columns:minmax(0,1fr) !important}
+  .face{grid-template-columns:minmax(0,1fr)}
+  .scale-row{grid-template-columns:minmax(0,1fr);gap:6px}
+  .pair{grid-template-columns:90px minmax(0,1fr) 56px 52px;gap:8px}
+}
+@media (max-width:600px){.lockup-ground{padding:24px !important}.lockup{grid-template-columns:minmax(0,1fr) !important}.lockup > div:first-child{border-right:0 !important;border-bottom:1px solid var(--rule-strong)}}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+
+<header style="background: var(--paper); border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap" style="padding-top: 36px; padding-bottom: 36px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
+    <a href="Main.dc.html" style="display: inline-flex;" aria-label="Back to brand book strategy"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 160px; height: auto; display: block;"></a>
+    <div style="display: flex; gap: 28px; align-items: baseline; flex-wrap: wrap;">
+      <span class="ref">Sheet B of E</span>
+      <span style="font-family: var(--f-serif); font-size: 1.25rem; color: var(--navy);">Mark, color and type</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="sheet" aria-labelledby="mark" style="border-top: 0;">
+    <div class="rail"><span class="ref">B1 · The mark</span><span class="mono" style="color: var(--slate);">Current REWAP logo, unchanged</span></div>
+    <div style="display: flex; flex-direction: column; gap: 48px;">
+      <div>
+        <h2 class="h2" id="mark">The logo stays exactly as it is.</h2>
+        <p class="lede">The current REWAP mark is the primary identity: a navy key carrying the REWAP wordmark in gold and white, with a skyline along its shaft. The Atlas system is designed around it rather than replacing it.</p>
+      </div>
+
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 24px;">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+          <div class="logo-stage" style="background: var(--white); border: 1px solid var(--rule); min-height: 340px;">
+            <div style="position: relative; padding: 38px; outline: 1px dashed var(--brick); outline-offset: 0;">
+              <img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage horizontal logo with clear space shown" style="width: 380px; max-width: 100%; height: auto; display: block;">
+              <span class="mono" style="position: absolute; top: 10px; left: 10px; color: var(--brick);">x</span>
+              <span class="mono" style="position: absolute; bottom: 10px; right: 10px; color: var(--brick);">x</span>
+            </div>
+          </div>
+          <figcaption class="note">Primary horizontal logo. Clear space x equals one quarter of the logo’s height on every side. Nothing enters the dashed area.</figcaption>
+        </figure>
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+            <div class="logo-stage" style="background: var(--white); border: 1px solid var(--rule); min-height: 200px;">
+              <img src="/_blob/95565ea2cf60cff46df98f6f8649de9f" alt="REWAP Brokerage compact circular mark" style="width: 140px; height: 140px; display: block;">
+            </div>
+            <figcaption class="note">Compact mark for avatars, favicons, map pins at office scale and mobile headers.</figcaption>
+          </figure>
+          <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 20px; font-size: .9375rem; line-height: 1.45;">
+            <dt class="ref" style="padding-top: 2px;">Min. size</dt><dd style="margin: 0;">Horizontal logo 150 px wide on screen, 1.5 in in print. Compact mark 32 px.</dd>
+            <dt class="ref" style="padding-top: 2px;">Grounds</dt><dd style="margin: 0;">Paper, white or Frame tint. On navy or photography, place it on a paper Title Block.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--rule-strong); background: var(--white); padding: 28px 32px; display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 16px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brick)" stroke-width="1.6" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3Z"></path><path d="M12 10v4.5M12 17.2v.3"></path></svg>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="h3">Two production notes for the client</h3>
+          <p style="margin: 0; line-height: 1.55; max-width: 72ch;">The only public logo files are a 380 px PNG and a 300 px PNG. Vector masters (SVG or EPS) are needed before launch, so the logo stays sharp on high-density screens and in print.</p>
+          <p style="margin: 0; line-height: 1.55; max-width: 72ch;">The mark already contains a key, a roofline and a skyline. Because the logo says “real estate,” the rest of the system never repeats those motifs. It speaks about place instead: parcels, streets, materials and terrain.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3 class="h3">Misuse</h3>
+        <div class="g3" style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 20px;">
+          <div class="dont">
+            <div class="dont-stage" style="background: var(--navy);"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="" style="width: 180px;"><span class="dont-x" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" stroke="#fff" stroke-width="1.8"><path d="M2 2l8 8M10 2l-8 8"></path></svg></span></div>
+            <p class="note">Directly on navy. The key disappears into the ground.</p>
+          </div>
+          <div class="dont">
+            <div class="dont-stage" style="background: var(--white);"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="" style="width: 190px; height: 50px;"><span class="dont-x" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" stroke="#fff" stroke-width="1.8"><path d="M2 2l8 8M10 2l-8 8"></path></svg></span></div>
+            <p class="note">Stretched or condensed to fit a space.</p>
+          </div>
+          <div class="dont">
+            <div class="dont-stage" style="background: var(--white);"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="" style="width: 180px; filter: hue-rotate(140deg) saturate(1.4);"><span class="dont-x" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" stroke="#fff" stroke-width="1.8"><path d="M2 2l8 8M10 2l-8 8"></path></svg></span></div>
+            <p class="note">Recolored, including “seasonal” or material colors.</p>
+          </div>
+          <div class="dont">
+            <div class="dont-stage" style="background: var(--white);"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="" style="width: 180px; filter: drop-shadow(4px 6px 6px rgba(0,0,0,.45)); transform: rotate(-8deg);"><span class="dont-x" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" stroke="#fff" stroke-width="1.8"><path d="M2 2l8 8M10 2l-8 8"></path></svg></span></div>
+            <p class="note">Rotated, shadowed or given effects.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <div class="lockup-ground" style="background: var(--navy); padding: 48px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; min-height: 220px;">
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 2.25rem; line-height: 1.05; color: var(--paper); max-width: 16ch; letter-spacing: -.015em;">Know where you’re moving.</p>
+          <div class="lockup" style="background: var(--paper); display: grid; grid-template-columns: auto auto; border: 1px solid var(--paper);">
+            <div style="padding: 14px 18px; border-right: 1px solid var(--rule-strong); display: flex; align-items: center;"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 170px; display: block;"></div>
+            <dl style="margin: 0; display: grid; grid-template-rows: auto auto; font-size: .8125rem;">
+              <div style="padding: 10px 16px; border-bottom: 1px solid var(--rule);"><dt class="ref" style="font-size: .6875rem;">Office</dt><dd style="margin: 2px 0 0; color: var(--ink);">652 Park Ave, Worcester</dd></div>
+              <div style="padding: 10px 16px;"><dt class="ref" style="font-size: .6875rem;">Coverage</dt><dd style="margin: 2px 0 0; color: var(--ink);">All of Massachusetts</dd></div>
+            </dl>
+          </div>
+        </div>
+        <figcaption class="note">The correct way onto dark grounds: the Title Block lockup. A paper plate holds the logo and a small set of facts, like the title block on an architectural drawing.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="color">
+    <div class="rail"><span class="ref">B2 · Color</span><span class="mono" style="color: var(--slate);">Logo core + material palette</span></div>
+    <div style="display: flex; flex-direction: column; gap: 48px;">
+      <div>
+        <h2 class="h2" id="color">Every color names a material.</h2>
+        <p class="lede">Navy and Gold come straight from the logo. The supporting palette borrows its logic from fire-insurance atlases, where color recorded what a building was made of. Here Brick, Frame and Stone describe the actual fabric of Massachusetts: mill brick from Lowell to Fall River, clapboard three-deckers and capes, granite and slate.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; height: 64px; border: 1px solid var(--rule-strong);" role="img" aria-label="Proportion of use: paper about 55 percent, navy 25, materials 12, ink 5, gold 3">
+          <div style="flex: 55; background: var(--paper);"></div>
+          <div style="flex: 25; background: var(--navy);"></div>
+          <div style="flex: 4; background: var(--brick);"></div>
+          <div style="flex: 3; background: var(--frame-tint);"></div>
+          <div style="flex: 3; background: var(--stone-tint);"></div>
+          <div style="flex: 2; background: var(--lichen);"></div>
+          <div style="flex: 5; background: var(--ink);"></div>
+          <div style="flex: 3; background: var(--gold);"></div>
+        </div>
+        <p class="note">Proportion of use across a typical page: Paper carries reading, Navy owns whole regions (navigation, the map, footers), materials fill the map and data, Gold is reserved for wayfinding: routes, the selected place and the primary action.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 22px;">
+        <h3 class="h3">Tokens</h3>
+        <p class="note" style="margin-top: -10px;">Select a swatch to see its values, role and approved text pairings.</p>
+        <div class="cgrid">
+          <sc-for list="{{swatches}}" as="s" hint-placeholder-count="12">
+            <button class="{{s.cls}}" onClick="{{s.pick}}" aria-pressed="{{s.pressed}}" aria-label="{{s.aria}}">
+              <span class="swatch-fill" style="background: {{s.hex}};"></span>
+              <span style="display: flex; flex-direction: column; gap: 2px;">
+                <span style="font-weight: 700; color: var(--navy); font-size: .9375rem;">{{s.name}}</span>
+                <span class="mono" style="color: var(--slate);">{{s.hex}}</span>
+              </span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div class="g2" style="display: grid; grid-template-columns: 280px minmax(0,1fr); border: 1px solid var(--rule-strong); background: var(--white);" aria-live="polite">
+          <div style="background: {{sel.hex}}; min-height: 240px; border-right: 1px solid var(--rule-strong); display: flex; align-items: flex-end; padding: 20px;">
+            <span style="font-family: var(--f-serif); font-size: 2rem; color: {{sel.on}};">{{sel.name}}</span>
+          </div>
+          <div style="padding: 28px 32px; display: flex; flex-direction: column; gap: 18px;">
+            <dl style="margin: 0; display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 8px 20px; font-size: .9375rem;">
+              <dt class="ref">Token</dt><dd class="mono" style="margin: 0; font-size: .875rem;">{{sel.token}}</dd>
+              <dt class="ref">Hex</dt><dd class="mono" style="margin: 0; font-size: .875rem;">{{sel.hex}}</dd>
+              <dt class="ref">OKLCH</dt><dd class="mono" style="margin: 0; font-size: .875rem;">{{sel.oklch}}</dd>
+              <dt class="ref">Source</dt><dd style="margin: 0;">{{sel.source}}</dd>
+              <dt class="ref">Role</dt><dd style="margin: 0; line-height: 1.5;">{{sel.role}}</dd>
+              <dt class="ref">Text use</dt><dd style="margin: 0; line-height: 1.5;">{{sel.text}}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h3 class="h3">Approved pairings</h3>
+        <p class="note">WCAG 2.2 contrast ratios, measured from the hex values. AA requires 4.5:1 for body text and 3:1 for large text and interface marks.</p>
+        <div style="border-top: 1px solid var(--rule-strong);">
+          <sc-for list="{{pairs}}" as="p" hint-placeholder-count="14">
+            <div class="pair">
+              <span style="background: {{p.bg}}; color: {{p.fg}}; padding: 10px 12px; font-weight: 600; border: 1px solid var(--rule);">Aa 652</span>
+              <span>{{p.label}}</span>
+              <span class="mono tnum" style="font-size: .875rem;">{{p.ratio}}</span>
+              <span class="badge" style="background: {{p.badgeBg}}; color: {{p.badgeFg}};">{{p.grade}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="type">
+    <div class="rail"><span class="ref">B3 · Typography</span><span class="mono" style="color: var(--slate);">Civic serif, wayfinding grotesk, survey numerals</span></div>
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <div>
+        <h2 class="h2" id="type">Three voices: the editor, the signmaker, the surveyor.</h2>
+        <p class="lede">A sturdy early-twentieth-century serif for authority, a grotesk with a true width axis for wayfinding and interface, and a mono reserved for measured things: coordinates, parcel and MLS numbers.</p>
+      </div>
+
+      <div class="face">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <p style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(3rem, 6vw, 5.5rem); line-height: .95; letter-spacing: -.028em; color: var(--navy);">Brygada 1918</p>
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 1.5rem; line-height: 1.4; max-width: 34ch;">From the Berkshires to the Cape: 351 cities and towns, each with its own streets.</p>
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 1.125rem; line-height: 1.6; max-width: 60ch; color: var(--slate);">Revived from a Polish typeface of 1918. It reads as civic and confident without imitating anything antique. Used for display, headlines, ledes and long-form Field Notes.</p>
+        </div>
+        <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 18px; font-size: .9375rem; align-content: start;">
+          <dt class="ref">Role</dt><dd style="margin: 0;">Editor</dd>
+          <dt class="ref">Weights</dt><dd style="margin: 0;">400 text, 600 display</dd>
+          <dt class="ref">Never</dt><dd style="margin: 0;">Italic display, all caps, below 16 px</dd>
+          <dt class="ref">License</dt><dd style="margin: 0;">SIL Open Font License</dd>
+        </dl>
+      </div>
+
+      <div class="face">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; color: var(--navy);">
+            <span style="font-weight: 800; font-size: clamp(2.6rem, 5vw, 4.5rem); font-stretch: 62%; line-height: 1;">Archivo</span>
+            <span style="font-weight: 500; font-size: clamp(2.6rem, 5vw, 4.5rem); font-stretch: 100%; line-height: 1;">Archivo</span>
+            <span style="font-weight: 300; font-size: clamp(2.6rem, 5vw, 4.5rem); font-stretch: 125%; line-height: 1;">Archivo</span>
+          </div>
+          <p style="margin: 0; font-stretch: 72%; font-weight: 700; font-size: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink);">Berkshires · Pioneer Valley · Central · North Shore · South Coast · Cape</p>
+          <p style="margin: 0; font-size: 1.0625rem; line-height: 1.55; max-width: 60ch; color: var(--slate);">A grotesk with a width axis from 62 to 125 percent. Condensed caps letter the map and the legend the way street signs and atlas lettering do; regular width runs the interface; condensed bold sets prices.</p>
+        </div>
+        <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 18px; font-size: .9375rem; align-content: start;">
+          <dt class="ref">Role</dt><dd style="margin: 0;">Signmaker</dd>
+          <dt class="ref">Widths</dt><dd style="margin: 0;">72% labels, 100% UI, 75% prices</dd>
+          <dt class="ref">Weights</dt><dd style="margin: 0;">400, 600, 700</dd>
+          <dt class="ref">License</dt><dd style="margin: 0;">SIL Open Font License</dd>
+        </dl>
+      </div>
+
+      <div class="face" style="border-bottom: 1px solid var(--rule-strong);">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <p style="margin: 0; font-family: var(--f-mono); font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.1; color: var(--navy);">42.2626° N 71.8023° W</p>
+          <p style="margin: 0; font-family: var(--f-mono); font-size: 1rem; line-height: 1.6; color: var(--ink);">MLS #[00000000] · Parcel [00-000-00000] · 01603</p>
+          <p style="margin: 0; font-size: 1.0625rem; line-height: 1.55; max-width: 60ch; color: var(--slate);">Azeret Mono appears only where something was measured or recorded: coordinates, MLS and parcel numbers, ZIP codes, data sources and dates. Never as decoration.</p>
+        </div>
+        <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 18px; font-size: .9375rem; align-content: start;">
+          <dt class="ref">Role</dt><dd style="margin: 0;">Surveyor</dd>
+          <dt class="ref">Weights</dt><dd style="margin: 0;">400, 500</dd>
+          <dt class="ref">Size</dt><dd style="margin: 0;">12 to 16 px</dd>
+          <dt class="ref">License</dt><dd style="margin: 0;">SIL Open Font License</dd>
+        </dl>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-top: 24px;">
+        <h3 class="h3">Responsive type scale</h3>
+        <div class="seg" role="group" aria-label="Preview size">
+          <button class="{{desktopCls}}" onClick="{{toDesktop}}" aria-pressed="{{desktopPressed}}">Desktop</button>
+          <button class="{{mobileCls}}" onClick="{{toMobile}}" aria-pressed="{{mobilePressed}}">Mobile</button>
+        </div>
+      </div>
+      <div style="border-top: 1px solid var(--rule-strong);">
+        <sc-for list="{{scale}}" as="t" hint-placeholder-count="12">
+          <div class="scale-row">
+            <span class="mono" style="color: var(--stone-ink);">{{t.token}}</span>
+            <span class="mono tnum" style="color: var(--slate);">{{t.spec}}</span>
+            <span class="{{t.cls}}" style="display: block; margin: 0; font-size: {{t.size}};">{{t.sample}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p class="note">Sizes interpolate with clamp() between the mobile and desktop values. Body copy holds a 60 to 72 character measure. Prices and data always use tabular, lining numerals so columns align.</p>
+    </div>
+  </section>
+</main>
+
+<footer style="background: var(--navy); color: var(--paper);">
+  <div class="wrap" style="padding-top: 48px; padding-bottom: 48px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center;">
+    <a href="Main.dc.html" style="color: var(--paper); display: inline-flex; gap: 10px; align-items: center; min-height: 44px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M16 10H4M9 5l-5 5 5 5"></path></svg>Sheet A · Strategy and voice</a>
+    <a href="System.dc.html" style="color: var(--paper); display: inline-flex; gap: 10px; align-items: center; min-height: 44px;">Sheet C · System and components<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></a>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sw: 0, mobile: false }; }
+  renderVals() {
+    const S = [
+      { name: 'Navy', token: '--navy', hex: '#193661', oklch: 'oklch(33.5% 0.084 258.2)', on: '#F1F2EE', source: 'REWAP logo, sampled from the key', role: 'Owns whole regions: navigation, the map field, footers, primary buttons. The brand’s ground color.', text: 'Text on Paper or White (10.7:1). Paper, White, Gold or Mist text on Navy.' },
+      { name: 'Gold', token: '--gold', hex: '#FAAF40', oklch: 'oklch(80.7% 0.149 72.8)', on: '#121A2B', source: 'REWAP logo, sampled from the wordmark', role: 'Wayfinding only: routes, the selected place, “you are here,” focus rings, one primary action per view.', text: 'Never as text on light grounds. Ink or Navy text on Gold.' },
+      { name: 'Navy Deep', token: '--navy-deep', hex: '#0F2342', oklch: 'oklch(25.8% 0.064 258.9)', on: '#F1F2EE', source: 'Navy, darkened', role: 'Footers and the dark map basemap beneath Navy features.', text: 'Paper, Mist or Gold text.' },
+      { name: 'Ink', token: '--ink', hex: '#121A2B', oklch: 'oklch(21.9% 0.036 264.4)', on: '#F1F2EE', source: 'Survey ink', role: 'Body text and fine linework.', text: 'Primary text color on Paper (15.5:1).' },
+      { name: 'Paper', token: '--paper', hex: '#F1F2EE', oklch: 'oklch(95.9% 0.005 117.9)', on: '#121A2B', source: 'Winter daylight on survey paper', role: 'The reading ground. Deliberately cool, never cream.', text: 'Ink, Navy, Slate, Brick, Stone Ink on Paper.' },
+      { name: 'White', token: '--white', hex: '#FFFFFF', oklch: 'oklch(100% 0 0)', on: '#121A2B', source: 'Plate stock', role: 'Plates that sit on Paper: the Title Block, inputs, comparison panels.', text: 'Same as Paper.' },
+      { name: 'Brick', token: '--brick', hex: '#A3402B', oklch: 'oklch(50.3% 0.136 33.6)', on: '#FFFFFF', source: 'Mill brick: Lowell, Lawrence, Worcester, Fall River', role: 'Brick buildings on maps; emphasis in data; destructive and error states.', text: 'Text on Paper (5.6:1). White text on Brick (6.3:1).' },
+      { name: 'Frame', token: '--frame-tint', hex: '#F7DDA0', oklch: 'oklch(90.5% 0.083 87.5)', on: '#121A2B', source: 'Clapboard; a softened logo Gold', role: 'Wood-frame buildings on maps, highlighted rows, selected parcels.', text: 'Background only. Navy or Ink text on Frame (9.1:1).' },
+      { name: 'Stone', token: '--stone-tint', hex: '#D3DEEC', oklch: 'oklch(89.6% 0.023 254.4)', on: '#121A2B', source: 'Granite and slate, Navy family', role: 'Masonry and civic buildings; neutral map fills; info notes.', text: 'Background only. Navy text on Stone (8.9:1).' },
+      { name: 'Stone Ink', token: '--stone-ink', hex: '#3D5A80', oklch: 'oklch(46.2% 0.071 255.5)', on: '#FFFFFF', source: 'Stone, deepened for text', role: 'Sheet references, legend labels, secondary links.', text: 'Text on Paper (6.3:1).' },
+      { name: 'Slate', token: '--slate', hex: '#4A5563', oklch: 'oklch(44.5% 0.027 254.5)', on: '#FFFFFF', source: 'Roof slate', role: 'Secondary text, captions, metadata.', text: 'Text on Paper (6.7:1) and Paper 2 (6.0:1).' },
+      { name: 'Lichen', token: '--lichen', hex: '#5F7048', oklch: 'oklch(52.0% 0.063 127.2)', on: '#FFFFFF', source: 'Parks, conservation land, stone walls', role: 'Open land and parks on maps; positive states.', text: 'Text on Paper (4.8:1), AA.' },
+      { name: 'Water', token: '--water', hex: '#4F7A9C', oklch: 'oklch(56.2% 0.071 243.4)', on: '#FFFFFF', source: 'The coast, the Quabbin, the rivers', role: 'Water bodies on maps.', text: 'Fill only. 4.1:1 on Paper; not for body text.' },
+      { name: 'Mist', token: '--mist', hex: '#AFC0D6', oklch: 'oklch(80.2% 0.036 254.9)', on: '#121A2B', source: 'Winter sky over the hills', role: 'Secondary text and contours on Navy.', text: 'Text on Navy (6.5:1) and Navy Deep (8.5:1).' },
+      { name: 'Gold Ink', token: '--gold-ink', hex: '#7A4E00', oklch: 'oklch(46.2% 0.099 72.2)', on: '#FFFFFF', source: 'Gold, deepened for text', role: 'The rare case where Gold meaning must appear as text on light grounds.', text: 'Text on Paper (6.4:1).' },
+      { name: 'Paper 2', token: '--paper-2', hex: '#E3E6E0', oklch: 'oklch(92.1% 0.009 128.6)', on: '#121A2B', source: 'Paper, one tone down', role: 'Alternate bands, map land, disabled fills.', text: 'Slate or darker.' },
+      { name: 'Brick tint', token: '--brick-tint', hex: '#EDCFC6', oklch: 'oklch(87.7% 0.036 37.4)', on: '#121A2B', source: 'Atlas pink for brick', role: 'Brick buildings in light map styles; error backgrounds.', text: 'Navy text on Brick tint (8.2:1).' },
+      { name: 'Lichen tint', token: '--lichen-tint', hex: '#D7DEC6', oklch: 'oklch(88.9% 0.033 120.3)', on: '#121A2B', source: 'Lichen, softened', role: 'Parks in light map styles; success backgrounds.', text: 'Navy text on Lichen tint (8.7:1).' }
+    ];
+    const i = this.state.sw;
+    const swatches = S.map((s, k) => ({ ...s, cls: k === i ? 'swatch-btn swatch-on' : 'swatch-btn', pressed: k === i ? 'true' : 'false', aria: s.name + ' ' + s.hex, pick: () => this.setState({ sw: k }) }));
+    const P = [
+      ['#F1F2EE','#121A2B','Ink on Paper','15.5:1','AAA'],
+      ['#F1F2EE','#193661','Navy on Paper','10.7:1','AAA'],
+      ['#193661','#F1F2EE','Paper on Navy','10.7:1','AAA'],
+      ['#FAAF40','#121A2B','Ink on Gold','9.3:1','AAA'],
+      ['#F7DDA0','#193661','Navy on Frame','9.1:1','AAA'],
+      ['#193661','#AFC0D6','Mist on Navy','6.5:1','AA'],
+      ['#193661','#FAAF40','Gold on Navy','6.5:1','AA'],
+      ['#F1F2EE','#4A5563','Slate on Paper','6.7:1','AA'],
+      ['#F1F2EE','#7A4E00','Gold Ink on Paper','6.4:1','AA'],
+      ['#A3402B','#FFFFFF','White on Brick','6.3:1','AA'],
+      ['#F1F2EE','#3D5A80','Stone Ink on Paper','6.3:1','AA'],
+      ['#F1F2EE','#A3402B','Brick on Paper','5.6:1','AA'],
+      ['#F1F2EE','#5F7048','Lichen on Paper','4.8:1','AA'],
+      ['#F1F2EE','#4F7A9C','Water on Paper','4.1:1','Large'],
+      ['#F1F2EE','#7F9BBE','Stone on Paper','2.6:1','Fill only']
+    ];
+    const pairs = P.map(p => ({ bg: p[0], fg: p[1], label: p[2], ratio: p[3], grade: p[4],
+      badgeBg: p[4] === 'Fill only' ? '#EDCFC6' : (p[4] === 'Large' ? '#F7DDA0' : '#D7DEC6'),
+      badgeFg: p[4] === 'Fill only' ? '#A3402B' : '#193661' }));
+    const m = this.state.mobile;
+    const T = [
+      ['display', '92 / 48', '48 / 46', 'font-family:var(--f-serif);font-weight:600;letter-spacing:-.028em;line-height:.96;color:var(--navy)', 'Know where you’re moving.', 92, 48],
+      ['h1', '68 / 40', '40 / 42', 'font-family:var(--f-serif);font-weight:600;letter-spacing:-.022em;line-height:1;color:var(--navy)', 'Shrewsbury', 68, 40],
+      ['h2', '56 / 36', '36 / 38', 'font-family:var(--f-serif);font-weight:600;letter-spacing:-.02em;line-height:1.02;color:var(--navy)', 'Housing character', 56, 36],
+      ['h3', '28 / 24', '24 / 28', 'font-family:var(--f-serif);font-weight:600;line-height:1.15;color:var(--navy)', 'Around Lake Quinsigamond', 28, 24],
+      ['h4 · ui', '20 / 18', '18 / 24', 'font-family:var(--f-sans);font-weight:700;color:var(--navy)', 'Commuting', 20, 18],
+      ['lede', '22 / 19', '19 / 29', 'font-family:var(--f-serif);line-height:1.5', 'The town sits east of Worcester across the lake.', 22, 19],
+      ['body · editorial', '18 / 17', '17 / 27', 'font-family:var(--f-serif);line-height:1.6', 'Route 9 runs through the center of town.', 18, 17],
+      ['body · ui', '16 / 16', '16 / 24', 'font-family:var(--f-sans);line-height:1.5', 'Save this search and get new matches.', 16, 16],
+      ['label · map', '13 / 12', '12 / 16', 'font-family:var(--f-sans);font-stretch:72%;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--stone-ink)', 'Tatnuck · Elm Park · Main South', 13, 12],
+      ['price', '40 / 30', '30 / 32', 'font-family:var(--f-sans);font-stretch:75%;font-weight:700;font-variant-numeric:tabular-nums lining-nums;letter-spacing:-.01em;color:var(--ink)', '$[000,000]', 40, 30],
+      ['address', '18 / 17', '17 / 24', 'font-family:var(--f-sans);font-weight:600;color:var(--ink)', '[00] Example St, Worcester, MA 01603', 18, 17],
+      ['data · mono', '13 / 12', '12 / 18', 'font-family:var(--f-mono);letter-spacing:.02em;color:var(--slate)', 'Source: MLS PIN · [Jan–Mar 2027] · n=[000]', 13, 12]
+    ];
+    const cls = ['ts-display','ts-h1','ts-h2','ts-h3','ts-h4','ts-lede','ts-body-ed','ts-body-ui','ts-label','ts-price','ts-address','ts-data'];
+    const scale = T.map((t, k) => ({ token: t[0], spec: (m ? t[6] : t[5]) + ' px', sample: t[4], cls: cls[k], size: (m ? t[6] : t[5]) + 'px' }));
+    return {
+      swatches, sel: S[i], pairs, scale,
+      desktopCls: m ? '' : 'on', mobileCls: m ? 'on' : '',
+      desktopPressed: m ? 'false' : 'true', mobilePressed: m ? 'true' : 'false',
+      toDesktop: () => this.setState({ mobile: false }), toMobile: () => this.setState({ mobile: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>REWAP mobile — search, sheet and listing</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 4px var(--navy)}
+button{font:inherit;color:inherit}
+a{color:var(--navy)}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.noscroll{scrollbar-width:none}
+.noscroll::-webkit-scrollbar{display:none}
+.ref{font-stretch:72%;font-weight:600;font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.chip{appearance:none;border:1px solid var(--rule-strong);background:var(--white);color:var(--navy);min-height:44px;padding:0 12px 0 8px;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.875rem;white-space:nowrap;cursor:pointer;flex:0 0 auto}
+.chip-on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+.mat{width:16px;height:12px;border:1px solid var(--navy)}
+.pin{position:absolute;transform:translate(-50%,-100%);appearance:none;border:1px solid var(--paper);background:var(--navy);color:var(--paper);font-stretch:75%;font-weight:700;font-size:.8125rem;padding:4px 7px;min-height:28px;min-width:48px;cursor:pointer;box-shadow:0 3px 10px rgba(15,35,66,.25)}
+.pin::before{content:"";position:absolute;inset:-8px -4px}
+.pin-hot{background:var(--gold);color:var(--ink);border-color:var(--ink);z-index:2}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-radius:16px 16px 0 0;box-shadow:0 -8px 24px rgba(15,35,66,.2);display:flex;flex-direction:column;height:764px;transition:transform .32s var(--ease-out);overflow:hidden;z-index:4}
+.handle{appearance:none;border:0;background:transparent;width:100%;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.res{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;padding:12px 16px;border-bottom:1px solid var(--rule);background:var(--white);appearance:none;border-left:0;border-right:0;border-top:0;text-align:left;width:100%;cursor:pointer}
+.seg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--navy)}
+.seg button{appearance:none;border:0;border-right:1px solid var(--navy);background:var(--white);min-height:44px;font-weight:600;cursor:pointer;color:var(--navy)}
+.seg button:last-child{border-right:0}
+.seg .on{background:var(--navy);color:var(--paper)}
+.abar{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:56px 56px minmax(0,1fr);gap:8px;padding:10px 16px 18px;background:var(--paper);border-top:1px solid var(--rule-strong);z-index:5}
+.iconbtn{appearance:none;width:56px;min-height:52px;border:1px solid var(--navy);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--navy)}
+.screen-in{animation:sin .32s var(--ease-out) both}
+@keyframes sin{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sheet{transition:none}.screen-in{animation:none}}
+</style>
+</helmet>
+
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: var(--paper-2);">
+
+  <sc-if value="{{isMap}}" hint-placeholder-val="{{true}}">
+    <div style="position: absolute; inset: 0;">
+      <svg viewBox="0 0 390 844" style="position: absolute; inset: 0; width: 100%; height: 100%;" aria-hidden="true">
+        <rect width="390" height="844" fill="#E3E6E0"></rect>
+        <g fill="#D8DCD5"><rect x="20" y="170" width="110" height="120"></rect><rect x="150" y="170" width="100" height="120"></rect><rect x="20" y="320" width="110" height="140"></rect><rect x="150" y="320" width="100" height="140"></rect><rect x="20" y="490" width="110" height="160"></rect><rect x="150" y="490" width="100" height="160"></rect></g>
+        <path d="M300 140 C 284 260, 320 360, 304 470 S 286 640, 316 844 L 360 844 C 336 640, 350 520, 344 450 S 324 260, 340 140 Z" fill="#4F7A9C"></path>
+        <rect x="150" y="320" width="100" height="70" fill="#D7DEC6" stroke="#5F7048" stroke-width=".8"></rect>
+        <g stroke="#FFFFFF" fill="none"><path d="M0 305 L 390 296" stroke-width="10"></path><path d="M140 140 L 142 844" stroke-width="9"></path><path d="M262 140 L 266 844" stroke-width="7"></path><path d="M0 475 L 300 470" stroke-width="7"></path></g>
+        <g font-family="Archivo" font-weight="700" font-size="11" letter-spacing="1.3" fill="#3D5A80"><text x="30" y="184">TATNUCK</text><text x="160" y="362" fill="#3D5A80">ELM PARK</text><text x="30" y="350">WEST SIDE</text><text x="160" y="520">MAIN SOUTH</text></g>
+      </svg>
+      <sc-for list="{{pins}}" as="p" hint-placeholder-count="8">
+        <button class="{{p.cls}}" style="left: {{p.left}}; top: {{p.top}};" onClick="{{p.pick}}" aria-label="{{p.aria}}">{{p.short}}</button>
+      </sc-for>
+
+      <div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; flex-direction: column; gap: 8px; z-index: 3;">
+        <div style="display: flex; gap: 8px;">
+          <a href="Home.dc.html" aria-label="REWAP home" style="width: 52px; height: 52px; flex: 0 0 52px; background: var(--white); border: 1px solid var(--rule-strong); display: flex; align-items: center; justify-content: center;"><img src="/_blob/95565ea2cf60cff46df98f6f8649de9f" alt="REWAP" style="width: 40px; height: 40px;"></a>
+          <div style="flex: 1; display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--navy); min-height: 52px; padding: 0 12px; box-shadow: 0 8px 24px rgba(15,35,66,.15); min-width: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
+            <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 700; color: var(--navy); font-size: .9375rem;">Worcester</span><span class="mono" style="color: var(--slate);">West Side to Downtown</span></span>
+          </div>
+        </div>
+        <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px;" role="toolbar" aria-label="Legend">
+          <button class="chip" onClick="{{openFilters}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Legend · {{filterCount}}</button>
+          <sc-for list="{{types}}" as="t" hint-placeholder-count="3">
+            <button class="{{t.cls}}" aria-pressed="{{t.pressed}}" onClick="{{t.toggle}}"><span class="mat" style="background: {{t.fill}};"></span>{{t.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="position: absolute; right: 12px; top: 136px; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(15,35,66,.15); z-index: 3;">
+        <button class="iconbtn" style="width: 48px; min-height: 48px;" aria-label="Draw an area"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M5 7l6-3 9 4-2 10-11 2z" stroke-dasharray="2.5 2"></path></svg></button>
+        <button class="iconbtn" style="width: 48px; min-height: 48px; border-top: 0;" aria-label="Map layers"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M12 3L2 8l10 5 10-5z"></path><path d="M2 13l10 5 10-5"></path></svg></button>
+      </div>
+
+      <div class="sheet" style="transform: translateY({{sheetY}});">
+        <button class="handle" onClick="{{cycleSheet}}" aria-label="{{handleLabel}}"><span style="width: 40px; height: 4px; background: var(--rule-strong); border-radius: 2px;"></span></button>
+        <div style="padding: 0 16px 10px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--rule-strong);">
+          <span style="display: flex; flex-direction: column;"><span style="font-family: var(--f-serif); font-weight: 600; font-size: 1.25rem; color: var(--navy);">{{countText}}</span><span class="mono" style="color: var(--gold-ink);">Demo data · not live listings</span></span>
+          <button class="chip" onClick="{{saveSearch}}" aria-pressed="{{savedP}}" style="min-height: 44px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="{{saveFill}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>{{saveLabel}}</button>
+        </div>
+        <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
+          <button class="res" style="background: #FBF3DE;" onClick="{{openListing}}">
+            <span style="aspect-ratio: 4 / 3; background: {{sel.tint}}; display: block; border: 1px solid var(--rule);"></span>
+            <span style="display: flex; flex-direction: column; gap: 3px;"><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.25rem;">{{sel.price}}</span><span style="font-weight: 600; font-size: .875rem;">{{sel.addr}}</span><span class="ref">{{sel.place}}</span><span class="tnum" style="font-size: .8125rem; color: var(--slate);">{{sel.facts}}</span></span>
+          </button>
+        </sc-if>
+        <div style="flex: 1; overflow-y: auto;">
+          <sc-for list="{{results}}" as="r" hint-placeholder-count="5">
+            <button class="res" onClick="{{r.open}}">
+              <span style="aspect-ratio: 4 / 3; background: {{r.tint}}; display: block; border: 1px solid var(--rule);"></span>
+              <span style="display: flex; flex-direction: column; gap: 3px;"><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.25rem;">{{r.price}}</span><span style="font-weight: 600; font-size: .875rem;">{{r.addr}}</span><span class="ref">{{r.place}}</span><span class="tnum" style="font-size: .8125rem; color: var(--slate);">{{r.facts}}</span></span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isFilters}}" hint-placeholder-val="{{false}}">
+    <div class="screen-in" style="position: absolute; inset: 0; background: var(--paper); display: flex; flex-direction: column; z-index: 6;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 12px 20px; border-bottom: 1px solid var(--rule-strong);">
+        <h1 style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 1.5rem; color: var(--navy);">Legend</h1>
+        <button class="iconbtn" style="width: 48px; min-height: 48px;" onClick="{{closeFilters}}" aria-label="Close filters"><svg width="16" height="16" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.5"><path d="M2 2l8 8M10 2l-8 8"></path></svg></button>
+      </div>
+      <div style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 28px;">
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+          <legend style="font-weight: 700; color: var(--navy); margin-bottom: 10px;">Building type</legend>
+          <sc-for list="{{typesAll}}" as="t" hint-placeholder-count="4">
+            <button class="{{t.cls}}" aria-pressed="{{t.pressed}}" onClick="{{t.toggle}}" style="min-height: 48px; justify-content: flex-start;"><span class="mat" style="background: {{t.fill}};"></span>{{t.label}}</button>
+          </sc-for>
+        </fieldset>
+        <fieldset style="border: 0; margin: 0; padding: 0;">
+          <legend style="font-weight: 700; color: var(--navy); margin-bottom: 10px;">Price</legend>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px;">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: .8125rem; font-weight: 600; color: var(--slate);">Minimum<input inputmode="numeric" placeholder="No min" style="font: inherit; font-size: 1rem; min-height: 48px; border: 1px solid var(--navy); padding: 0 10px; background: var(--white); color: var(--ink);"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: .8125rem; font-weight: 600; color: var(--slate);">Maximum<input inputmode="numeric" placeholder="No max" style="font: inherit; font-size: 1rem; min-height: 48px; border: 1px solid var(--navy); padding: 0 10px; background: var(--white); color: var(--ink);"></label>
+          </div>
+        </fieldset>
+        <fieldset style="border: 0; margin: 0; padding: 0;">
+          <legend style="font-weight: 700; color: var(--navy); margin-bottom: 10px;">Bedrooms</legend>
+          <div class="seg" role="group" aria-label="Minimum bedrooms">
+            <sc-for list="{{beds}}" as="b" hint-placeholder-count="5"><button class="{{b.cls}}" aria-pressed="{{b.pressed}}" onClick="{{b.pick}}">{{b.label}}</button></sc-for>
+          </div>
+        </fieldset>
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+          <legend style="font-weight: 700; color: var(--navy); margin-bottom: 10px;">On the map</legend>
+          <label style="display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-bottom: 1px solid var(--rule);"><span>Commuter rail and stations</span><input type="checkbox" checked="{{ly.rail}}" onChange="{{tly.rail}}" style="width: 22px; height: 22px; accent-color: #193661;"></label>
+          <label style="display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-bottom: 1px solid var(--rule);"><span>Parks and water</span><input type="checkbox" checked="{{ly.parks}}" onChange="{{tly.parks}}" style="width: 22px; height: 22px; accent-color: #193661;"></label>
+          <label style="display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-bottom: 1px solid var(--rule);"><span>Open houses this weekend</span><input type="checkbox" checked="{{ly.oh}}" onChange="{{tly.oh}}" style="width: 22px; height: 22px; accent-color: #193661;"></label>
+        </fieldset>
+      </div>
+      <div style="padding: 12px 16px 20px; border-top: 1px solid var(--rule-strong); display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px; background: var(--paper);">
+        <button class="chip" style="min-height: 52px;" onClick="{{resetFilters}}">Reset</button>
+        <button onClick="{{closeFilters}}" style="appearance: none; border: 0; min-height: 52px; background: var(--navy); color: var(--paper); font-weight: 700; font-size: 1rem; cursor: pointer;">Show {{visCount}}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isListing}}" hint-placeholder-val="{{false}}">
+    <div class="screen-in" style="position: absolute; inset: 0; background: var(--paper); z-index: 6; display: flex; flex-direction: column;">
+      <div style="flex: 1; overflow-y: auto; padding-bottom: 96px;">
+        <div style="position: relative; aspect-ratio: 4 / 3; background: {{cur.shotTint}};">
+          <svg viewBox="0 0 390 292" style="position: absolute; inset: 0; width: 100%; height: 100%;" aria-hidden="true"><g fill="none" stroke="#193661" stroke-opacity=".3" stroke-width="1.2"><path d="M0 250 L 390 232"></path><rect x="120" y="92" width="150" height="140"></rect><path d="M108 98 L 195 44 L 282 98"></path><path d="M120 162h150"></path><rect x="140" y="110" width="24" height="32"></rect><rect x="226" y="110" width="24" height="32"></rect><rect x="182" y="180" width="26" height="52"></rect></g></svg>
+          <button class="iconbtn" style="position: absolute; top: 12px; left: 12px; width: 48px; min-height: 48px;" onClick="{{backToMap}}" aria-label="Back to map"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M15 6l-6 6 6 6"></path></svg></button>
+          <button onClick="{{nextShot}}" aria-label="Next photo" style="position: absolute; inset: 0 0 0 30%; appearance: none; border: 0; background: transparent; cursor: pointer;"></button>
+          <span style="position: absolute; left: 12px; bottom: 12px; background: var(--white); padding: 4px 8px; font-weight: 600; font-size: .8125rem; color: var(--navy);">{{cur.shotLabel}}</span>
+          <span class="mono tnum" style="position: absolute; right: 12px; bottom: 12px; background: var(--ink); color: var(--paper); padding: 4px 8px;">{{cur.shotIdx}}</span>
+        </div>
+        <div style="margin: 16px; border: 1.5px solid var(--navy); background: var(--white);">
+          <div style="padding: 16px; border-bottom: 1px solid var(--navy); display: flex; flex-direction: column; gap: 4px;">
+            <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2rem; line-height: 1;">{{cur.price}}</span>
+            <span style="font-weight: 600;">{{cur.addr}}</span>
+            <span class="ref">{{cur.place}}</span>
+          </div>
+          <div class="tnum" style="padding: 12px 16px; display: flex; gap: 16px; flex-wrap: wrap; font-size: .9375rem;">{{cur.facts}}</div>
+          <div class="mono" style="padding: 10px 16px; border-top: 1px solid var(--rule); color: var(--slate);">Listed by [Brokerage] · MLS #[demo] · Demo listing</div>
+        </div>
+        <section style="padding: 8px 16px 0; display: flex; flex-direction: column; gap: 10px;" aria-labelledby="mplace">
+          <h2 id="mplace" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 1.5rem; color: var(--navy);">The place behind it</h2>
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 1.0625rem; line-height: 1.55;">{{cur.placeText}}</p>
+          <a href="Area.dc.html" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center;">Read the {{cur.hood}} Sheet</a>
+        </section>
+        <section style="padding: 16px; display: flex; flex-direction: column; gap: 10px;" aria-labelledby="moh">
+          <h2 id="moh" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 1.5rem; color: var(--navy);">Open house</h2>
+          <div style="display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule);"><span style="border: 1px solid var(--navy); text-align: center; padding: 4px 0;"><span class="ref" style="display: block;">Sun</span><span class="tnum" style="font-weight: 700; font-size: 1.25rem; color: var(--navy);">[19]</span></span><span><strong>12:00 – 2:00 pm</strong><br><span style="color: var(--slate); font-size: .875rem;">Hosted by the listing agent</span></span></div>
+        </section>
+      </div>
+      <div class="abar">
+        <a class="iconbtn" href="tel:+15085097759" aria-label="Call REWAP"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"></path></svg></a>
+        <button class="iconbtn" onClick="{{toggleFav}}" aria-pressed="{{favP}}" aria-label="{{favLabel}}" style="background: {{favBg}};"><svg width="20" height="20" viewBox="0 0 24 24" fill="{{favFill}}" stroke="#193661" stroke-width="1.5" stroke-linecap="square"><path d="M6 3h12v18l-6-4-6 4z"></path></svg></button>
+        <a href="Listing.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: var(--gold); color: var(--ink); font-weight: 700; text-decoration: none;">Schedule a visit</a>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen: 'map', sheet: 1, sel: null, cur: 'm3', shot: 0, saved: false, fav: false, beds: 2, types: { single: true, multi: true, condo: true, land: false }, ly: { rail: true, parks: true, oh: false } };
+  }
+  renderVals() {
+    const tint = { single: '#F7DDA0', multi: '#EDCFC6', condo: '#D3DEEC', land: '#D7DEC6' };
+    const tname = { single: 'Single-family', multi: 'Three-family', condo: 'Condo', land: 'Land' };
+    const L = [
+      ['m1', 'single', '$412,000', '$412K', 'Sample 01', 'Worcester · Tatnuck', '3 bd · 2 ba · 1,540 sq ft', 22, 26, 'Tatnuck', 'Single-family streets around Tatnuck Square, on the city’s far west side toward Holden.'],
+      ['m2', 'multi', '$689,000', '$689K', 'Sample 02', 'Worcester · Elm Park', '9 bd · 3 ba · 3 units', 58, 27, 'Elm Park', 'Around Elm Park and Newton Hill: large Victorian houses and three-deckers near the park.'],
+      ['m3', 'single', '$529,000', '$529K', 'Sample 03', 'Worcester · West Side', '4 bd · 2.5 ba · 2,210 sq ft', 26, 46, 'West Side', 'The West Side is Worcester’s hill country of Victorian and early-twentieth-century houses, around Elm Park and Newton Hill.'],
+      ['m4', 'condo', '$298,000', '$298K', 'Sample 04', 'Worcester · Downtown', '2 bd · 2 ba · 1,050 sq ft', 70, 40, 'Downtown', 'Downtown Worcester: City Hall, the Common, Mechanics Hall and residential conversions.'],
+      ['m5', 'multi', '$615,000', '$615K', 'Sample 05', 'Worcester · Grafton Hill', '7 bd · 3 ba · 3 units', 68, 56, 'Grafton Hill', 'Hillside streets of three-deckers along Grafton Street on the east side.'],
+      ['m6', 'single', '$375,000', '$375K', 'Sample 07', 'Worcester · Main South', '3 bd · 1.5 ba · 1,380 sq ft', 52, 66, 'Main South', 'Main Street south of downtown, around Clark University.'],
+      ['m7', 'single', '$468,000', '$468K', 'Sample 09', 'Worcester · Tatnuck', '3 bd · 2 ba · 1,690 sq ft', 14, 36, 'Tatnuck', 'Single-family streets around Tatnuck Square, on the city’s far west side toward Holden.'],
+      ['m8', 'land', '$129,000', '$129K', 'Sample 10', 'Worcester · West Side', '0.41 acre lot', 30, 58, 'West Side', 'The West Side is Worcester’s hill country of Victorian and early-twentieth-century houses.']
+    ];
+    const s = this.state;
+    const bedsOf = (l) => l[1] === 'land' ? 0 : (parseInt(l[6], 10) || 0);
+    const minB = [0, 1, 2, 3, 4][s.beds];
+    const vis = L.filter(l => s.types[l[1]] && (minB === 0 || bedsOf(l) >= minB));
+    const toRow = (l) => ({ price: l[2], addr: l[4] + ' · ' + tname[l[1]], place: l[5], facts: l[6], tint: tint[l[1]] });
+    const pins = vis.map(l => ({ left: l[7] + '%', top: l[8] + '%', short: l[3], aria: l[2] + ', ' + l[5], cls: l[0] === s.sel ? 'pin pin-hot' : 'pin',
+      pick: () => this.setState({ sel: l[0], sheet: 1 }) }));
+    const results = vis.filter(l => l[0] !== s.sel).map(l => ({ ...toRow(l), open: () => this.setState({ screen: 'listing', cur: l[0], shot: 0 }) }));
+    const selL = vis.find(l => l[0] === s.sel);
+    const offsets = ['616px', '344px', '0px'];
+    const keys = ['single', 'multi', 'condo', 'land'];
+    const mk = (k) => ({ label: tname[k], fill: tint[k], cls: s.types[k] ? 'chip chip-on' : 'chip', pressed: String(s.types[k]),
+      toggle: () => this.setState({ types: { ...this.state.types, [k]: !this.state.types[k] } }) });
+    const curL = L.find(l => l[0] === s.cur) || L[2];
+    const shots = ['Front elevation', 'Street view', 'Living room', 'Kitchen', 'Plot plan'];
+    const shotTints = [tint[curL[1]], '#D7DEC6', '#F1F2EE', '#E3E6E0', '#D3DEEC'];
+    const B = ['Any', '1+', '2+', '3+', '4+'];
+    return {
+      isMap: s.screen === 'map', isFilters: s.screen === 'filters', isListing: s.screen === 'listing',
+      pins, results, hasSel: !!selL, sel: selL ? toRow(selL) : toRow(L[0]),
+      openListing: () => this.setState({ screen: 'listing', cur: s.sel, shot: 0 }),
+      sheetY: offsets[s.sheet], handleLabel: ['Expand results', 'Expand results to full screen', 'Collapse results'][s.sheet],
+      cycleSheet: () => this.setState({ sheet: (s.sheet + 1) % 3 }),
+      countText: vis.length === 1 ? '1 property here' : vis.length + ' properties here',
+      ly: s.ly, tly: { rail: () => this.setState({ ly: { ...s.ly, rail: !s.ly.rail } }), parks: () => this.setState({ ly: { ...s.ly, parks: !s.ly.parks } }), oh: () => this.setState({ ly: { ...s.ly, oh: !s.ly.oh } }) },
+      types: keys.slice(0, 3).map(mk), typesAll: keys.map(mk),
+      filterCount: Object.values(s.types).filter(Boolean).length + ' on',
+      openFilters: () => this.setState({ screen: 'filters' }), closeFilters: () => this.setState({ screen: 'map' }),
+      resetFilters: () => this.setState({ types: { single: true, multi: true, condo: true, land: true }, beds: 0 }),
+      visCount: vis.length === 1 ? '1 property' : vis.length + ' properties',
+      beds: B.map((b, k) => ({ label: b, cls: k === s.beds ? 'on' : '', pressed: String(k === s.beds), pick: () => this.setState({ beds: k }) })),
+      saveLabel: s.saved ? 'Saved' : 'Save', saveFill: s.saved ? 'currentColor' : 'none', savedP: String(s.saved), saveSearch: () => this.setState({ saved: !s.saved }),
+      cur: { price: curL[2], addr: curL[4] + ' · ' + tname[curL[1]], place: curL[5], facts: curL[6], hood: curL[9], placeText: curL[10],
+        shotLabel: shots[s.shot], shotTint: shotTints[s.shot], shotIdx: (s.shot + 1) + ' / ' + shots.length },
+      nextShot: () => this.setState({ shot: (s.shot + 1) % shots.length }),
+      backToMap: () => this.setState({ screen: 'map' }),
+      favP: String(s.fav), favLabel: s.fav ? 'Remove from saved' : 'Save this listing', favFill: s.fav ? '#193661' : 'none', favBg: s.fav ? '#FAAF40' : '#FFFFFF',
+      toggleFav: () => this.setState({ fav: !s.fav })
+    };
+  }
+}
+</script>
+</body>
+</html>

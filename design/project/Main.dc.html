@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>REWAP Brand Book — Strategy and Voice</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.cond{font-stretch:72%}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-family:var(--f-sans);font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.sheet{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:56px;padding:112px 0 120px;border-top:1px solid var(--rule-strong)}
+.rail{display:flex;flex-direction:column;gap:12px;padding-top:14px}
+.h2{font-family:var(--f-serif);font-weight:600;font-size:clamp(2.25rem,3.8vw,3.5rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 28px;text-wrap:balance;color:var(--navy)}
+.lede{font-family:var(--f-serif);font-size:1.375rem;line-height:1.5;max-width:46ch;margin:0;color:var(--ink)}
+.body{font-family:var(--f-serif);font-size:1.125rem;line-height:1.6;max-width:62ch;margin:0}
+.h3{font-family:var(--f-sans);font-weight:700;font-size:1.25rem;letter-spacing:-.005em;margin:0;color:var(--navy)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.trait{padding:28px 32px 32px 0;border-top:1px solid var(--rule-strong);display:flex;flex-direction:column;gap:14px}
+.trait:nth-child(even){padding-left:32px;border-left:1px solid var(--rule)}
+.isnot{display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:6px;font-size:.9375rem;line-height:1.45}
+.isnot dt{font-stretch:72%;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem;padding-top:3px}
+.isnot dd{margin:0}
+.tab{appearance:none;border:0;background:transparent;text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--rule);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--f-sans);font-weight:600;font-size:1rem;color:var(--slate);min-height:48px}
+.tab:hover{color:var(--navy)}
+.tab-on{color:var(--navy);border-bottom:2px solid var(--navy)}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--rule-strong)}
+.compare > div{padding:28px 32px;display:flex;flex-direction:column;gap:16px}
+.strike{color:var(--slate);font-family:var(--f-sans);font-size:1.0625rem;line-height:1.55}
+.yes{background:var(--white);font-family:var(--f-serif);font-size:1.25rem;line-height:1.55;color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:1rem}
+.tbl th{font-stretch:72%;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem;color:var(--stone-ink);text-align:left;padding:0 20px 12px 0;border-bottom:1px solid var(--rule-strong)}
+.tbl td{padding:18px 20px 18px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5}
+.tbl td:first-child{font-weight:700;color:var(--navy);white-space:nowrap}
+.aud{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:32px;padding:26px 0;border-top:1px solid var(--rule)}
+.legend{display:flex;flex-wrap:wrap;gap:28px 40px}
+.sw{display:flex;align-items:center;gap:12px;color:var(--paper)}
+.chip{width:36px;height:24px;border:1px solid rgba(241,242,238,.7)}
+.toc a{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:baseline;gap:16px;padding:18px 0;border-top:1px solid rgba(241,242,238,.28);color:var(--paper);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toc a:hover .toc-arrow{transform:translateX(4px)}
+.toc-arrow{transition:transform .25s cubic-bezier(.16,1,.3,1)}
+@media (max-width:960px){
+  .foot-grid{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
+  .wrap{padding:0 20px}
+  .sheet{grid-template-columns:minmax(0,1fr);row-gap:20px;padding:72px 0 80px}
+  .rail{flex-direction:row;flex-wrap:wrap;gap:8px 16px;padding-top:0}
+  .grid2,.compare{grid-template-columns:minmax(0,1fr)}
+  .trait:nth-child(even){padding-left:0;border-left:0}
+  .aud{grid-template-columns:minmax(0,1fr);gap:10px}
+  .cover-grid{grid-template-columns:minmax(0,1fr) !important}
+  .scroll-x{overflow-x:auto}
+  .pos-row{grid-template-columns:minmax(0,1fr) !important}
+  .pos-row > div{border-right:0 !important;padding-bottom:0 !important}
+  .tbl td:first-child{white-space:normal}
+}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+
+<header style="background: var(--navy); color: var(--paper); position: relative; overflow: hidden;">
+  <div class="wrap" style="padding-top: 40px; padding-bottom: 56px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap;">
+      <div style="background: var(--paper); padding: 14px 18px 12px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--paper);">
+        <img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 190px; height: auto; display: block;">
+      </div>
+      <dl style="margin: 0; display: grid; grid-template-columns: auto auto; gap: 6px 20px; font-size: .8125rem; color: var(--mist);">
+        <dt class="cond" style="font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--paper);">Document</dt><dd style="margin: 0;">Brand book, concept v0.1</dd>
+        <dt class="cond" style="font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--paper);">Issued</dt><dd style="margin: 0;">October 2026</dd>
+        <dt class="cond" style="font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--paper);">Office</dt><dd style="margin: 0;">652 Park Ave, Worcester, MA 01603</dd>
+        <dt class="cond" style="font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--paper);">Coverage</dt><dd style="margin: 0;">All of Massachusetts</dd>
+        <dt class="cond" style="font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--paper);">Sheet</dt><dd style="margin: 0;">A of E · Strategy &amp; voice</dd>
+      </dl>
+    </div>
+
+    <div class="cover-grid" style="display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: end; margin-top: 88px;">
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+        <h1 style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(3rem, 6.2vw, 5.75rem); line-height: .96; letter-spacing: -.028em; text-wrap: balance;">We understand the place behind the property.</h1>
+        <p style="margin: 0; font-family: var(--f-serif); font-size: 1.3125rem; line-height: 1.5; max-width: 40ch; color: var(--mist);">The Massachusetts Atlas is how REWAP Brokerage looks, sounds and behaves: a working atlas of the state’s 351 cities and towns, from the Berkshires to the Cape, with every property placed inside it.</p>
+      </div>
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+        <svg viewBox="0 0 640 500" role="img" aria-label="Abstract parcel map: street blocks divided into lots, some filled with brick, frame and stone tints, beside a long lake and hill contours" style="width: 100%; height: auto; display: block;">
+          <defs>
+            <pattern id="hatchA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#EDCFC6" stroke-width="1.4"></line></pattern>
+            <pattern id="crossA" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 0 L7 7 M7 0 L0 7" stroke="#D3DEEC" stroke-width=".9"></path></pattern>
+          </defs>
+          <g fill="none" stroke="#AFC0D6" stroke-width=".9" opacity=".55">
+            <path d="M-10 420 C 60 380, 120 400, 170 440 S 260 520, 300 520"></path>
+            <path d="M-10 446 C 50 412, 110 428, 150 462 S 220 520, 250 530"></path>
+            <path d="M-10 472 C 40 446, 90 456, 124 484"></path>
+            <path d="M-10 394 C 70 348, 140 368, 196 414 S 300 500, 360 512"></path>
+          </g>
+          <path d="M556 -10 C 540 60, 572 120, 560 180 S 520 300, 548 360 S 590 470, 572 520 L 640 520 L 640 -10 Z" fill="#4F7A9C" opacity=".55"></path>
+          <path d="M556 -10 C 540 60, 572 120, 560 180 S 520 300, 548 360 S 590 470, 572 520" fill="none" stroke="#AFC0D6" stroke-width="1"></path>
+          <g transform="rotate(-11 300 240)">
+            <g stroke="#F1F2EE" stroke-width="1" stroke-opacity=".7" fill="none">
+              <rect x="40" y="30" width="210" height="120"></rect>
+              <line x1="40" y1="90" x2="250" y2="90"></line>
+              <line x1="78" y1="30" x2="78" y2="90"></line><line x1="112" y1="30" x2="112" y2="90"></line><line x1="150" y1="30" x2="150" y2="90"></line><line x1="186" y1="30" x2="186" y2="90"></line><line x1="216" y1="30" x2="216" y2="90"></line>
+              <line x1="70" y1="90" x2="70" y2="150"></line><line x1="104" y1="90" x2="104" y2="150"></line><line x1="146" y1="90" x2="146" y2="150"></line><line x1="178" y1="90" x2="178" y2="150"></line><line x1="214" y1="90" x2="214" y2="150"></line>
+              <rect x="282" y="30" width="230" height="120"></rect>
+              <line x1="282" y1="90" x2="512" y2="90"></line>
+              <line x1="316" y1="30" x2="316" y2="90"></line><line x1="352" y1="30" x2="352" y2="90"></line><line x1="392" y1="30" x2="392" y2="90"></line><line x1="436" y1="30" x2="436" y2="90"></line><line x1="474" y1="30" x2="474" y2="90"></line>
+              <line x1="330" y1="90" x2="330" y2="150"></line><line x1="390" y1="90" x2="390" y2="150"></line><line x1="452" y1="90" x2="452" y2="150"></line>
+              <rect x="40" y="182" width="210" height="130"></rect>
+              <line x1="40" y1="248" x2="250" y2="248"></line>
+              <line x1="90" y1="182" x2="90" y2="248"></line><line x1="128" y1="182" x2="128" y2="248"></line><line x1="170" y1="182" x2="170" y2="248"></line><line x1="208" y1="182" x2="208" y2="248"></line>
+              <line x1="74" y1="248" x2="74" y2="312"></line><line x1="120" y1="248" x2="120" y2="312"></line><line x1="160" y1="248" x2="160" y2="312"></line><line x1="204" y1="248" x2="204" y2="312"></line>
+              <rect x="282" y="182" width="230" height="130"></rect>
+              <line x1="282" y1="248" x2="512" y2="248"></line>
+              <line x1="340" y1="182" x2="340" y2="248"></line><line x1="420" y1="182" x2="420" y2="248"></line>
+              <line x1="318" y1="248" x2="318" y2="312"></line><line x1="356" y1="248" x2="356" y2="312"></line><line x1="398" y1="248" x2="398" y2="312"></line><line x1="440" y1="248" x2="440" y2="312"></line><line x1="478" y1="248" x2="478" y2="312"></line>
+              <rect x="40" y="344" width="210" height="96"></rect>
+              <line x1="112" y1="344" x2="112" y2="440"></line><line x1="180" y1="344" x2="180" y2="440"></line>
+            </g>
+            <rect x="78" y="30" width="34" height="60" fill="url(#hatchA)"></rect>
+            <rect x="150" y="30" width="36" height="60" fill="#F7DDA0" opacity=".85"></rect>
+            <rect x="104" y="90" width="42" height="60" fill="#F7DDA0" opacity=".85"></rect>
+            <rect x="214" y="90" width="36" height="60" fill="url(#hatchA)"></rect>
+            <rect x="282" y="30" width="34" height="60" fill="#F7DDA0" opacity=".85"></rect>
+            <rect x="392" y="30" width="44" height="60" fill="url(#crossA)"></rect>
+            <rect x="390" y="90" width="62" height="60" fill="#A3402B"></rect>
+            <rect x="128" y="182" width="42" height="66" fill="#F7DDA0" opacity=".85"></rect>
+            <rect x="40" y="248" width="34" height="64" fill="url(#hatchA)"></rect>
+            <rect x="340" y="182" width="80" height="66" fill="#A3402B"></rect>
+            <rect x="398" y="248" width="42" height="64" fill="#F7DDA0" opacity=".85"></rect>
+            <rect x="112" y="344" width="68" height="96" fill="#5F7048" opacity=".9"></rect>
+            <line x1="20" y1="166" x2="540" y2="166" stroke="#FAAF40" stroke-width="2"></line>
+            <circle cx="371" cy="166" r="6" fill="#FAAF40"></circle>
+            <circle cx="371" cy="166" r="12" fill="none" stroke="#FAAF40" stroke-width="1"></circle>
+          </g>
+        </svg>
+        <figcaption class="mono" style="color: var(--mist); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;"><span>Illustrative parcel study, not a survey</span><span>Home office · 42.26° N · 71.80° W</span></figcaption>
+      </figure>
+    </div>
+
+    <div style="margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(241,242,238,.28); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <div class="legend" aria-label="Material legend">
+        <span class="sw"><span class="chip" style="background: var(--brick);"></span><span class="cond" style="font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .8125rem;">Brick</span></span>
+        <span class="sw"><span class="chip" style="background: var(--frame-tint);"></span><span class="cond" style="font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .8125rem;">Frame</span></span>
+        <span class="sw"><span class="chip" style="background: var(--stone-tint);"></span><span class="cond" style="font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .8125rem;">Stone</span></span>
+        <span class="sw"><span class="chip" style="background: var(--lichen);"></span><span class="cond" style="font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .8125rem;">Open land</span></span>
+        <span class="sw"><span class="chip" style="background: var(--water);"></span><span class="cond" style="font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .8125rem;">Water</span></span>
+        <span class="sw"><span class="chip" style="background: var(--gold); border-color: var(--gold);"></span><span class="cond" style="font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .8125rem;">Route &amp; you are here</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="sheet" aria-labelledby="idea">
+    <div class="rail"><span class="ref">A1 · The idea</span><span class="mono" style="color: var(--slate);">Positioning, purpose, promise</span></div>
+    <div style="display: flex; flex-direction: column; gap: 56px;">
+      <div>
+        <h2 class="h2" id="idea">Most brokerages show inventory. REWAP explains places.</h2>
+        <p class="lede">Portals already list every home for sale. What a buyer, seller or investor anywhere in Massachusetts actually lacks is context: what a street is like, what the housing stock is made of, what is changing nearby, and what the paperwork means. REWAP owns that context, statewide.</p>
+      </div>
+
+      <div style="border: 1px solid var(--rule-strong); background: var(--white);">
+        <div class="pos-row" style="display: grid; grid-template-columns: 180px minmax(0,1fr); border-bottom: 1px solid var(--rule);">
+          <div class="ref" style="padding: 22px 24px; border-right: 1px solid var(--rule);">For</div>
+          <p class="body" style="padding: 20px 28px;">people buying, selling and investing anywhere in Massachusetts,</p>
+        </div>
+        <div class="pos-row" style="display: grid; grid-template-columns: 180px minmax(0,1fr); border-bottom: 1px solid var(--rule);">
+          <div class="ref" style="padding: 22px 24px; border-right: 1px solid var(--rule);">REWAP is</div>
+          <p class="body" style="padding: 20px 28px;">the Massachusetts brokerage, based in Worcester in the middle of the state, that explains the place behind every property: its streets, building types, landmarks, commutes and direction of travel,</p>
+        </div>
+        <div class="pos-row" style="display: grid; grid-template-columns: 180px minmax(0,1fr); border-bottom: 1px solid var(--rule);">
+          <div class="ref" style="padding: 22px 24px; border-right: 1px solid var(--rule);">So that</div>
+          <p class="body" style="padding: 20px 28px;">every decision is made with clear guidance and earned confidence.</p>
+        </div>
+        <div class="pos-row" style="display: grid; grid-template-columns: 180px minmax(0,1fr);">
+          <div class="ref" style="padding: 22px 24px; border-right: 1px solid var(--rule);">Unlike</div>
+          <p class="body" style="padding: 20px 28px;">portals that treat homes as interchangeable inventory, REWAP is founded by a real estate lawyer, Hong Tran, and publishes original, sourced knowledge of the region.</p>
+        </div>
+      </div>
+
+      <div class="grid2" style="border-bottom: 1px solid var(--rule-strong);">
+        <div class="trait">
+          <h3 class="h3">Purpose</h3>
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 2rem; line-height: 1.15; color: var(--ink); letter-spacing: -.01em;">Make Massachusetts legible.</p>
+          <p class="body" style="font-size: 1.0625rem; color: var(--slate);">Turn a state of 351 cities and towns, from mill cities and coastal villages to hill towns and suburbs, into something a newcomer can read and a lifelong resident can trust.</p>
+        </div>
+        <div class="trait">
+          <h3 class="h3">Promise</h3>
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 2rem; line-height: 1.15; color: var(--ink); letter-spacing: -.01em;">You will understand the place and the paper.</p>
+          <p class="body" style="font-size: 1.0625rem; color: var(--slate);">Context about where you are moving, and plain-English clarity about what you are signing. The second half is what a lawyer-founded brokerage can promise credibly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="personality">
+    <div class="rail"><span class="ref">A2 · Personality</span><span class="mono" style="color: var(--slate);">Four traits, each with its limit</span></div>
+    <div>
+      <h2 class="h2" id="personality">A neighbor who reads the land records.</h2>
+      <p class="lede" style="margin-bottom: 48px;">REWAP sounds like the most informed person on the street: someone who has walked it, pulled the deed and knows what the zoning board decided last spring, and who tells you plainly.</p>
+      <div class="grid2" style="border-bottom: 1px solid var(--rule-strong);">
+        <div class="trait">
+          <h3 class="h3">Grounded</h3>
+          <dl class="isnot"><dt style="color: var(--lichen);">Is</dt><dd>Specific about streets, buildings and distances. Names real places.</dd><dt style="color: var(--brick);">Is not</dt><dd>Folksy, nostalgic or sepia-toned about the past.</dd></dl>
+        </div>
+        <div class="trait">
+          <h3 class="h3">Exacting</h3>
+          <dl class="isnot"><dt style="color: var(--lichen);">Is</dt><dd>Precise, sourced and dated. Shows its working, like a lawyer would.</dd><dt style="color: var(--brick);">Is not</dt><dd>Legalistic, cold or hiding behind disclaimers.</dd></dl>
+        </div>
+        <div class="trait">
+          <h3 class="h3">Generous</h3>
+          <dl class="isnot"><dt style="color: var(--lichen);">Is</dt><dd>Shares what it knows before anyone signs anything.</dd><dt style="color: var(--brick);">Is not</dt><dd>Gatekeeping useful information behind a lead form.</dd></dl>
+        </div>
+        <div class="trait">
+          <h3 class="h3">Civic</h3>
+          <dl class="isnot"><dt style="color: var(--lichen);">Is</dt><dd>Proud of the state’s real character: mill cities, hill towns, the coast, three-deckers, redevelopment.</dd><dt style="color: var(--brick);">Is not</dt><dd>Boosterish. Never pretends a place is something it is not.</dd></dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="voice">
+    <div class="rail"><span class="ref">A3 · Voice</span><span class="mono" style="color: var(--slate);">Principles and live rewrites</span></div>
+    <div style="display: flex; flex-direction: column; gap: 48px;">
+      <div>
+        <h2 class="h2" id="voice">Specific before superlative.</h2>
+        <p class="lede">Every sentence should survive the question “how do you know?” If it cannot, it is either sourced, rewritten, or removed.</p>
+      </div>
+
+      <div class="scroll-x">
+      <table class="tbl" style="min-width: 560px;">
+        <thead><tr><th scope="col">Principle</th><th scope="col">What it means in practice</th></tr></thead>
+        <tbody>
+          <tr><td>Name the place</td><td>Streets, landmarks, building types and travel times replace adjectives. “Two blocks from Elm Park” beats “great location.”</td></tr>
+          <tr><td>Places, not people</td><td>Describe buildings, streets, parks and transit. Never describe who lives somewhere or who a home is “perfect for.” This is a fair housing rule, not a style preference.</td></tr>
+          <tr><td>Show the source</td><td>Every number carries its source and its date range. Sample or demo data is labeled as such, every time.</td></tr>
+          <tr><td>Plain words, legal precision</td><td>Explain terms like purchase and sale agreement, title, contingency and closing in everyday language, accurately.</td></tr>
+          <tr><td>Confident, never pushy</td><td>No urgency theater: no “won’t last,” no countdowns, no “act now.” Confidence comes from knowing more, not from pressure.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3 class="h3">Voice rewrites</h3>
+        <div role="group" aria-label="Writing scenario" style="display: flex; flex-wrap: wrap; column-gap: 28px;">
+          <sc-for list="{{scenarios}}" as="s" hint-placeholder-count="5">
+            <button aria-pressed="{{s.ariaSel}}" class="{{s.cls}}" onClick="{{s.pick}}">{{s.label}}</button>
+          </sc-for>
+        </div>
+        <div class="compare" aria-live="polite">
+          <div>
+            <span class="ref" style="color: var(--brick);">Category default</span>
+            <p class="strike" style="margin: 0;"><s style="text-decoration-color: rgba(163,64,43,.6);">{{current.before}}</s></p>
+          </div>
+          <div class="yes">
+            <span class="ref">REWAP</span>
+            <p style="margin: 0;">{{current.after}}</p>
+            <p class="mono" style="margin: 0; color: var(--slate);">{{current.why}}</p>
+          </div>
+        </div>
+        <p class="mono" style="margin: 0; color: var(--slate);">Bracketed items are placeholders for verified facts. They are never published unfilled.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="audiences">
+    <div class="rail"><span class="ref">A4 · Audiences</span><span class="mono" style="color: var(--slate);">Defined by their question, never by demographics</span></div>
+    <div>
+      <h2 class="h2" id="audiences">Five people, five questions.</h2>
+      <p class="lede" style="margin-bottom: 40px;">Audiences are defined by what they are trying to decide. That keeps the work useful and keeps REWAP clear of steering.</p>
+      <div class="aud" style="border-top: 1px solid var(--rule-strong); padding-top: 0; padding-bottom: 12px;">
+        <span class="ref">Who</span><span class="ref">Their question</span><span class="ref">What the Atlas gives them</span>
+      </div>
+      <div class="aud"><strong class="h3" style="font-size: 1.125rem;">First-time buyers</strong><p class="body" style="font-size: 1.0625rem;">“Where can I afford to live, and what am I actually agreeing to?”</p><p style="margin: 0; line-height: 1.55;">Area Sheets by housing type, a buying guide that explains every document in order, and saved searches tied to places.</p></div>
+      <div class="aud"><strong class="h3" style="font-size: 1.125rem;">Relocating and moving-up households</strong><p class="body" style="font-size: 1.0625rem;">“Which town fits how we live and how we commute?”</p><p style="margin: 0; line-height: 1.55;">Town-to-town and region-to-region comparison on the map, commute overlays to rail and highways, landmarks and parks on each Sheet.</p></div>
+      <div class="aud"><strong class="h3" style="font-size: 1.125rem;">Sellers</strong><p class="body" style="font-size: 1.0625rem;">“What is my place worth, and how do I sell it well?”</p><p style="margin: 0; line-height: 1.55;">Comparable sales within the same building type, a document-readiness checklist, and a listing page that sells the place, not only the rooms.</p></div>
+      <div class="aud"><strong class="h3" style="font-size: 1.125rem;">Investors</strong><p class="body" style="font-size: 1.0625rem;">“Which blocks and building types make sense to own?”</p><p style="margin: 0; line-height: 1.55;">Multifamily and mixed-use context from the mill cities to the suburbs, links to official permit and zoning sources, sourced readings, never projected returns.</p></div>
+      <div class="aud" style="border-bottom: 1px solid var(--rule-strong);"><strong class="h3" style="font-size: 1.125rem;">Agents, teams and partners</strong><p class="body" style="font-size: 1.0625rem;">“Can I build my practice under REWAP without losing my identity?”</p><p style="margin: 0; line-height: 1.55;">A clear affiliation model, compliant team branding, and agent pages that inherit the Atlas.</p></div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="messaging">
+    <div class="rail"><span class="ref">A5 · Messaging</span><span class="mono" style="color: var(--slate);">From idea to proof</span></div>
+    <div style="display: flex; flex-direction: column; gap: 48px;">
+      <div>
+        <h2 class="h2" id="messaging">One idea, said four ways.</h2>
+        <p class="lede">Messages cascade from the brand idea down to proof. Lower levels change by page; the top two never do.</p>
+      </div>
+      <div class="scroll-x">
+      <table class="tbl" style="min-width: 720px;">
+        <thead><tr><th scope="col">Level</th><th scope="col">Message</th><th scope="col">Where it lives</th></tr></thead>
+        <tbody>
+          <tr><td>Idea</td><td style="font-family: var(--f-serif); font-size: 1.375rem; line-height: 1.3;">We understand the place behind the property.</td><td>About page, brand moments, agent onboarding</td></tr>
+          <tr><td>Signature</td><td style="font-family: var(--f-serif); font-size: 1.375rem; line-height: 1.3;">Know where you’re moving.</td><td>Home page, signage, social profile line</td></tr>
+          <tr><td>Buy</td><td style="font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.3;">Read the street before you make the offer.</td><td>Buying guide, buyer consultation</td></tr>
+          <tr><td>Sell</td><td style="font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.3;">Price the place, not only the square footage.</td><td>Seller guide, listing presentations</td></tr>
+          <tr><td>Invest</td><td style="font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.3;">Know the block before the numbers.</td><td>Investor guide, multifamily listings</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="grid2" style="border-bottom: 1px solid var(--rule-strong);">
+        <div class="trait">
+          <h3 class="h3">Proof REWAP can use</h3>
+          <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; line-height: 1.5;">
+            <li>Original Area Sheets, researched and dated</li>
+            <li>MLS data shown with its source, date range and sample size</li>
+            <li>The founder’s background as a real estate lawyer</li>
+            <li>Transactions and reviews, once real and verifiable</li>
+            <li>Official public sources: MassGIS, municipal sites, MBTA</li>
+          </ul>
+        </div>
+        <div class="trait">
+          <h3 class="h3">Claims REWAP never makes</h3>
+          <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; line-height: 1.5;">
+            <li>“#1,” “top-rated,” awards or rankings it cannot document</li>
+            <li>Sales volume, review counts or client numbers before they exist</li>
+            <li>“Safe,” “family-friendly,” “exclusive” or any description of residents</li>
+            <li>Guaranteed prices, timelines or returns</li>
+            <li>Unsourced statistics, or statistics without a date</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="naming">
+    <div class="rail"><span class="ref">A6 · Naming</span><span class="mono" style="color: var(--slate);">The Atlas vocabulary</span></div>
+    <div>
+      <h2 class="h2" id="naming">A small vocabulary, used consistently.</h2>
+      <p class="lede" style="margin-bottom: 40px;">Atlas terms give the site an ownable language without becoming a theme park. Each name maps to one kind of content or component.</p>
+      <div class="scroll-x">
+      <table class="tbl" style="min-width: 720px;">
+        <thead><tr><th scope="col">Name</th><th scope="col">What it is</th><th scope="col">URL pattern</th></tr></thead>
+        <tbody>
+          <tr><td>The Atlas</td><td>The whole knowledge layer: map, Sheets, Field Notes and Readings together.</td><td class="mono">/atlas/</td></tr>
+          <tr><td>Sheets</td><td>One deep, maintained guide per region, city, town or neighborhood. The organic-search moat.</td><td class="mono">/regions/{region}/ · /areas/{town}/ · /areas/{city}/{neighborhood}/</td></tr>
+          <tr><td>Field Notes</td><td>Editorial: buying and selling guides, local development, architecture, how-tos.</td><td class="mono">/field-notes/{slug}/</td></tr>
+          <tr><td>Readings</td><td>Dated, sourced market data panels. Always labeled with source and period.</td><td class="mono">component</td></tr>
+          <tr><td>Title Block</td><td>The signature component, borrowed from architectural drawings, that states who prepared what.</td><td class="mono">component</td></tr>
+          <tr><td>Legend</td><td>Search filters, presented the way a map legend explains its symbols.</td><td class="mono">component</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background: var(--navy-deep); color: var(--paper);">
+  <div class="wrap foot-grid" style="padding-top: 72px; padding-bottom: 72px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: 56px;" >
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 2.25rem; line-height: 1.05; letter-spacing: -.015em;">Continue through the book</h2>
+      <p style="margin: 0; color: var(--mist); line-height: 1.55; max-width: 40ch;">Each sheet is its own artboard. The links below open the next one.</p>
+    </div>
+    <nav class="toc" aria-label="Brand book sheets">
+      <a href="Identity.dc.html"><span class="mono" style="color: var(--gold);">B</span><span style="font-family: var(--f-serif); font-size: 1.375rem;">Mark, color and type</span><span class="toc-arrow" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></span></a>
+      <a href="System.dc.html"><span class="mono" style="color: var(--gold);">C</span><span style="font-family: var(--f-serif); font-size: 1.375rem;">System, map and components</span><span class="toc-arrow" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></span></a>
+      <a href="Home.dc.html"><span class="mono" style="color: var(--gold);">D</span><span style="font-family: var(--f-serif); font-size: 1.375rem;">Website concept</span><span class="toc-arrow" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></span></a>
+      <a href="Platform.dc.html" style="border-bottom: 1px solid rgba(241,242,238,.28);"><span class="mono" style="color: var(--gold);">E</span><span style="font-family: var(--f-serif); font-size: 1.375rem;">Platform and structured data</span><span class="toc-arrow" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></span></a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0 }; }
+  renderVals() {
+    const data = [
+      { label: 'Listing remarks',
+        before: 'Stunning move-in-ready gem in a highly desirable neighborhood! Perfect for families. Won’t last!',
+        after: 'Three-family on a corner lot, two blocks from [street]. Owner’s unit on the top floor; [n] units currently rented. Roof replaced [year]. Ask us what the inspection found.',
+        why: 'Facts a buyer can verify replace adjectives. No description of who it suits.' },
+      { label: 'Area introduction',
+        before: 'Shrewsbury is a great place to live, with top-rated schools, a safe community and something for everyone!',
+        after: 'Shrewsbury sits east of Worcester across Lake Quinsigamond, with Route 9 running through its center. Housing ranges from older farmhouses and capes to newer subdivisions.',
+        why: 'Geography and building stock. Schools link to official state data; “safe” is never used.' },
+      { label: 'Market note',
+        before: 'The market is HOT! Now is the best time to buy!',
+        after: 'Readings for [month]: median sale price and days on market in [area], from [MLS source], [n] closed sales. What this means for a buyer, and what it does not tell you.',
+        why: 'Every number carries a source, a period and a sample size.' },
+      { label: 'Seller outreach',
+        before: 'Thinking of selling? We’ll get you top dollar FAST! Free home valuation!',
+        after: 'Before you list, we walk the property, pull the recorded deed and plot plan, and compare sales of the same building type nearby. Then we talk about price.',
+        why: 'The lawyer-founder advantage, shown as a process rather than claimed.' },
+      { label: 'Error message',
+        before: 'Oops! Something went wrong.',
+        after: 'We couldn’t load listings for this area. The map and the Area Sheet still work. Try again, or keep reading while we reconnect.',
+        why: 'Name the problem, keep the place useful, offer the recovery.' }
+    ];
+    const i = this.state.i;
+    const scenarios = data.map((d, k) => ({
+      label: d.label,
+      cls: k === i ? 'tab tab-on' : 'tab',
+      ariaSel: k === i ? 'true' : 'false',
+      pick: () => this.setState({ i: k })
+    }));
+    return { scenarios, current: data[i] };
+  }
+}
+</script>
+</body>
+</html>

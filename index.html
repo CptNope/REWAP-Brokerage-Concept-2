@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en" data-page="index">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Massachusetts Atlas — REWAP brand book and website concept</title>
+<meta name="description" content="Brand book and website concept for REWAP Brokerage LLC: a statewide Massachusetts brokerage based in Worcester. Concept only; demo data is labeled.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo/rewap-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Azeret+Mono:wght@400;500&family=Brygada+1918:ital,wght@0,400..700;1,400..700&display=swap">
+<style>
+:root{
+  --navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;--ink:#121A2B;--paper:#F1F2EE;--paper-2:#E3E6E0;--white:#fff;
+  --brick:#A3402B;--frame-tint:#F7DDA0;--stone-tint:#D3DEEC;--stone-ink:#3D5A80;--slate:#4A5563;--lichen:#5F7048;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:#C9CEC6;
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:Archivo,system-ui,sans-serif;--f-mono:"Azeret Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--navy);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+.skip{position:absolute;left:-9999px;top:12px;z-index:5;background:var(--navy);color:var(--paper);padding:12px 16px;font-weight:600}
+.skip:focus{left:16px}.skip:hover{color:var(--gold)}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px}
+.mono{font-family:var(--f-mono)}
+.label{font:700 12px/1 var(--f-sans);font-stretch:72%;letter-spacing:.12em;text-transform:uppercase;color:var(--stone-ink)}
+
+/* Masthead */
+.mast{border-bottom:1px solid var(--rule);background:var(--white)}
+.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:88px}
+.mast img{width:190px;height:auto;display:block}
+.mast .status{font:500 12px/1.4 var(--f-mono);color:var(--slate);text-align:right}
+
+/* Cover */
+.cover{padding:88px 0 64px;border-bottom:1px solid var(--rule)}
+.cover .grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:end}
+.cover h1{font:600 clamp(3rem,6.4vw,5.75rem)/.95 var(--f-serif);letter-spacing:-.03em;color:var(--navy);margin:20px 0 28px;text-wrap:balance}
+.cover .lede{font:400 clamp(1.15rem,1.6vw,1.375rem)/1.5 var(--f-serif);max-width:58ch;margin:0}
+.tb{background:var(--white);border:1px solid var(--navy)}
+.tb-row{display:grid;grid-template-columns:132px 1fr;border-bottom:1px solid var(--rule);min-height:44px;align-items:center}
+.tb-row:last-child{border-bottom:0}
+.tb-row dt{padding:10px 14px;border-right:1px solid var(--rule);font:700 11px/1.2 var(--f-sans);font-stretch:72%;letter-spacing:.1em;text-transform:uppercase;color:var(--stone-ink);height:100%;display:flex;align-items:center}
+.tb-row dd{margin:0;padding:10px 14px;font:500 15px/1.35 var(--f-sans)}
+.tb-head{background:var(--navy);color:var(--paper);padding:14px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.tb-head b{font:600 18px/1.2 var(--f-serif)}
+.tb-head span{font:500 12px/1 var(--f-mono);color:var(--mist)}
+
+/* Materials strip */
+.strip{display:grid;grid-template-columns:repeat(8,1fr);height:14px}
+.strip span{display:block}
+
+/* Directory */
+.section{padding:80px 0;border-bottom:1px solid var(--rule)}
+.section-head{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;margin-bottom:40px;align-items:end}
+.section-head h2{font:600 clamp(2rem,3.6vw,3.25rem)/1 var(--f-serif);letter-spacing:-.02em;color:var(--navy);margin:14px 0 0}
+.section-head p{font:400 18px/1.6 var(--f-serif);margin:0;max-width:62ch}
+.sheets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--navy);border-left:1px solid var(--rule)}
+.sheet{display:flex;flex-direction:column;min-height:280px;padding:24px 24px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper);text-decoration:none;color:var(--ink);position:relative;transition:background-color 120ms ease-out}
+.sheet:hover{background:var(--white);color:var(--ink)}
+.sheet:hover .open{color:var(--navy);text-decoration:underline}
+.sheet .code{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.sheet .code b{font:600 44px/1 var(--f-serif);color:var(--navy);letter-spacing:-.02em}
+.sheet .code span{font:500 12px/1 var(--f-mono);color:var(--slate)}
+.sheet h3{font:700 22px/1.2 var(--f-sans);color:var(--navy);margin:22px 0 10px}
+.sheet p{font:400 16px/1.55 var(--f-sans);margin:0 0 20px;color:var(--ink)}
+.sheet ul{margin:0 0 20px;padding:0;list-style:none;font:500 12px/1.9 var(--f-mono);color:var(--slate)}
+.sheet .open{margin-top:auto;font:700 15px/1 var(--f-sans);color:var(--navy);display:flex;align-items:center;gap:8px}
+.sheet::before{content:"";position:absolute;left:0;top:-1px;width:0;height:4px;background:var(--gold);transition:width 240ms cubic-bezier(.16,1,.3,1)}
+.sheet:hover::before,.sheet:focus-visible::before{width:100%}
+.sheet.feature{grid-column:span 2;background:var(--navy);color:var(--paper)}
+.sheet.feature:hover{background:var(--navy-deep);color:var(--paper)}
+.sheet.feature .code b,.sheet.feature h3,.sheet.feature .open{color:var(--paper)}
+.sheet.feature:hover .open{color:var(--gold)}
+.sheet.feature .code span,.sheet.feature ul{color:var(--mist)}
+.sheet.feature p{color:var(--paper);max-width:56ch}
+.tag{display:inline-block;margin-left:8px;padding:3px 7px;font:500 11px/1 var(--f-mono);background:var(--frame-tint);color:var(--navy);vertical-align:2px}
+
+/* Rules */
+.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--navy)}
+.rules div{padding:22px 24px 24px 0;border-bottom:1px solid var(--rule)}
+.rules div + div{padding-left:24px;border-left:1px solid var(--rule)}
+.rules b{display:block;font:700 17px/1.3 var(--f-sans);color:var(--navy);margin:12px 0 8px}
+.rules p{margin:0;font:400 15px/1.55 var(--f-sans)}
+
+/* Files */
+.files{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.files table{width:100%;border-collapse:collapse;font:400 14px/1.45 var(--f-sans)}
+.files th{text-align:left;font:700 11px/1 var(--f-sans);font-stretch:72%;letter-spacing:.1em;text-transform:uppercase;color:var(--stone-ink);padding:0 12px 10px 0;border-bottom:1px solid var(--navy)}
+.files td{padding:10px 12px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.files td:first-child{font:500 13px/1.45 var(--f-mono);white-space:nowrap}
+.files p{font:400 17px/1.6 var(--f-serif);margin:0 0 16px;max-width:60ch}
+.files pre{margin:16px 0 0;padding:16px;background:var(--navy-deep);color:var(--paper);font:400 13px/1.6 var(--f-mono);overflow:auto}
+
+footer{background:var(--navy-deep);color:var(--paper);padding:48px 0 112px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+footer p{margin:0;font:400 14px/1.6 var(--f-sans);max-width:70ch;color:var(--mist)}
+footer a{color:var(--paper)}footer a:hover{color:var(--gold)}
+
+@media (max-width:1100px){
+  .cover .grid,.section-head,.files{grid-template-columns:minmax(0,1fr);gap:32px}
+  .sheets{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rules{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rules div:nth-child(3){padding-left:0;border-left:0}
+}
+@media (max-width:700px){
+  .wrap{padding:0 20px}
+  .mast .wrap{min-height:72px}.mast img{width:150px}.mast .status{display:none}
+  .cover{padding:48px 0 40px}
+  .section{padding:56px 0}
+  .sheets{grid-template-columns:minmax(0,1fr)}
+  .sheet.feature{grid-column:auto}
+  .sheet{min-height:0}
+  .rules{grid-template-columns:minmax(0,1fr)}
+  .rules div + div{padding-left:0;border-left:0}
+  .tb-row{grid-template-columns:104px 1fr}
+  .files td:first-child{white-space:normal;word-break:break-all}
+}
+@media (prefers-reduced-motion:reduce){.sheet,.sheet::before{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#sheets">Skip to the pages</a>
+
+<header class="mast">
+  <div class="wrap">
+    <img src="assets/logo/rewap-logo-horizontal.png" alt="REWAP Brokerage" width="380" height="152">
+    <div class="status">Concept v0.1 · October 2026<br>Not a live website · demo data labeled</div>
+  </div>
+</header>
+
+<main>
+  <section class="cover" aria-labelledby="cover-title">
+    <div class="wrap grid">
+      <div>
+        <div class="label">Brand book and website concept</div>
+        <h1 id="cover-title">The Massachusetts Atlas</h1>
+        <p class="lede">How REWAP Brokerage looks, sounds and behaves: a working atlas of the state’s 351 cities and towns, from the Berkshires to the Cape, with every property placed inside it. Worcester is the home office, not the boundary.</p>
+      </div>
+      <dl class="tb" aria-label="Document title block">
+        <div class="tb-head"><b>REWAP Brokerage LLC</b><span>A–E · 9 sheets</span></div>
+        <div class="tb-row"><dt>Idea</dt><dd>We understand the place behind the property.</dd></div>
+        <div class="tb-row"><dt>Signature</dt><dd>Know where you’re moving.</dd></div>
+        <div class="tb-row"><dt>Office</dt><dd>652 Park Ave, Worcester, MA 01603</dd></div>
+        <div class="tb-row"><dt>Coverage</dt><dd>All of Massachusetts</dd></div>
+        <div class="tb-row"><dt>Founder</dt><dd>Hong Tran, real estate lawyer</dd></div>
+        <div class="tb-row"><dt>Status</dt><dd>Concept for review. Listings, prices and market figures are samples.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <span style="background:#193661"></span><span style="background:#FAAF40"></span><span style="background:#A3402B"></span><span style="background:#F7DDA0"></span><span style="background:#D3DEEC"></span><span style="background:#5F7048"></span><span style="background:#4F7A9C"></span><span style="background:#0F2342"></span>
+  </div>
+
+  <section class="section" id="sheets" aria-labelledby="book-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="label">Sheets A–C</div><h2 id="book-title">The brand book</h2></div>
+        <p>Three sheets set the strategy, the identity and the system. Each one is a working page: the voice rewrites, color swatches, type scale, Legend and save controls all respond.</p>
+      </div>
+      <div class="sheets">
+        <a class="sheet" href="pages/Main.html">
+          <div class="code"><b>A</b><span>Strategy and voice</span></div>
+          <h3>Positioning, personality and voice</h3>
+          <p>The brand idea, four traits with their limits, voice principles with live before-and-after rewrites, audiences defined by their question, the messaging cascade and the Atlas vocabulary.</p>
+          <ul><li>A1 Idea · A2 Personality · A3 Voice</li><li>A4 Audiences · A5 Messaging · A6 Naming</li></ul>
+          <span class="open">Open sheet A <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/Identity.html">
+          <div class="code"><b>B</b><span>Mark, color and type</span></div>
+          <h3>The logo, the material palette, the type</h3>
+          <p>The current REWAP logo, unchanged, with clear space, sizes and misuse. A palette where every color names a material, with contrast-checked pairings. Three typefaces and a responsive scale.</p>
+          <ul><li>B1 Mark · B2 Color · B3 Typography</li></ul>
+          <span class="open">Open sheet B <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/System.html">
+          <div class="code"><b>C</b><span>System and components</span></div>
+          <h3>Grid, map, motion and components</h3>
+          <p>Spacing and grid, a photography shot list, illustration, sourced data Readings, the branded basemap, icons, motion tokens, working components and the accessibility floor.</p>
+          <ul><li>C1 Space · C2 Photo · C3 Illustration</li><li>C4 Data · C5 Map · C6 Icons · C7 Motion</li><li>C8 Components · C9 Accessibility</li></ul>
+          <span class="open">Open sheet C <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="site-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="label">Sheets D1–D5</div><h2 id="site-title">The website concept</h2></div>
+        <p>Explore the place, then the property. The home page opens on a statewide map of nine regions; every region, city, town and neighborhood gets a Sheet; property search keeps the map and the list in sync.</p>
+      </div>
+      <div class="sheets">
+        <a class="sheet feature" href="pages/Home.html">
+          <div class="code"><b>D1</b><span>1440 · responsive</span></div>
+          <h3>Home: know where you’re moving</h3>
+          <p>A statewide Massachusetts Atlas: nine regions you can hover, select or reach from a list, with rail and highway overlays, a region summary, a gazetteer, the three ways in (buy, sell, invest) and Field Notes.</p>
+          <ul><li>Map and list twin · keyboard reachable · search form</li></ul>
+          <span class="open">Open the home page <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/Area.html">
+          <div class="code"><b>D2</b><span>/areas/shrewsbury/</span></div>
+          <h3>Area Sheet</h3>
+          <p>The Sheet template, shown for Shrewsbury: overview, a schematic map, housing character, Readings in their empty state and a note from the lawyer’s desk.</p>
+          <span class="open">Open the Sheet <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/Search.html">
+          <div class="code"><b>D3</b><span>1440 × 900</span></div>
+          <h3>Property search <span class="tag">Demo data</span></h3>
+          <p>Map and list in sync, a Legend for filters, a drawn search area, clustering and saved searches, set in a Worcester demo view.</p>
+          <span class="open">Open search <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/Listing.html">
+          <div class="code"><b>D4</b><span>Sample 03</span></div>
+          <h3>Listing <span class="tag">Sample</span></h3>
+          <p>A listing placed inside its area: the place behind it, comparable sales of the same building type and the public records worth reading.</p>
+          <span class="open">Open the listing <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/MobileSearch.html">
+          <div class="code"><b>D5</b><span>390 × 844</span></div>
+          <h3>Mobile search <span class="tag">Demo data</span></h3>
+          <p>Full-screen map with a three-stop bottom sheet, the Legend as a filter screen, and a listing view, shown in a phone frame.</p>
+          <span class="open">Open mobile <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="sheet" href="pages/Platform.html">
+          <div class="code"><b>E</b><span>Platform</span></div>
+          <h3>Entities, URLs and structured data</h3>
+          <p>A provider-neutral data model, the URL plan for regions, towns and neighborhoods, the rules behind team and brokerage relationships, and JSON-LD for search and AI answer engines.</p>
+          <span class="open">Open sheet E <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="rules-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="label">Ground rules</div><h2 id="rules-title">What this concept never does</h2></div>
+        <p>These rules apply to every page here and to anything built from it.</p>
+      </div>
+      <div class="rules">
+        <div><span class="label">01</span><b>Places, not people</b><p>Content describes streets, buildings and services, never residents. No “safe,” “family-friendly” or “perfect for.” A fair housing rule, not a style choice.</p></div>
+        <div><span class="label">02</span><b>No invented proof</b><p>No awards, rankings, reviews, sales volume, team rosters or history that cannot be documented.</p></div>
+        <div><span class="label">03</span><b>Every number has a source</b><p>Readings print their source, period and sample size. Without a feed they show an empty state, never estimates.</p></div>
+        <div><span class="label">04</span><b>Demo data is labeled</b><p>Listings, prices and comparables on these pages are samples until IDX is connected.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="files-title">
+    <div class="wrap files">
+      <div>
+        <div class="label">How this demo is built</div>
+        <h2 id="files-title" style="font:600 clamp(2rem,3.6vw,3.25rem)/1 var(--f-serif);letter-spacing:-.02em;color:var(--navy);margin:14px 0 24px">The original design files, rendered live</h2>
+        <p>Every page here is drawn at load time from the Claude Design artboards in <code class="mono">design/project/</code>. Nothing was exported or flattened, so changing an artboard changes the page.</p>
+        <p>The README in the repository carries the full brand book in text: strategy, voice, palette, type, system, components and the platform model.</p>
+        <p><a href="https://github.com/CptNope/REWAP-Brokerage-Concept-2#readme">Read the README and browse the design files on GitHub</a></p>
+<pre>python3 -m http.server 8000
+# then open http://localhost:8000</pre>
+      </div>
+      <table>
+        <thead><tr><th scope="col">File</th><th scope="col">What it holds</th></tr></thead>
+        <tbody>
+          <tr><td>design/project/canvas.json</td><td>The canvas: pages, artboard sizes and order</td></tr>
+          <tr><td>design/project/*.dc.html</td><td>Nine artboards: markup, styles and logic</td></tr>
+          <tr><td>design/PRODUCT.md</td><td>Product context: users, purpose, constraints, open decisions</td></tr>
+          <tr><td>design/.impeccable/config.json</td><td>Design-skill settings used during the work</td></tr>
+          <tr><td>assets/dc-runtime.js</td><td>Renders an artboard as a live page</td></tr>
+          <tr><td>assets/demo-nav.js</td><td>The “Atlas pages” navigator on every page</td></tr>
+          <tr><td>pages/*.html</td><td>One small viewer page per artboard</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Concept prepared for REWAP Brokerage LLC, 652 Park Ave, Worcester, MA 01603. The REWAP logo is the property of REWAP Brokerage LLC. Fonts: Brygada 1918, Archivo and Azeret Mono, all under the SIL Open Font License.</p>
+    <p><a href="https://github.com/CptNope/REWAP-Brokerage-Concept-2">github.com/CptNope/REWAP-Brokerage-Concept-2</a></p>
+  </div>
+</footer>
+<script src="assets/demo-nav.js" defer></script>
+</body>
+</html>

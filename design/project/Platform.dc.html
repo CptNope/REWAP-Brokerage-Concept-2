@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>REWAP platform — entities, URLs and structured data</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.sheet{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:56px;padding:96px 0 104px;border-top:1px solid var(--rule-strong)}
+.rail{display:flex;flex-direction:column;gap:12px;padding-top:14px}
+.h2{font-family:var(--f-serif);font-weight:600;font-size:clamp(2.25rem,3.6vw,3.25rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 22px;color:var(--navy);text-wrap:balance}
+.lede{font-family:var(--f-serif);font-size:1.3125rem;line-height:1.5;max-width:54ch;margin:0}
+.ent{background:var(--white);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column}
+.ent-h{padding:14px 18px;border-bottom:1px solid var(--navy);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ent ul{list-style:none;margin:0;padding:10px 18px 14px;display:flex;flex-direction:column;gap:5px}
+.ent li{font-family:var(--f-mono);font-size:.75rem;color:var(--slate)}
+.ent li b{color:var(--ink);font-weight:500}
+.rel{display:grid;grid-template-columns:200px 60px 200px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.url{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+pre{margin:0;font-family:var(--f-mono);font-size:.78rem;line-height:1.6;color:var(--paper);white-space:pre;overflow-x:auto;tab-size:2}
+@media (max-width:960px){
+  .wrap{padding:0 20px}
+  .sheet{grid-template-columns:minmax(0,1fr);row-gap:20px;padding:72px 0}
+  .rail{flex-direction:row;flex-wrap:wrap;gap:8px 16px;padding-top:0}
+  .egrid,.g2{grid-template-columns:minmax(0,1fr) !important}
+  .rel{grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr)}
+  .rel span:last-child{grid-column:1 / -1}
+  .url{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+<header style="background: var(--navy); color: var(--paper);">
+  <div class="wrap" style="padding-top: 36px; padding-bottom: 64px; display: flex; flex-direction: column; gap: 48px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <div style="background: var(--paper); padding: 12px 16px;"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 160px; display: block;"></div>
+      <span class="ref" style="color: var(--mist);">Sheet E of E · Platform</span>
+    </div>
+    <div style="display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 48px; align-items: end;" class="g2">
+      <h1 style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(2.75rem, 5.4vw, 4.75rem); line-height: .98; letter-spacing: -.028em;">One data model, many places to publish it.</h1>
+      <p style="margin: 0; font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.5; color: var(--mist);">The site is built on entities that are independent of any MLS, IDX vendor or map provider, so the same system can later run another brokerage, a team, agent microsites or neighborhood sites.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="sheet" aria-labelledby="ents" style="border-top: 0;">
+    <div class="rail"><span class="ref">E1 · Entities</span><span class="mono" style="color: var(--slate);">Provider-neutral core</span></div>
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      <div>
+        <h2 class="h2" id="ents">Thirteen entities, scoped by tenant.</h2>
+        <p class="lede">Every record belongs to a tenant, normally a brokerage. Sites are views over that data: a brokerage site, a team site, an agent page or an area microsite all read the same tables.</p>
+      </div>
+      <div class="egrid" style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);">
+        <div class="ent"><div class="ent-h" style="background: var(--navy); color: var(--paper);"><strong>Brokerage</strong><span class="mono" style="color: var(--gold);">tenant</span></div><ul><li><b>id</b>, legal_name, dba</li><li>license_no, license_state</li><li>broker_of_record → Person</li><li>offices[] → Office</li><li>site → Site</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Office</strong></div><ul><li><b>id</b>, brokerage → Brokerage</li><li>address, geo (lat, lng)</li><li>phone, email, hours</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Person</strong></div><ul><li><b>id</b>, name, photo</li><li>bio, languages[]</li><li>licenses[] → License</li><li>professional_titles[]</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">License</strong></div><ul><li><b>id</b>, person → Person</li><li>brokerage → Brokerage</li><li>role: broker | salesperson</li><li>number, state, active_from</li></ul></div>
+        <div class="ent"><div class="ent-h" style="background: var(--frame-tint);"><strong style="color: var(--navy);">Team</strong><span class="mono" style="color: var(--gold-ink);">affiliation</span></div><ul><li><b>id</b>, name</li><li>brokerage_of_record → Brokerage</li><li>members[] → License</li><li>display_rules (prominence)</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Property</strong></div><ul><li><b>id</b>, address, parcel_id</li><li>geo, building_type, material</li><li>areas[] → Area</li><li>year_built, lot_size</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Listing</strong></div><ul><li><b>id</b>, property → Property</li><li>source → IDXProvider, external_id</li><li>listing_brokerage, listing_agents</li><li>status, price, media[], open_houses[]</li></ul></div>
+        <div class="ent"><div class="ent-h" style="background: var(--lichen-tint);"><strong style="color: var(--navy);">Area</strong><span class="mono" style="color: var(--lichen);">the moat</span></div><ul><li><b>id</b>, name, kind: region | county | town | neighborhood</li><li>parent → Area, geometry</li><li>sheet sections, sources[]</li><li>reviewed_at, sameAs[]</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Article</strong></div><ul><li><b>id</b>, title, body, kind</li><li>authors[] → Person</li><li>about[] → Area</li><li>published_at, reviewed_at</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Lead</strong></div><ul><li><b>id</b>, contact, consent</li><li>context → Listing | Area | Article</li><li>assigned_to → License</li><li>team → Team (optional)</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">SavedSearch</strong></div><ul><li><b>id</b>, owner, filters</li><li>geometry (GeoJSON) or areas[]</li><li>alert_frequency</li></ul></div>
+        <div class="ent"><div class="ent-h" style="background: var(--stone-tint);"><strong style="color: var(--navy);">IDXProvider</strong><span class="mono">adapter</span></div><ul><li><b>id</b>, vendor, mls (e.g. MLS PIN)</li><li>credentials (vault ref)</li><li>field_map → RESO</li><li>display_rules, attribution</li></ul></div>
+        <div class="ent"><div class="ent-h"><strong style="color: var(--navy);">Site</strong></div><ul><li><b>id</b>, domain, owner: brokerage | team | person | area</li><li>theme tokens, nav</li><li>scope filters</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="rels">
+    <div class="rail"><span class="ref">E2 · Relationships</span><span class="mono" style="color: var(--slate);">Rules the UI depends on</span></div>
+    <div style="display: flex; flex-direction: column; gap: 28px;">
+      <div>
+        <h2 class="h2" id="rels">Affiliation is data, not decoration.</h2>
+        <p class="lede">The Title Block on every page is generated from these relationships, so a team can never be shown without its brokerage of record, and a listing never without its listing brokerage.</p>
+      </div>
+      <div style="border-top: 1px solid var(--rule-strong);">
+        <div class="rel"><strong style="color: var(--navy);">Team</strong><span class="mono">n : 1</span><strong style="color: var(--navy);">Brokerage</strong><span style="line-height: 1.5;">Exactly one brokerage of record. The Oberdorfer Group → REWAP Brokerage LLC.</span></div>
+        <div class="rel"><strong style="color: var(--navy);">Person</strong><span class="mono">n : n</span><strong style="color: var(--navy);">Brokerage</strong><span style="line-height: 1.5;">Through License, which carries role and dates, so history is kept when people move.</span></div>
+        <div class="rel"><strong style="color: var(--navy);">Listing</strong><span class="mono">n : 1</span><strong style="color: var(--navy);">Property</strong><span style="line-height: 1.5;">A property outlives its listings; price history and Sheets attach to the property.</span></div>
+        <div class="rel"><strong style="color: var(--navy);">Listing</strong><span class="mono">n : 1</span><strong style="color: var(--navy);">Listing brokerage</strong><span style="line-height: 1.5;">May be REWAP or another firm through IDX; attribution prints either way.</span></div>
+        <div class="rel"><strong style="color: var(--navy);">Property</strong><span class="mono">n : n</span><strong style="color: var(--navy);">Area</strong><span style="line-height: 1.5;">Resolved by point-in-polygon against Area geometry: town plus any neighborhood.</span></div>
+        <div class="rel"><strong style="color: var(--navy);">Area</strong><span class="mono">tree</span><strong style="color: var(--navy);">Area</strong><span style="line-height: 1.5;">Massachusetts → Central Massachusetts → Worcester → West Side. Regions group all 351 cities and towns; breadcrumbs and URLs follow the tree.</span></div>
+        <div class="rel"><strong style="color: var(--navy);">Article</strong><span class="mono">n : n</span><strong style="color: var(--navy);">Area · Person</strong><span style="line-height: 1.5;">Field Notes appear on every Sheet they are about, credited to named authors.</span></div>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px;">
+        <div style="border: 1.5px solid var(--navy); background: var(--white); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+          <strong style="color: var(--navy); font-size: 1.125rem;">Listing provider adapter</strong>
+          <p style="margin: 0; line-height: 1.55;">Each IDX vendor is wrapped in an adapter that maps its feed to RESO Data Dictionary fields, then to REWAP’s Listing. Display rules, required attribution and refresh times live on the IDXProvider record, so switching vendors does not touch the UI.</p>
+        </div>
+        <div style="border: 1.5px solid var(--navy); background: var(--white); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+          <strong style="color: var(--navy); font-size: 1.125rem;">Map provider adapter</strong>
+          <p style="margin: 0; line-height: 1.55;">The map style is a REWAP-owned style document (layers, colors, labels). Tiles, geocoding and routing sit behind one interface: MapLibre with OpenStreetMap vector tiles by default, replaceable without restyling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="urls">
+    <div class="rail"><span class="ref">E3 · URLs</span><span class="mono" style="color: var(--slate);">Readable, stable, geographic</span></div>
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div>
+        <h2 class="h2" id="urls">Addresses that read like an atlas index.</h2>
+        <p class="lede">URLs follow the Area tree, so search engines and people can both tell where a page sits.</p>
+      </div>
+      <div style="border-top: 1px solid var(--rule-strong);">
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/regions/central-massachusetts/</span><span style="line-height: 1.5;">Region Sheet: one per region, nine in all</span></div>
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/areas/shrewsbury/</span><span style="line-height: 1.5;">City or town Sheet, one for each of the 351</span></div>
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/areas/worcester/west-side/</span><span style="line-height: 1.5;">Neighborhood Sheet, child of its city</span></div>
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/properties/worcester/{street-slug}-{mls-id}/</span><span style="line-height: 1.5;">Listing, stable across status changes</span></div>
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/search/?area=worcester&amp;type=single-family</span><span style="line-height: 1.5;">Search state, shareable; never indexed</span></div>
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/field-notes/{slug}/</span><span style="line-height: 1.5;">Editorial</span></div>
+        <div class="url"><span class="mono" style="font-size: .875rem; color: var(--ink);">/people/{slug}/ · /teams/{slug}/</span><span style="line-height: 1.5;">Agent and team pages; teams may also map their own domain to a Site</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="aeo">
+    <div class="rail"><span class="ref">E4 · AEO / GEO</span><span class="mono" style="color: var(--slate);">Machine-readable facts</span></div>
+    <div style="display: flex; flex-direction: column; gap: 28px;">
+      <div>
+        <h2 class="h2" id="aeo">Written so answer engines can cite it.</h2>
+        <p class="lede">Search engines and AI assistants should be able to tell, without guessing, who REWAP is, where it works, who works there, which listings belong to whom, and how the Oberdorfer Group relates to it.</p>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap: 32px; align-items: start;">
+        <ul style="margin: 0; padding-left: 20px; line-height: 1.65; display: flex; flex-direction: column; gap: 8px;">
+          <li>One JSON-LD graph per page, with stable <span class="mono">@id</span>s so the brokerage, office, founder, team and areas are the same nodes everywhere.</li>
+          <li>Each Sheet opens with an “At a glance” block of short, factual statements, each with a source and a reviewed date.</li>
+          <li><span class="mono">dateModified</span> and named authors on Sheets and Field Notes.</li>
+          <li>Areas carry <span class="mono">sameAs</span> links to their Wikidata and official municipal pages.</li>
+          <li>Listings use schema.org <span class="mono">RealEstateListing</span> and always name the listing brokerage.</li>
+          <li>Placeholders such as license numbers are filled with verified values before launch; nothing unverified is marked up.</li>
+        </ul>
+        <figure style="margin: 0; background: var(--navy-deep); padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+          <figcaption class="mono" style="color: var(--gold);">Example graph · home page (abridged)</figcaption>
+<pre>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://rewapbrokerage.com/#brokerage",
+      "name": "REWAP Brokerage LLC",
+      "url": "https://rewapbrokerage.com/",
+      "telephone": "+1-508-509-7759",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "652 Park Ave",
+        "addressLocality": "Worcester",
+        "addressRegion": "MA",
+        "postalCode": "01603"
+      },
+      "founder": { "@id": "https://rewapbrokerage.com/#hong-tran" },
+      "areaServed": {
+        "@type": "State",
+        "name": "Massachusetts",
+        "sameAs": "[Wikidata URL]"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://rewapbrokerage.com/#hong-tran",
+      "name": "Hong Tran",
+      "jobTitle": "Founder; Real Estate Lawyer",
+      "worksFor": { "@id": "https://rewapbrokerage.com/#brokerage" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://rewapbrokerage.com/teams/oberdorfer-group/#team",
+      "name": "The Oberdorfer Group",
+      "parentOrganization": { "@id": "https://rewapbrokerage.com/#brokerage" }
+    },
+    {
+      "@type": "City",
+      "@id": "https://rewapbrokerage.com/areas/worcester/#place",
+      "name": "Worcester, Massachusetts",
+      "sameAs": ["[Wikidata URL]", "[City of Worcester URL]"]
+    }
+  ]
+}
+</pre>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="next" style="padding-bottom: 120px;">
+    <div class="rail"><span class="ref">E5 · Open items</span><span class="mono" style="color: var(--slate);">For REWAP to supply or confirm</span></div>
+    <div>
+      <h2 class="h2" id="next">Before this goes live.</h2>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); border-top: 1px solid var(--rule-strong);">
+        <ul style="margin: 0; padding: 20px 28px 0 20px; line-height: 1.7;">
+          <li>Vector logo masters (SVG or EPS)</li>
+          <li>Brokerage license number and broker of record</li>
+          <li>Founder biography and portrait, approved by Hong Tran</li>
+          <li>Agent roster, team members and their licenses</li>
+          <li>Oberdorfer Group affiliation wording, reviewed by counsel</li>
+        </ul>
+        <ul style="margin: 0; padding: 20px 0 0 40px; line-height: 1.7; border-left: 1px solid var(--rule);">
+          <li>MLS PIN membership and choice of IDX vendor</li>
+          <li>Map provider and tile hosting decision</li>
+          <li>Commissioned photography in all nine regions</li>
+          <li>A statewide research plan: every region researched to the same depth before launch</li>
+          <li>Languages REWAP serves clients in, if more than English</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5200}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

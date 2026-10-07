@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sample listing, West Side, Worcester — REWAP Brokerage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.note{font-size:.9375rem;line-height:1.5;color:var(--slate);margin:0}
+.btn{appearance:none;border:1px solid var(--navy);background:var(--navy);color:var(--paper);min-height:48px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:1rem;cursor:pointer;text-decoration:none;box-sizing:border-box;transition:background .24s var(--ease-out)}
+.btn:hover{background:var(--navy-deep);color:var(--paper)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F39C1F;color:var(--ink)}
+.btn-line{background:transparent;color:var(--navy)}
+.btn-line:hover{background:var(--navy);color:var(--paper)}
+.thumb{appearance:none;border:1px solid var(--rule);padding:0;cursor:pointer;aspect-ratio:4/3;position:relative;display:block;width:100%}
+.thumb-on{outline:2px solid var(--navy);outline-offset:2px}
+.h2{font-family:var(--f-serif);font-weight:600;font-size:clamp(1.875rem,3vw,2.625rem);line-height:1.05;letter-spacing:-.018em;margin:0 0 20px;color:var(--navy)}
+.sec{padding:64px 0;border-top:1px solid var(--rule-strong)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:.875rem;color:var(--navy)}
+.field input,.field textarea{font:inherit;font-size:1rem;border:1px solid var(--navy);background:var(--white);min-height:48px;padding:10px 12px;box-sizing:border-box;color:var(--ink)}
+.field input:focus,.field textarea:focus{outline:2px solid var(--gold);outline-offset:2px}
+.cmp{display:grid;grid-template-columns:minmax(0,1.4fr) 110px 110px 100px 90px;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.mbar{display:none}
+.skip{position:absolute;left:-9999px;top:16px;z-index:20;background:var(--navy);color:var(--paper);padding:12px 16px;font-weight:600}
+.skip:focus{left:16px;color:var(--paper)}
+@media (max-width:960px){
+  .wrap{padding:0 20px}
+  .main-grid,.tb,.g2,.g3,.gallery{grid-template-columns:minmax(0,1fr) !important}
+  .aside{position:static !important}
+  .cmp{grid-template-columns:minmax(0,1fr) 90px 90px;}
+  .cmp .hide-m{display:none}
+  .mbar{display:grid;position:fixed;left:0;right:0;bottom:0;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--paper);border-top:1px solid var(--rule-strong);z-index:10}
+  .tb > div{border-right:0 !important;border-bottom:1px solid var(--navy)}
+}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+
+<a class="skip" href="#addr">Skip to the listing</a>
+<header style="background: var(--paper); border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px;">
+    <a href="Home.dc.html" style="display: inline-flex;" aria-label="REWAP Brokerage home"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 170px; display: block;"></a>
+    <nav aria-label="Breadcrumb"><ol style="list-style: none; margin: 0; padding: 0; display: flex; gap: 10px; font-size: .875rem; color: var(--slate); flex-wrap: wrap;"><li><a href="Search.dc.html">Search</a></li><li aria-hidden="true">/</li><li><a href="Area.dc.html">Worcester</a></li><li aria-hidden="true">/</li><li><a href="Area.dc.html">West Side</a></li><li aria-hidden="true">/</li><li aria-current="page">Sample 03</li></ol></nav>
+  </div>
+</header>
+
+<div style="background: var(--frame-tint); border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap" style="padding-top: 10px; padding-bottom: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+    <span class="ref" style="color: var(--gold-ink);">Demo listing</span>
+    <span style="font-size: .9375rem;">Every fact on this page is illustrative. Live listings will come from MLS PIN through an IDX provider.</span>
+  </div>
+</div>
+
+<main>
+<section class="wrap" aria-label="Photos" style="padding-top: 32px;">
+  <div class="gallery" style="display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 12px;">
+    <div style="position: relative; aspect-ratio: 16 / 10; background: {{main.tint}}; border: 1px solid var(--rule-strong); overflow: hidden;">
+      <svg viewBox="0 0 800 500" style="position: absolute; inset: 0; width: 100%; height: 100%;" aria-hidden="true"><g fill="none" stroke="#193661" stroke-opacity=".28" stroke-width="1.2"><path d="M0 420 L 800 380"></path><rect x="250" y="130" width="300" height="250"></rect><path d="M230 140 L 400 50 L 570 140"></path><path d="M250 255h300"></path></g></svg>
+      <div style="position: absolute; left: 16px; bottom: 16px; background: var(--white); padding: 8px 12px; display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--rule-strong);"><span style="font-weight: 700; color: var(--navy);">{{main.label}}</span><span class="mono" style="color: var(--slate);">{{main.idx}}</span></div>
+      <div style="position: absolute; right: 16px; bottom: 16px; display: flex; gap: 8px;">
+        <button class="btn btn-line" style="background: var(--white); min-height: 44px; width: 44px; padding: 0;" onClick="{{prev}}" aria-label="Previous photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M15 6l-6 6 6 6"></path></svg></button>
+        <button class="btn btn-line" style="background: var(--white); min-height: 44px; width: 44px; padding: 0;" onClick="{{next}}" aria-label="Next photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M9 6l6 6-6 6"></path></svg></button>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; align-content: start;">
+      <sc-for list="{{shots}}" as="s" hint-placeholder-count="6">
+        <button class="{{s.cls}}" style="background: {{s.tint}};" onClick="{{s.pick}}" aria-label="{{s.label}}" aria-pressed="{{s.pressed}}"><span class="mono" style="position: absolute; left: 6px; bottom: 4px; color: var(--navy); font-size: .625rem; text-align: left;">{{s.short}}</span></button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="addr" style="padding-top: 28px;">
+  <div class="tb" style="display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1.4fr) minmax(0,1fr); border: 1.5px solid var(--navy); background: var(--white);">
+    <div style="padding: 24px 28px; border-right: 1px solid var(--navy); display: flex; flex-direction: column; gap: 8px;">
+      <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: clamp(2.25rem, 3.6vw, 3rem); line-height: 1; letter-spacing: -.012em;">$529,000</span>
+      <h1 id="addr" style="margin: 0; font-size: 1.25rem; font-weight: 600; line-height: 1.3;">Sample 03 · [00] Example Street</h1>
+      <span class="ref">Worcester · West Side · 01602</span>
+      <span class="mono" style="color: var(--slate);">42.27° N · 71.83° W (approximate, demo)</span>
+    </div>
+    <dl class="tnum" style="margin: 0; padding: 20px 24px; border-right: 1px solid var(--navy); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px 18px; align-content: center;">
+      <div><dt class="ref" style="font-size: .6875rem;">Bedrooms</dt><dd style="margin: 2px 0 0; font-weight: 700; font-size: 1.25rem;">4</dd></div>
+      <div><dt class="ref" style="font-size: .6875rem;">Baths</dt><dd style="margin: 2px 0 0; font-weight: 700; font-size: 1.25rem;">2.5</dd></div>
+      <div><dt class="ref" style="font-size: .6875rem;">Living area</dt><dd style="margin: 2px 0 0; font-weight: 700; font-size: 1.25rem;">2,210 sq ft</dd></div>
+      <div><dt class="ref" style="font-size: .6875rem;">Lot</dt><dd style="margin: 2px 0 0; font-weight: 700; font-size: 1.25rem;">0.18 acre</dd></div>
+      <div><dt class="ref" style="font-size: .6875rem;">Built</dt><dd style="margin: 2px 0 0; font-weight: 700; font-size: 1.25rem;">[1920s]</dd></div>
+      <div><dt class="ref" style="font-size: .6875rem;">Construction</dt><dd style="margin: 2px 0 0; font-weight: 700; font-size: 1.25rem; display: flex; align-items: center; gap: 8px;"><span style="width: 16px; height: 12px; background: var(--frame-tint); border: 1px solid var(--navy);"></span>Frame</dd></div>
+    </dl>
+    <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+      <div style="display: flex; gap: 8px;">
+        <button class="btn" onClick="{{toggleSave}}" aria-pressed="{{savedP}}" style="flex: 1; background: {{saveBg}}; color: {{saveFg}}; border-color: {{saveBorder}};"><svg width="18" height="18" viewBox="0 0 24 24" fill="{{saveFill}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>{{saveLabel}}</button>
+        <button class="btn btn-line" aria-label="Share" style="width: 48px; padding: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M12 3v12M7 8l5-5 5 5M5 13v8h14v-8"></path></svg></button>
+      </div>
+      <a class="btn btn-gold" href="#contact">Schedule a visit</a>
+      <span class="mono" style="color: var(--slate);">Listed by [Brokerage] · MLS #[demo] · Active</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap main-grid" style="display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; padding-top: 32px; align-items: start;">
+  <div style="min-width: 0;">
+    <section class="sec" aria-labelledby="oh" style="border-top: 0; padding-top: 24px;">
+      <h2 class="h2" id="oh">Open houses</h2>
+      <div class="g2" style="display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0; border-top: 1px solid var(--rule-strong);">
+        <div style="padding: 18px 20px 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 64px minmax(0,1fr) auto; gap: 14px; align-items: center;">
+          <div style="border: 1px solid var(--navy); text-align: center; padding: 6px 0;"><div class="ref" style="font-size: .6875rem;">Sat</div><div class="tnum" style="font-weight: 700; font-size: 1.5rem; color: var(--navy);">[18]</div></div>
+          <div><div style="font-weight: 700;">11:00 am – 1:00 pm</div><div class="note" style="font-size: .875rem;">Hosted by the listing agent</div></div>
+          <button class="btn btn-line" style="min-height: 44px; padding: 0 14px;">Add</button>
+        </div>
+        <div style="padding: 18px 0 18px 20px; border-bottom: 1px solid var(--rule); border-left: 1px solid var(--rule); display: grid; grid-template-columns: 64px minmax(0,1fr) auto; gap: 14px; align-items: center;">
+          <div style="border: 1px solid var(--navy); text-align: center; padding: 6px 0;"><div class="ref" style="font-size: .6875rem;">Sun</div><div class="tnum" style="font-weight: 700; font-size: 1.5rem; color: var(--navy);">[19]</div></div>
+          <div><div style="font-weight: 700;">12:00 – 2:00 pm</div><div class="note" style="font-size: .875rem;">Hosted by the listing agent</div></div>
+          <button class="btn btn-line" style="min-height: 44px; padding: 0 14px;">Add</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="about">
+      <h2 class="h2" id="about">About this property</h2>
+      <p style="margin: 0; font-family: var(--f-serif); font-size: 1.1875rem; line-height: 1.65; max-width: 64ch;">[Demo remarks, written in REWAP’s voice.] Four-bedroom wood-frame house on a West Side side street, with a covered front porch and a detached garage. Original trim and stair survive; the kitchen was renovated in [year]. Heating is [system], replaced in [year]. The roof is [material], installed in [year]. Ask us for the plot plan and the most recent permits.</p>
+    </section>
+
+    <section class="sec" aria-labelledby="place">
+      <h2 class="h2" id="place">The place behind it</h2>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 32px; align-items: start;">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <svg viewBox="0 0 420 320" role="img" aria-label="Schematic map of the West Side with the property, Elm Park and the route toward downtown" style="width: 100%; background: #E3E6E0; border: 1px solid var(--rule-strong);">
+            <g fill="#D8DCD5"><rect x="20" y="20" width="110" height="80"></rect><rect x="150" y="20" width="120" height="80"></rect><rect x="290" y="20" width="110" height="80"></rect><rect x="20" y="120" width="110" height="90"></rect><rect x="290" y="120" width="110" height="90"></rect><rect x="20" y="230" width="110" height="70"></rect><rect x="150" y="230" width="120" height="70"></rect><rect x="290" y="230" width="110" height="70"></rect></g>
+            <rect x="150" y="120" width="120" height="90" fill="#D7DEC6" stroke="#5F7048"></rect>
+            <text x="210" y="170" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="11" letter-spacing="1.2" fill="#5F7048">ELM PARK</text>
+            <path d="M0 110 L 420 110" stroke="#fff" stroke-width="8"></path><path d="M140 0 L 140 320" stroke="#fff" stroke-width="8"></path><path d="M280 0 L 280 320" stroke="#fff" stroke-width="6"></path><path d="M0 220 L 420 220" stroke="#fff" stroke-width="6"></path>
+            <path d="M74 160 L 140 160 L 140 110 L 420 104" fill="none" stroke="#FAAF40" stroke-width="3"></path>
+            <rect x="60" y="146" width="28" height="28" fill="#F7DDA0" stroke="#121A2B" stroke-width="2"></rect>
+            <text x="74" y="196" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="11" fill="#121A2B">THIS HOME</text>
+            <text x="410" y="96" text-anchor="end" font-family="Archivo" font-weight="700" font-size="11" fill="#121A2B">TO DOWNTOWN →</text>
+          </svg>
+          <figcaption class="mono" style="color: var(--slate);">Schematic · demo location</figcaption>
+        </figure>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <p style="margin: 0; font-family: var(--f-serif); font-size: 1.125rem; line-height: 1.6;">The West Side is Worcester’s hill country of Victorian and early-twentieth-century houses, around Elm Park and Newton Hill.</p>
+          <dl style="margin: 0; border-top: 1px solid var(--rule-strong);">
+            <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule);"><dt style="font-weight: 600;">Elm Park</dt><dd class="mono tnum" style="margin: 0; color: var(--slate);">[0.0] mi · walk [00] min</dd></div>
+            <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule);"><dt style="font-weight: 600;">Union Station</dt><dd class="mono tnum" style="margin: 0; color: var(--slate);">[0.0] mi · drive [00] min</dd></div>
+            <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule);"><dt style="font-weight: 600;">I-290 access</dt><dd class="mono tnum" style="margin: 0; color: var(--slate);">[0.0] mi · drive [00] min</dd></div>
+          </dl>
+          <a class="btn btn-line" href="Area.dc.html" style="align-self: flex-start;">Read the West Side Sheet</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="comps">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+        <h2 class="h2" id="comps">Same building type, nearby</h2>
+        <span class="ref" style="background: var(--frame-tint); color: var(--gold-ink); padding: 4px 8px;">Demo values</span>
+      </div>
+      <p class="note" style="margin-bottom: 18px; max-width: 64ch;">Context, not an appraisal: recent sales of wood-frame single-family houses within the same neighborhood. Sources and dates print with every row.</p>
+      <div class="cmp" style="border-bottom: 1px solid var(--rule-strong); padding-top: 0;"><span class="ref">Property</span><span class="ref">Sold</span><span class="ref">Price</span><span class="ref hide-m">Sq ft</span><span class="ref hide-m">$ / sq ft</span></div>
+      <sc-for list="{{comps}}" as="c" hint-placeholder-count="4">
+        <div class="cmp tnum"><span style="font-weight: 600;">{{c.a}}</span><span class="mono" style="color: var(--slate);">{{c.d}}</span><span style="font-stretch: 75%; font-weight: 700; font-size: 1.125rem;">{{c.p}}</span><span class="hide-m">{{c.s}}</span><span class="hide-m">{{c.ps}}</span></div>
+      </sc-for>
+      <p class="mono" style="margin: 14px 0 0; color: var(--slate);">Source: [MLS PIN] · Closed [period] · Radius [0.5 mi] · demo rows</p>
+    </section>
+
+    <section class="sec" aria-labelledby="records">
+      <h2 class="h2" id="records">Records worth reading</h2>
+      <p style="margin: 0 0 22px; font-family: var(--f-serif); font-size: 1.125rem; line-height: 1.6; max-width: 62ch;">A lawyer-founded brokerage reads the paper behind the property. Before you make an offer, these are the public records REWAP reviews with you.</p>
+      <div class="g2" style="display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); border-top: 1px solid var(--rule-strong);">
+        <div style="padding: 18px 20px 18px 0; border-bottom: 1px solid var(--rule);"><strong style="color: var(--navy);">Deed and plot plan</strong><p class="note" style="margin-top: 4px;">Worcester District Registry of Deeds</p></div>
+        <div style="padding: 18px 0 18px 20px; border-bottom: 1px solid var(--rule); border-left: 1px solid var(--rule);"><strong style="color: var(--navy);">Assessor’s record</strong><p class="note" style="margin-top: 4px;">City of Worcester Assessing</p></div>
+        <div style="padding: 18px 20px 18px 0; border-bottom: 1px solid var(--rule);"><strong style="color: var(--navy);">Building permits</strong><p class="note" style="margin-top: 4px;">City of Worcester Inspectional Services</p></div>
+        <div style="padding: 18px 0 18px 20px; border-bottom: 1px solid var(--rule); border-left: 1px solid var(--rule);"><strong style="color: var(--navy);">Zoning district</strong><p class="note" style="margin-top: 4px;">City of Worcester zoning map</p></div>
+      </div>
+    </section>
+  </div>
+
+  <aside id="contact" class="aside" aria-labelledby="ask" style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 0; border: 1.5px solid var(--navy); background: var(--white);">
+    <div style="padding: 20px 22px; border-bottom: 1px solid var(--navy); display: flex; flex-direction: column; gap: 4px;">
+      <h2 id="ask" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 1.5rem; color: var(--navy);">Ask REWAP about this home</h2>
+      <span class="note" style="font-size: .875rem;">We answer with the place, the records and the price context.</span>
+    </div>
+    <sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
+      <form style="padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 14px;" onSubmit="{{send}}">
+        <div class="field"><label for="n">Name</label><input id="n" autocomplete="name"></div>
+        <div class="field"><label for="e">Email</label><input id="e" type="email" autocomplete="email"></div>
+        <div class="field"><label for="p">Phone <span style="font-weight: 400; color: var(--slate);">(optional)</span></label><input id="p" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="m">Question</label><textarea id="m" rows="3" style="min-height: 88px;" placeholder="For example: when can I see it, and what did the last inspection find?"></textarea></div>
+        <button class="btn btn-gold" type="submit">Send to REWAP</button>
+        <p class="note" style="font-size: .8125rem;">Sent to REWAP Brokerage LLC. [Response time to be confirmed by REWAP.]</p>
+      </form>
+    </sc-if>
+    <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+      <div role="status" style="padding: 22px; display: flex; flex-direction: column; gap: 10px; background: var(--lichen-tint);">
+        <strong style="color: var(--navy); font-size: 1.125rem;">Question sent.</strong>
+        <span style="line-height: 1.5;">REWAP will reply by email. In the meantime, the West Side Sheet covers the neighborhood.</span>
+        <a href="Area.dc.html" style="font-weight: 600;">Open the Sheet</a>
+      </div>
+    </sc-if>
+    <div style="padding: 16px 22px; border-top: 1px solid var(--navy); display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 12px; align-items: center;">
+      <img src="/_blob/95565ea2cf60cff46df98f6f8649de9f" alt="" style="width: 52px; height: 52px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-weight: 700;">REWAP Brokerage</span><a href="tel:+15085097759" class="tnum" style="font-weight: 600;">508-509-7759</a></div>
+    </div>
+  </aside>
+</div>
+
+<section class="wrap" aria-labelledby="related" style="padding-top: 48px; padding-bottom: 120px;">
+  <h2 class="h2" id="related">Nearby, also on the West Side</h2>
+  <div class="g3" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);">
+    <sc-for list="{{related}}" as="r" hint-placeholder-count="3">
+      <a href="Listing.dc.html" style="background: var(--white); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-decoration: none; color: inherit; display: flex; flex-direction: column;">
+        <span style="aspect-ratio: 16 / 10; background: {{r.tint}}; display: block;"></span>
+        <span style="padding: 14px 18px 16px; display: flex; flex-direction: column; gap: 4px;"><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.375rem;">{{r.price}}</span><span style="font-weight: 600;">{{r.addr}}</span><span class="ref" style="font-size: .6875rem;">{{r.place}}</span></span>
+      </a>
+    </sc-for>
+  </div>
+  <p class="mono" style="margin: 28px 0 0; color: var(--slate); line-height: 1.6;">Listing information is provided by [MLS PIN] and deemed reliable but not guaranteed. Listing courtesy of [Brokerage]. REWAP Brokerage LLC · Equal Housing Opportunity.</p>
+</section>
+</main>
+
+<nav class="mbar" aria-label="Listing actions">
+  <a href="tel:+15085097759" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 60px; text-decoration: none; font-weight: 600; font-size: .8125rem; border-right: 1px solid var(--rule);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"></path></svg>Call</a>
+  <button onClick="{{toggleSave}}" style="appearance: none; border: 0; border-right: 1px solid var(--rule); background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 60px; font-weight: 600; font-size: .8125rem; color: var(--navy);"><svg width="20" height="20" viewBox="0 0 24 24" fill="{{saveFill2}}" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>{{saveLabel}}</button>
+  <a href="#contact" style="display: flex; align-items: center; justify-content: center; min-height: 60px; background: var(--gold); color: var(--ink); font-weight: 700; text-decoration: none;">Visit</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { shot: 0, saved: false, sent: false }; }
+  renderVals() {
+    const S = [
+      ['Front elevation and porch', 'Front', '#F7DDA0'], ['Street, looking toward Elm Park', 'Street', '#D7DEC6'], ['Living room', 'Living', '#F1F2EE'],
+      ['Kitchen', 'Kitchen', '#E3E6E0'], ['Rear yard and garage', 'Yard', '#D7DEC6'], ['Plot plan', 'Plan', '#D3DEEC']
+    ];
+    const i = this.state.shot;
+    const shots = S.map((s, k) => ({ label: s[0], short: s[1], tint: s[2], cls: k === i ? 'thumb thumb-on' : 'thumb', pressed: String(k === i), pick: () => this.setState({ shot: k }) }));
+    const sv = this.state.saved;
+    return {
+      shots, main: { label: S[i][0], tint: S[i][2], idx: 'Photo ' + (i + 1) + ' of ' + S.length + ' · demo placeholder' },
+      prev: () => this.setState({ shot: (i + S.length - 1) % S.length }), next: () => this.setState({ shot: (i + 1) % S.length }),
+      toggleSave: () => this.setState({ saved: !sv }), savedP: String(sv),
+      saveLabel: sv ? 'Saved' : 'Save', saveFill: sv ? 'currentColor' : 'none', saveFill2: sv ? '#193661' : 'none',
+      saveBg: sv ? '#FAAF40' : '#193661', saveFg: sv ? '#121A2B' : '#F1F2EE', saveBorder: sv ? '#121A2B' : '#193661',
+      notSent: !this.state.sent, sent: this.state.sent,
+      send: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      comps: [
+        { a: 'Demo A · same street', d: '[MM/YYYY]', p: '$505,000', s: '2,050', ps: '$246' },
+        { a: 'Demo B · two blocks west', d: '[MM/YYYY]', p: '$548,000', s: '2,300', ps: '$238' },
+        { a: 'Demo C · near Elm Park', d: '[MM/YYYY]', p: '$492,000', s: '1,980', ps: '$248' },
+        { a: 'Demo D · Newton Hill', d: '[MM/YYYY]', p: '$561,000', s: '2,420', ps: '$232' }
+      ],
+      related: [
+        { tint: '#F7DDA0', price: '$468,000', addr: 'Sample 09', place: 'Worcester · Tatnuck' },
+        { tint: '#EDCFC6', price: '$689,000', addr: 'Sample 02', place: 'Worcester · Elm Park' },
+        { tint: '#D7DEC6', price: '$129,000', addr: 'Sample 10', place: 'Worcester · West Side' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

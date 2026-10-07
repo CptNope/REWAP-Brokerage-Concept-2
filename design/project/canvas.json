@@ -1,0 +1,150 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Area.dc.html": {
+      "expand": "fill",
+      "h": 6000,
+      "is_interactive": true,
+      "page": "site",
+      "title": "Area Sheet — /areas/shrewsbury/",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Home.dc.html": {
+      "expand": "fill",
+      "h": 6600,
+      "is_interactive": true,
+      "page": "site",
+      "title": "Home — Know where you're moving",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Identity.dc.html": {
+      "expand": "fill",
+      "h": 6200,
+      "is_interactive": true,
+      "page": "brand",
+      "title": "Brand Book · Mark, Color, Type",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Listing.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "site",
+      "title": "Listing — sample property",
+      "w": 1440,
+      "x": 3040,
+      "y": 1020
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 5600,
+      "is_interactive": true,
+      "page": "brand",
+      "title": "Brand Book · Strategy & Voice",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "MobileSearch.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "page": "site",
+      "radius": 28,
+      "title": "Mobile — search, sheet, listing",
+      "w": 390,
+      "x": 4560,
+      "y": 0
+    },
+    "Platform.dc.html": {
+      "expand": "fill",
+      "h": 5200,
+      "page": "platform",
+      "title": "Platform — entities, URLs, AEO",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Search.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "is_interactive": true,
+      "page": "site",
+      "title": "Property Search — map + list",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "System.dc.html": {
+      "expand": "fill",
+      "h": 7800,
+      "is_interactive": true,
+      "page": "brand",
+      "title": "Brand Book · System & Components",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-06T22:52:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "brand",
+    "view": "canvas"
+  },
+  "notes": {
+    "brandTitle": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "brand",
+      "text": "The Massachusetts Atlas — REWAP Brokerage brand book",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "siteTitle": {
+      "kind": "title1",
+      "maxW": 4950,
+      "page": "site",
+      "text": "Website concept — explore the place, then the property",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Identity.dc.html",
+    "System.dc.html",
+    "Home.dc.html",
+    "Area.dc.html",
+    "Search.dc.html",
+    "Listing.dc.html",
+    "MobileSearch.dc.html",
+    "Platform.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "brand",
+      "name": "Brand Book"
+    },
+    {
+      "id": "site",
+      "name": "Website"
+    },
+    {
+      "id": "platform",
+      "name": "Platform"
+    }
+  ],
+  "title": "REWAP — The Massachusetts Atlas"
+}

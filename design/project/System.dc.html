@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>REWAP Brand Book — System and Components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);--ease-inout:cubic-bezier(.65,0,.35,1);
+  --dur-micro:120ms;--dur-ui:240ms;--dur-map:480ms;--dur-draw:900ms;
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.sheet{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:56px;padding:104px 0 112px;border-top:1px solid var(--rule-strong)}
+.rail{display:flex;flex-direction:column;gap:12px;padding-top:14px}
+.h2{font-family:var(--f-serif);font-weight:600;font-size:clamp(2.25rem,3.8vw,3.5rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 24px;text-wrap:balance;color:var(--navy)}
+.h3{font-family:var(--f-sans);font-weight:700;font-size:1.25rem;margin:0;color:var(--navy)}
+.lede{font-family:var(--f-serif);font-size:1.375rem;line-height:1.5;max-width:50ch;margin:0}
+.note{font-size:.9375rem;line-height:1.5;color:var(--slate);margin:0}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.btn{appearance:none;border:1px solid var(--navy);background:var(--navy);color:var(--paper);min-height:48px;padding:0 22px;display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;cursor:pointer;text-decoration:none;transition:background .24s var(--ease-out),color .24s var(--ease-out)}
+.btn:hover{background:var(--navy-deep);color:var(--paper)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F39C1F;color:var(--ink)}
+.btn-line{background:transparent;color:var(--navy)}
+.btn-line:hover{background:var(--navy);color:var(--paper)}
+.btn[disabled]{background:var(--paper-2);border-color:var(--paper-2);color:var(--slate);cursor:not-allowed}
+.btn-focus{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-weight:600;font-size:.9375rem;color:var(--navy)}
+.input{display:flex;align-items:center;gap:10px;border:1px solid var(--navy);background:var(--white);min-height:52px;padding:0 14px}
+.input input{border:0;outline:0;background:transparent;font:inherit;font-size:1rem;color:var(--ink);width:100%;min-height:48px}
+.input input::placeholder{color:var(--slate)}
+.input:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+.chip{appearance:none;border:1px solid var(--rule-strong);background:var(--white);min-height:44px;padding:0 14px 0 10px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;font-size:.9375rem;color:var(--navy)}
+.chip-on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);background:var(--paper)}
+.mat{width:22px;height:16px;border:1px solid var(--navy)}
+.icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:20px 16px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.igrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+.spec-row{display:grid;grid-template-columns:140px 90px minmax(0,1fr);align-items:center;gap:20px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.shot{position:relative;background:var(--paper-2);border:1px solid var(--rule-strong);display:flex;flex-direction:column;justify-content:flex-end;padding:18px;min-height:220px;box-sizing:border-box}
+.crop{position:absolute;width:14px;height:14px;border-color:var(--navy);border-style:solid}
+.bar{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;height:220px}
+.draw path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw var(--dur-draw) var(--ease-inout) forwards}
+.draw-b path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw2 var(--dur-draw) var(--ease-inout) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes draw2{to{stroke-dashoffset:0}}
+.region{transition:fill var(--dur-map) var(--ease-out),stroke-width var(--dur-map) var(--ease-out)}
+.region:hover{fill:var(--frame-tint);stroke-width:2.5}
+.coord-a{animation:coordA .9s var(--ease-out) both}
+.coord-b{animation:coordB .9s var(--ease-out) both}
+@keyframes coordA{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes coordB{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.mask-a{animation:maskA 1.1s var(--ease-out) both}
+.mask-b{animation:maskB 1.1s var(--ease-out) both}
+@keyframes maskA{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes maskB{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@media (prefers-reduced-motion:reduce){
+  .draw path,.draw-b path{animation:none;stroke-dashoffset:0}
+  .coord-a,.coord-b,.mask-a,.mask-b{animation:none}
+  .region,.btn{transition:none}
+}
+@media (max-width:960px){
+  .wrap{padding:0 20px}
+  .sheet{grid-template-columns:minmax(0,1fr);row-gap:20px;padding:72px 0 80px}
+  .rail{flex-direction:row;flex-wrap:wrap;gap:8px 16px;padding-top:0}
+  .igrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .g2,.g3,.g4{grid-template-columns:minmax(0,1fr) !important}
+  .spec-row{grid-template-columns:100px 70px minmax(0,1fr);gap:10px}
+}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+
+<header style="border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap" style="padding-top: 36px; padding-bottom: 36px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
+    <a href="Main.dc.html" style="display: inline-flex;" aria-label="Back to brand book strategy"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 160px; height: auto; display: block;"></a>
+    <div style="display: flex; gap: 28px; align-items: baseline; flex-wrap: wrap;">
+      <span class="ref">Sheet C of E</span>
+      <span style="font-family: var(--f-serif); font-size: 1.25rem; color: var(--navy);">System, map and components</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- C1 SPACE & GRID -->
+  <section class="sheet" aria-labelledby="space" style="border-top: 0;">
+    <div class="rail"><span class="ref">C1 · Space and grid</span><span class="mono" style="color: var(--slate);">4 px base, ruled structure</span></div>
+    <div style="display: flex; flex-direction: column; gap: 40px;">
+      <div>
+        <h2 class="h2" id="space">Structure comes from lines, not boxes.</h2>
+        <p class="lede">Like a plat map, the layout is divided by fine rules rather than wrapped in rounded cards. Corners are square. Depth is reserved for things that float over the map.</p>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 48px;">
+        <div style="display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule-strong);">
+          <sc-for list="{{spaces}}" as="s" hint-placeholder-count="10">
+            <div class="spec-row">
+              <span class="mono" style="color: var(--stone-ink);">{{s.token}}</span>
+              <span class="mono tnum">{{s.px}}</span>
+              <span style="display: flex; align-items: center; gap: 12px;"><span style="height: 14px; background: var(--navy); width: {{s.w}};"></span><span class="note" style="font-size: .8125rem;">{{s.use}}</span></span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="position: relative; border: 1px solid var(--rule-strong); background: var(--white); height: 220px; padding: 0 22px; box-sizing: border-box; display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); column-gap: 8px;" role="img" aria-label="Twelve-column desktop grid with margins">
+            <span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span><span style="background: var(--brick-tint);"></span>
+            <span style="position: absolute; left: 22px; right: 22px; top: 40px; height: 1px; background: var(--navy);"></span>
+            <span style="position: absolute; left: 22px; width: calc((100% - 44px) * .19); top: 70px; bottom: 30px; border: 1px solid var(--navy); background: rgba(255,255,255,.7);"></span>
+            <span style="position: absolute; left: calc(22px + (100% - 44px) * .235); right: 22px; top: 70px; bottom: 30px; border: 1px solid var(--navy); background: rgba(255,255,255,.7);"></span>
+          </div>
+          <dl style="margin: 0; display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 10px 18px; font-size: .9375rem; line-height: 1.45;">
+            <dt class="ref">Desktop</dt><dd style="margin: 0;">12 columns, 48 px margins, 24 px gutters, 1344 px max. Editorial pages use a 232 px reference rail plus content.</dd>
+            <dt class="ref">Tablet</dt><dd style="margin: 0;">8 columns, 32 px margins, 20 px gutters.</dd>
+            <dt class="ref">Mobile</dt><dd style="margin: 0;">4 columns, 20 px margins, 16 px gutters. Rails collapse into a single line above the content.</dd>
+            <dt class="ref">Corners</dt><dd style="margin: 0;">0 everywhere. Exceptions: the mobile bottom sheet (16 px top corners) and circular map pins.</dd>
+            <dt class="ref">Depth</dt><dd style="margin: 0;">Only floating map UI: <span class="mono">0 8px 24px rgba(15,35,66,.18)</span>. Everything else is flat and ruled.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C2 PHOTOGRAPHY -->
+  <section class="sheet" aria-labelledby="photo">
+    <div class="rail"><span class="ref">C2 · Photography</span><span class="mono" style="color: var(--slate);">A commissioned shot list</span></div>
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      <div>
+        <h2 class="h2" id="photo">Photograph the fabric of the place.</h2>
+        <p class="lede">Real Massachusetts, every region of it, shot in natural light, with materials and streets as the subject. Every frame should be recognizably here and captioned with its place. Placeholders below are art-directed slots for a commissioned shoot, not stock.</p>
+      </div>
+      <div class="g3" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 240px 240px; gap: 16px;">
+        <div class="shot" style="grid-row: span 2; background: linear-gradient(180deg, var(--stone-tint), var(--paper-2));">
+          <span class="crop" style="top: 10px; left: 10px; border-width: 1px 0 0 1px;"></span><span class="crop" style="top: 10px; right: 10px; border-width: 1px 1px 0 0;"></span><span class="crop" style="bottom: 10px; left: 10px; border-width: 0 0 1px 1px;"></span><span class="crop" style="bottom: 10px; right: 10px; border-width: 0 1px 1px 0;"></span>
+          <span class="ref">Shot 01 · Hero</span>
+          <span style="font-family: var(--f-serif); font-size: 1.375rem; color: var(--navy); line-height: 1.3; max-width: 28ch;">A street of three-deckers on a hill, raking winter morning light, porches stacked, utility lines left in.</span>
+        </div>
+        <div class="shot" style="background: var(--brick-tint);">
+          <span class="ref" style="color: var(--brick);">Shot 02 · Material</span>
+          <span style="font-family: var(--f-serif); font-size: 1.125rem; color: var(--navy); line-height: 1.3;">Mill brick, close and flat-on, in a river city: Lowell, Holyoke or Worcester.</span>
+        </div>
+        <div class="shot" style="background: var(--frame-tint);">
+          <span class="ref" style="color: var(--gold-ink);">Shot 03 · Material</span>
+          <span style="font-family: var(--f-serif); font-size: 1.125rem; color: var(--navy); line-height: 1.3;">Painted clapboard and a porch column, shallow focus.</span>
+        </div>
+        <div class="shot" style="background: var(--lichen-tint);">
+          <span class="ref" style="color: var(--lichen);">Shot 04 · Land</span>
+          <span style="font-family: var(--f-serif); font-size: 1.125rem; color: var(--navy); line-height: 1.3;">Stone wall and open field in a hill town.</span>
+        </div>
+        <div class="shot" style="background: var(--stone-tint);">
+          <span class="ref">Shot 05 · Water</span>
+          <span style="font-family: var(--f-serif); font-size: 1.125rem; color: var(--navy); line-height: 1.3;">The coast at dusk: a South Shore harbor or a Cape marsh.</span>
+        </div>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0; border-top: 1px solid var(--rule-strong);">
+        <div style="padding: 24px 28px 0 0; display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="h3" style="color: var(--lichen);">Shoot</h3>
+          <ul style="margin: 0; padding-left: 20px; line-height: 1.6;"><li>Streets, facades, materials, landmarks, terrain and seasons</li><li>Overcast and low winter light; honest color, slightly cool</li><li>Wide establishing frames paired with tight material details</li><li>People only as they naturally appear in a place, never posed to represent a buyer</li><li>Caption every image with its place and, where useful, its coordinates</li></ul>
+        </div>
+        <div style="padding: 24px 0 0 28px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="h3" style="color: var(--brick);">Never</h3>
+          <ul style="margin: 0; padding-left: 20px; line-height: 1.6;"><li>Stock families, handshakes, keys, “sold” signs, champagne</li><li>Drone shots of unidentifiable suburbs</li><li>Heavy filters, HDR or sepia nostalgia</li><li>Images that could be any city</li><li>Photos that suggest who should live somewhere</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C3 ILLUSTRATION -->
+  <section class="sheet" aria-labelledby="illus">
+    <div class="rail"><span class="ref">C3 · Illustration</span><span class="mono" style="color: var(--slate);">Parcels, hatches, contours</span></div>
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      <div>
+        <h2 class="h2" id="illus">Draw like a surveyor, not a cartoonist.</h2>
+        <p class="lede">Illustration is linework built from real geometry: lot lines, building footprints, contours and routes, filled with material colors and hatches. No houses with smiling roofs, no clip art, no isometric towns.</p>
+      </div>
+      <div class="g4" style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px;">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <svg viewBox="0 0 200 150" role="img" aria-label="Brick hatch pattern" style="width: 100%; border: 1px solid var(--rule-strong); background: var(--white);"><defs><pattern id="h1" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#A3402B" stroke-width="1.6"></line></pattern></defs><rect x="20" y="20" width="160" height="110" fill="url(#h1)" stroke="#193661"></rect></svg>
+          <figcaption class="note"><strong style="color: var(--navy);">Brick</strong> · 45° hatch</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <svg viewBox="0 0 200 150" role="img" aria-label="Frame fill" style="width: 100%; border: 1px solid var(--rule-strong); background: var(--white);"><rect x="20" y="20" width="160" height="110" fill="#F7DDA0" stroke="#193661"></rect><line x1="20" y1="75" x2="180" y2="75" stroke="#193661" stroke-width=".8"></line></svg>
+          <figcaption class="note"><strong style="color: var(--navy);">Frame</strong> · solid tint</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <svg viewBox="0 0 200 150" role="img" aria-label="Stone crosshatch" style="width: 100%; border: 1px solid var(--rule-strong); background: var(--white);"><defs><pattern id="h3" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M0 0 L9 9 M9 0 L0 9" stroke="#3D5A80" stroke-width=".9"></path></pattern></defs><rect x="20" y="20" width="160" height="110" fill="#D3DEEC" stroke="#193661"></rect><rect x="20" y="20" width="160" height="110" fill="url(#h3)"></rect></svg>
+          <figcaption class="note"><strong style="color: var(--navy);">Stone</strong> · tint with crosshatch</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <svg viewBox="0 0 200 150" role="img" aria-label="Contour lines" style="width: 100%; border: 1px solid var(--rule-strong); background: var(--white);"><g fill="none" stroke="#5F7048" stroke-width="1"><ellipse cx="100" cy="78" rx="80" ry="52"></ellipse><ellipse cx="104" cy="74" rx="60" ry="38"></ellipse><ellipse cx="108" cy="70" rx="40" ry="24"></ellipse><ellipse cx="112" cy="67" rx="18" ry="10"></ellipse></g><circle cx="112" cy="67" r="3" fill="#FAAF40"></circle></svg>
+          <figcaption class="note"><strong style="color: var(--navy);">Terrain</strong> · lichen contours, gold summit</figcaption>
+        </figure>
+      </div>
+      <p class="note">Patterns double as accessibility: material is shown by hatch as well as color, so the map still reads for people with color vision deficiencies and in print.</p>
+    </div>
+  </section>
+
+  <!-- C4 DATA -->
+  <section class="sheet" aria-labelledby="data">
+    <div class="rail"><span class="ref">C4 · Data</span><span class="mono" style="color: var(--slate);">Readings, always sourced</span></div>
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      <div>
+        <h2 class="h2" id="data">A number without a source is decoration.</h2>
+        <p class="lede">Market data appears as Readings: compact, dated panels with the source, period and sample size printed alongside. One series is emphasized in Navy; context recedes to Stone; Gold marks “now.”</p>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); gap: 32px; align-items: start;">
+        <figure style="margin: 0; border: 1px solid var(--rule-strong); background: var(--white); padding: 24px 28px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+            <figcaption style="font-weight: 700; color: var(--navy); font-size: 1.0625rem;">Closed sales by month, single-family</figcaption>
+            <span class="badge ref" style="background: var(--frame-tint); color: var(--gold-ink); padding: 4px 8px;">Demo values, not market data</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 8px; align-items: end; border-bottom: 1px solid var(--navy); padding-top: 12px;">
+            <sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
+              <div class="bar">
+                <span class="mono tnum" style="color: {{b.labelColor}}; font-size: .6875rem;">{{b.v}}</span>
+                <span style="width: 100%; height: {{b.h}}; background: {{b.fill}};"></span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 8px; margin-top: -10px;">
+            <sc-for list="{{bars}}" as="b" hint-placeholder-count="12"><span class="mono" style="text-align: center; color: var(--slate); font-size: .6875rem;">{{b.m}}</span></sc-for>
+          </div>
+          <p class="mono" style="margin: 0; color: var(--slate);">Source: [MLS PIN via IDX] · Period: [Oct 2025–Sep 2026] · Area: [City or town] · n=[000]</p>
+        </figure>
+        <div style="display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule-strong);">
+          <div style="padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 12px;"><span style="width: 18px; height: 18px; background: var(--navy); margin-top: 3px;"></span><span style="line-height: 1.5;">Navy for the series that answers the question.</span></div>
+          <div style="padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 12px;"><span style="width: 18px; height: 18px; background: var(--stone-tint); border: 1px solid var(--stone); margin-top: 3px;"></span><span style="line-height: 1.5;">Stone tint for context and comparison.</span></div>
+          <div style="padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 12px;"><span style="width: 18px; height: 18px; background: var(--gold); margin-top: 3px;"></span><span style="line-height: 1.5;">Gold marks the current period or the selected place, once.</span></div>
+          <div style="padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 12px;"><span style="width: 18px; height: 18px; border: 1px dashed var(--slate); margin-top: 3px;"></span><span style="line-height: 1.5;">Direct labels instead of legends. Values in mono, tabular.</span></div>
+          <div style="padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 12px;"><span style="width: 18px; height: 18px; border: 1px solid var(--brick); background: var(--brick-tint); margin-top: 3px;"></span><span style="line-height: 1.5;">No feed yet? Show the Reading in its empty state, never invented numbers.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C5 MAPPING -->
+  <section class="sheet" aria-labelledby="mapping">
+    <div class="rail"><span class="ref">C5 · Mapping</span><span class="mono" style="color: var(--slate);">A branded basemap, provider-agnostic</span></div>
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      <div>
+        <h2 class="h2" id="mapping">The map is the brand’s main surface.</h2>
+        <p class="lede">REWAP’s map is styled from scratch, never an embedded default. It is specified as layers and states, so the same look can be rendered by MapLibre with vector tiles today and swapped to another provider later.</p>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: 32px; align-items: start;">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <svg viewBox="0 0 640 440" role="img" aria-label="Map style sample showing area states, price pins, a cluster and the office marker" style="width: 100%; display: block; border: 1px solid var(--rule-strong); background: #E3E6E0;">
+            <rect width="640" height="440" fill="#E3E6E0"></rect>
+            <path d="M520 0 C 505 80, 540 150, 526 220 S 500 360, 530 440 L 640 440 L 640 0 Z" fill="#4F7A9C" opacity=".75"></path>
+            <path d="M40 300 L 200 260 L 260 330 L 180 420 L 40 420 Z" fill="#D7DEC6" stroke="#5F7048" stroke-width=".8"></path>
+            <path d="M0 210 L 640 150" stroke="#FFFFFF" stroke-width="7"></path>
+            <path d="M0 210 L 640 150" stroke="#AFC0D6" stroke-width="1"></path>
+            <path d="M300 0 L 340 440" stroke="#FFFFFF" stroke-width="5"></path>
+            <path class="region" d="M60 40 L 280 30 L 300 190 L 70 210 Z" fill="rgba(211,222,236,.35)" stroke="#193661" stroke-width="1.2"></path>
+            <path d="M330 26 L 500 18 L 512 160 L 344 178 Z" fill="rgba(25,54,97,.10)" stroke="#FAAF40" stroke-width="3"></path>
+            <text x="90" y="70" font-family="Archivo" font-stretch="72%" font-weight="700" font-size="13" letter-spacing="1.2" fill="#3D5A80">DEFAULT</text>
+            <text x="350" y="56" font-family="Archivo" font-stretch="72%" font-weight="700" font-size="13" letter-spacing="1.2" fill="#193661">SELECTED</text>
+            <text x="90" y="88" font-family="Archivo" font-size="11" fill="#4A5563">Hover the shape</text>
+            <g><rect x="120" y="120" width="70" height="28" fill="#193661"></rect><text x="155" y="139" text-anchor="middle" font-family="Archivo" font-stretch="75%" font-weight="700" font-size="14" fill="#F1F2EE">$[000]K</text></g>
+            <g><rect x="380" y="96" width="74" height="30" fill="#FAAF40" stroke="#121A2B"></rect><text x="417" y="116" text-anchor="middle" font-family="Archivo" font-stretch="75%" font-weight="700" font-size="14" fill="#121A2B">$[000]K</text></g>
+            <g><circle cx="230" cy="340" r="22" fill="#193661" stroke="#F1F2EE" stroke-width="3"></circle><text x="230" y="345" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="14" fill="#F1F2EE">12</text></g>
+            <g><circle cx="420" cy="300" r="9" fill="#FAAF40" stroke="#121A2B" stroke-width="1.5"></circle><circle cx="420" cy="300" r="18" fill="none" stroke="#FAAF40" stroke-width="1.5"></circle><text x="446" y="305" font-family="Archivo" font-weight="700" font-size="13" fill="#121A2B">652 Park Ave</text></g>
+            <text x="560" y="230" font-family="Archivo" font-stretch="72%" font-weight="700" font-size="12" letter-spacing="1.4" fill="#F1F2EE">WATER</text>
+            <text x="70" y="370" font-family="Archivo" font-stretch="72%" font-weight="700" font-size="12" letter-spacing="1.4" fill="#5F7048">PARK</text>
+            <g transform="translate(596 44)"><path d="M0 -18 L 8 10 L 0 4 L -8 10 Z" fill="#193661"></path><text y="26" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="11" fill="#193661">N</text></g>
+          </svg>
+          <figcaption class="mono" style="color: var(--slate);">Style sample · schematic geometry</figcaption>
+        </figure>
+        <div style="display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule-strong);">
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Land</span><span>Paper 2. Blocks one step darker; roads White with a Mist center line.</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Water · Parks</span><span>Water and Lichen tint. Labels in condensed caps.</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Areas</span><span>Default: Navy 1 px line, faint Stone fill. Hover: Frame fill, 2.5 px. Selected: Gold 3 px outline, Navy 10% fill.</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Price pins</span><span>Square Navy plates with condensed price. Selected and saved pins turn Gold with an Ink rule.</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Clusters</span><span>Navy circles with counts; the only round shapes besides “you are here.”</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Overlays</span><span>Commuter rail and highways as Gold routes; schools and parks as small Navy glyphs, toggled from the Legend.</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Sources</span><span>Basemap: OpenStreetMap vector tiles. Town and parcel boundaries: MassGIS. Transit: MBTA GTFS. Listings: MLS via IDX. Attribution always visible.</span></div>
+          <div class="spec-row" style="grid-template-columns: 120px minmax(0,1fr);"><span class="ref">Fallback</span><span>Every map has a list twin. Nothing is reachable only by the map.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C6 ICONOGRAPHY -->
+  <section class="sheet" aria-labelledby="icons">
+    <div class="rail"><span class="ref">C6 · Iconography</span><span class="mono" style="color: var(--slate);">24 px grid, 1.5 px stroke, square ends</span></div>
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <div>
+        <h2 class="h2" id="icons">Map symbols, not app icons.</h2>
+        <p class="lede">A compact set drawn on a 24 px grid with a 1.5 px stroke and square ends, like legend symbols on a plan. Icons always sit beside a word, except on the map where the Legend explains them.</p>
+      </div>
+      <div class="igrid">
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg><span class="note" style="font-size: .8125rem;">Search</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"></path><path d="M9 4v14M15 6v14"></path></svg><span class="note" style="font-size: .8125rem;">Map</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"></path></svg><span class="note" style="font-size: .8125rem;">List</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 3L2 8l10 5 10-5z"></path><path d="M2 13l10 5 10-5"></path></svg><span class="note" style="font-size: .8125rem;">Layers</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 7l6-3 9 4-2 10-11 2z" stroke-dasharray="2.5 2"></path><rect x="4" y="6" width="2" height="2" fill="#193661"></rect><rect x="19" y="7" width="2" height="2" fill="#193661"></rect><rect x="6" y="19" width="2" height="2" fill="#193661"></rect></svg><span class="note" style="font-size: .8125rem;">Draw area</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 21s-6-6.2-6-11a6 6 0 0 1 12 0c0 4.8-6 11-6 11z"></path><circle cx="12" cy="10" r="2"></circle></svg><span class="note" style="font-size: .8125rem;">Place</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="note" style="font-size: .8125rem;">Save</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg><span class="note" style="font-size: .8125rem;">Legend</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><rect x="6" y="3" width="12" height="13"></rect><path d="M6 10h12M9 20l1.5-4M15 20l-1.5-4"></path><path d="M9 13h.5M14.5 13h.5"></path></svg><span class="note" style="font-size: .8125rem;">Rail</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M8 3L5 21M16 3l3 18M12 4v3M12 10v3M12 16v3"></path></svg><span class="note" style="font-size: .8125rem;">Highway</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 3L5 16h14z"></path><path d="M12 16v5"></path></svg><span class="note" style="font-size: .8125rem;">Park</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"></path></svg><span class="note" style="font-size: .8125rem;">Water</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3 10l9-5 9 5-9 5z"></path><path d="M7 12v5c3 2 7 2 10 0v-5"></path></svg><span class="note" style="font-size: .8125rem;">School</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="5" width="18" height="16"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg><span class="note" style="font-size: .8125rem;">Open house</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span class="note" style="font-size: .8125rem;">Commute</span></div>
+        <div class="icon-cell"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><rect x="3" y="3" width="18" height="18"></rect><path d="M10 3v18M3 14h7M10 9h11"></path></svg><span class="note" style="font-size: .8125rem;">Parcel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C7 MOTION -->
+  <section class="sheet" aria-labelledby="motion">
+    <div class="rail"><span class="ref">C7 · Motion</span><span class="mono" style="color: var(--slate);">Geography in motion, briefly</span></div>
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <div>
+        <h2 class="h2" id="motion">Motion explains where you are.</h2>
+        <p class="lede">Movement is reserved for spatial meaning: a route drawing itself, a region lighting up, coordinates settling as the map moves, an image revealed along a parcel edge. Nothing bounces. Everything respects reduced-motion settings.</p>
+      </div>
+      <div style="display: flex; justify-content: flex-end;">
+        <button class="btn btn-line" onClick="{{replay}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"></path></svg>Replay demos</button>
+      </div>
+      <div class="g4" style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px;">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <div style="background: var(--navy); height: 180px; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 200 140" class="{{drawCls}}" style="width: 90%;" aria-hidden="true"><path d="M10 120 L 60 90 L 70 50 L 130 40 L 190 14" fill="none" stroke="#FAAF40" stroke-width="3"></path></svg>
+          </div>
+          <figcaption class="note"><strong style="color: var(--navy);">Line draw</strong> · routes, commutes · 900 ms ease-in-out</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <div style="background: var(--paper-2); height: 180px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--rule);">
+            <svg viewBox="0 0 200 140" style="width: 90%;" aria-label="Hover the shapes"><path class="region" d="M20 20 L 100 14 L 108 70 L 26 80 Z" fill="rgba(211,222,236,.4)" stroke="#193661" stroke-width="1.2"></path><path class="region" d="M110 16 L 186 22 L 180 90 L 114 70 Z" fill="rgba(211,222,236,.4)" stroke="#193661" stroke-width="1.2"></path><path class="region" d="M28 84 L 110 74 L 176 94 L 160 128 L 40 126 Z" fill="rgba(211,222,236,.4)" stroke="#193661" stroke-width="1.2"></path></svg>
+          </div>
+          <figcaption class="note"><strong style="color: var(--navy);">Region highlight</strong> · hover above · 480 ms ease-out</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <div style="background: var(--white); height: 180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; padding: 0 22px; border: 1px solid var(--rule);">
+            <span class="ref">Now viewing</span>
+            <span class="{{coordCls}}" style="font-family: var(--f-serif); font-size: 1.75rem; color: var(--navy);">Pittsfield</span>
+            <span class="{{coordCls}} mono" style="color: var(--slate);">42.45° N · 73.25° W</span>
+          </div>
+          <figcaption class="note"><strong style="color: var(--navy);">Coordinate shift</strong> · on map move · 900 ms</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <div style="height: 180px; position: relative; border: 1px solid var(--rule);">
+            <div class="{{maskCls}}" style="position: absolute; inset: 0; background: linear-gradient(135deg, var(--brick) 0 30%, var(--brick-tint) 30% 55%, var(--frame-tint) 55% 100%);"></div>
+          </div>
+          <figcaption class="note"><strong style="color: var(--navy);">Masked reveal</strong> · images enter along a parcel edge · 1100 ms</figcaption>
+        </figure>
+      </div>
+      <div style="border-top: 1px solid var(--rule-strong);">
+        <div class="spec-row"><span class="mono" style="color: var(--stone-ink);">--dur-micro</span><span class="mono tnum">120 ms</span><span>Hover color, pressed states</span></div>
+        <div class="spec-row"><span class="mono" style="color: var(--stone-ink);">--dur-ui</span><span class="mono tnum">240 ms</span><span>Sheets, menus, filter changes, list and map sync</span></div>
+        <div class="spec-row"><span class="mono" style="color: var(--stone-ink);">--dur-map</span><span class="mono tnum">480 ms</span><span>Region highlight, pin selection, map flyTo up to 1200 ms</span></div>
+        <div class="spec-row"><span class="mono" style="color: var(--stone-ink);">--ease-out</span><span class="mono">expo</span><span class="mono">cubic-bezier(.16, 1, .3, 1)</span></div>
+        <div class="spec-row"><span class="mono" style="color: var(--stone-ink);">reduced</span><span class="mono">—</span><span>Map jumps instead of flying; routes and images appear without animation; hover color changes remain.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C8 COMPONENTS -->
+  <section class="sheet" aria-labelledby="components">
+    <div class="rail"><span class="ref">C8 · Components</span><span class="mono" style="color: var(--slate);">Working specimens</span></div>
+    <div style="display: flex; flex-direction: column; gap: 56px;">
+      <div>
+        <h2 class="h2" id="components">Components carry the Atlas grammar.</h2>
+        <p class="lede">Rules, plates, title blocks and legends replace generic cards and pills. Each component below works: try the Legend, the save control and the affiliation panel.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3 class="h3">Actions</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+          <button class="btn">Search this area</button>
+          <button class="btn btn-gold">Explore the map<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"></path></svg></button>
+          <button class="btn btn-line">Read the Sheet</button>
+          <button class="btn btn-focus">Focused</button>
+          <button class="btn" disabled="{{yes}}">Unavailable</button>
+          <a href="#components" style="font-weight: 600; display: inline-flex; gap: 8px; align-items: center; min-height: 44px;">Text link<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"></path></svg></a>
+        </div>
+        <p class="note">Navy is the default action. Gold is the wayfinding action and appears once per view. Minimum height 48 px; focus is a Gold ring with a Navy halo, visible on every ground.</p>
+      </div>
+
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 40px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <h3 class="h3">Search field</h3>
+          <div class="field">
+            <label for="sys-q">Where are you looking?</label>
+            <div class="input"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg><input id="sys-q" type="search" placeholder="Town, neighborhood, street or ZIP"></div>
+            <span class="note" style="font-size: .8125rem;">Try “Tatnuck,” “Route 9” or “01545”.</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <h3 class="h3">Legend (filters)</h3>
+          <div role="group" aria-label="Building type" style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <sc-for list="{{legend}}" as="l" hint-placeholder-count="4">
+              <button class="{{l.cls}}" aria-pressed="{{l.pressed}}" onClick="{{l.toggle}}"><span class="mat" style="background: {{l.fill}};"></span>{{l.label}}</button>
+            </sc-for>
+          </div>
+          <p class="note">{{legendSummary}}</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3 class="h3">Property plate</h3>
+        <div class="g3" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);">
+          <article style="border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; background: var(--white);">
+            <div style="aspect-ratio: 4 / 3; background: var(--frame-tint); position: relative; display: flex; align-items: flex-end; padding: 12px;">
+              <span class="ref" style="background: var(--white); color: var(--gold-ink); padding: 4px 8px;">Sample listing</span>
+              <button aria-pressed="{{savedPressed}}" aria-label="{{saveLabel}}" onClick="{{toggleSave}}" style="position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 1px solid var(--navy); background: {{saveBg}}; display: flex; align-items: center; justify-content: center; cursor: pointer;"><svg width="20" height="20" viewBox="0 0 24 24" fill="{{saveFill}}" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg></button>
+            </div>
+            <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px;">
+              <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.75rem; color: var(--ink); letter-spacing: -.01em;">$[000,000]</span>
+              <span style="font-weight: 600; color: var(--ink);">[00] Example Street</span>
+              <span class="ref" style="font-size: .75rem;">Worcester · West Side</span>
+              <span style="display: flex; gap: 14px; flex-wrap: wrap; font-size: .9375rem; color: var(--slate);" class="tnum"><span>[3] bd</span><span>[2] ba</span><span>[0,000] sq ft</span><span>Frame</span></span>
+              <span class="mono" style="color: var(--slate); padding-top: 8px; border-top: 1px solid var(--rule);">Listed by [Brokerage] · MLS #[00000000]</span>
+            </div>
+          </article>
+          <div style="grid-column: span 2; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 24px 28px; display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+              <li>A plate, not a card: square, ruled, sitting in a shared grid of lines.</li>
+              <li>Price in condensed bold tabular numerals; address in regular; place in map lettering.</li>
+              <li>Building material appears as data and on the plate’s placeholder tint.</li>
+              <li>Listing brokerage and MLS number are always printed, as IDX rules require.</li>
+              <li>The save control is a real toggle button with a state the screen reader announces.</li>
+              <li>{{saveStatus}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3 class="h3">Reading</h3>
+        <div class="g3" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border: 1px solid var(--rule-strong); background: var(--white);">
+          <div style="padding: 22px 24px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;">
+            <span class="ref">Median sale price</span>
+            <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2.25rem; color: var(--ink);">$[000,000]</span>
+            <span class="mono" style="color: var(--slate);">[MLS PIN] · [Q3 2026] · n=[000]</span>
+          </div>
+          <div style="padding: 22px 24px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;">
+            <span class="ref">Median days on market</span>
+            <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2.25rem; color: var(--ink);">[00]</span>
+            <span class="mono" style="color: var(--slate);">[MLS PIN] · [Q3 2026] · n=[000]</span>
+          </div>
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px; background: var(--paper);">
+            <span class="ref" style="color: var(--brick);">Empty state</span>
+            <span style="font-family: var(--f-serif); font-size: 1.25rem; color: var(--navy); line-height: 1.3;">Readings appear once the MLS feed is connected.</span>
+            <span class="note" style="font-size: .875rem;">No placeholder numbers are ever published.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3 class="h3">Title Block · brokerage relationships</h3>
+        <p class="note" style="max-width: 70ch;">The Title Block states who prepared what, the way a drawing credits its architect and engineer. It makes team and brokerage relationships explicit, so an affiliated group never reads as a separate company or as the same one.</p>
+        <div style="border: 1.5px solid var(--navy); background: var(--white); display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr) auto;" class="g3">
+          <div style="padding: 22px 26px; border-right: 1px solid var(--navy); display: flex; flex-direction: column; gap: 6px;">
+            <span class="ref">Affiliated group</span>
+            <span style="font-family: var(--f-serif); font-weight: 600; font-size: 1.75rem; color: var(--navy); line-height: 1.1;">The Oberdorfer Group</span>
+            <span class="note" style="font-size: .875rem;">A team affiliated with REWAP Brokerage LLC</span>
+          </div>
+          <div style="padding: 22px 26px; border-right: 1px solid var(--navy); display: flex; flex-direction: column; gap: 6px;">
+            <span class="ref">Brokerage of record</span>
+            <img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 150px; display: block;">
+            <span class="note" style="font-size: .875rem;">REWAP Brokerage LLC · 652 Park Ave, Worcester, MA 01603</span>
+          </div>
+          <div style="padding: 22px 26px; display: flex; align-items: center;">
+            <button class="btn btn-line" onClick="{{toggleAff}}" aria-expanded="{{affExpanded}}" aria-controls="aff-detail">About the group</button>
+          </div>
+        </div>
+        <sc-if value="{{affOpen}}" hint-placeholder-val="{{false}}">
+          <div id="aff-detail" style="border: 1px solid var(--rule-strong); border-top: 0; background: var(--paper); padding: 22px 26px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 28px;" class="g2">
+            <p style="margin: 0; line-height: 1.6;"><span class="mono" style="color: var(--gold-ink); display: block; margin-bottom: 6px;">[Draft wording · pending 254 CMR and MLS review]</span>The Oberdorfer Group is a real estate team whose licensees operate under REWAP Brokerage LLC. Brokerage services, including listing agreements and buyer representation, are provided by REWAP Brokerage LLC.</p>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.6;"><li>Brokerage name shown at equal or greater prominence than the team name</li><li>Team pages link back to the brokerage and list the brokerage’s office address</li><li>Final wording confirmed against 254 CMR, MLS PIN rules and REWAP’s counsel</li></ul>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- C9 ACCESSIBILITY -->
+  <section class="sheet" aria-labelledby="a11y">
+    <div class="rail"><span class="ref">C9 · Accessibility</span><span class="mono" style="color: var(--slate);">WCAG 2.2 AA as the floor</span></div>
+    <div style="display: flex; flex-direction: column; gap: 28px;">
+      <div>
+        <h2 class="h2" id="a11y">An atlas everyone can read.</h2>
+        <p class="lede">Accessibility rules are part of the identity, not a checklist after it. A map-led brand has a particular duty: the map can never be the only way in.</p>
+      </div>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0; border-top: 1px solid var(--rule-strong);">
+        <sc-for list="{{rules}}" as="r" hint-placeholder-count="10">
+          <div style="padding: 20px 28px 20px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 12px;">
+            <span class="mono" style="color: var(--stone-ink); padding-top: 3px;">{{r.n}}</span>
+            <span style="display: flex; flex-direction: column; gap: 4px;"><strong style="color: var(--navy);">{{r.t}}</strong><span style="line-height: 1.5; color: var(--slate);">{{r.d}}</span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background: var(--navy); color: var(--paper);">
+  <div class="wrap" style="padding-top: 48px; padding-bottom: 48px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center;">
+    <a href="Identity.dc.html" style="color: var(--paper); display: inline-flex; gap: 10px; align-items: center; min-height: 44px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M16 10H4M9 5l-5 5 5 5"></path></svg>Sheet B · Mark, color and type</a>
+    <a href="Home.dc.html" style="color: var(--paper); display: inline-flex; gap: 10px; align-items: center; min-height: 44px;">Sheet D · Website concept<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></a>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":7800}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { run: 0, saved: false, aff: false, legend: { single: true, multi: true, condo: false, land: false } };
+  }
+  renderVals() {
+    const sp = [
+      ['--s1', 4, 'Hairline offsets, icon gaps'], ['--s2', 8, 'Inline gaps, chip padding'], ['--s3', 12, 'Label to value'],
+      ['--s4', 16, 'Mobile gutter, control padding'], ['--s5', 24, 'Desktop gutter, plate padding'], ['--s6', 32, 'Between related groups'],
+      ['--s7', 48, 'Page margin, between components'], ['--s8', 64, 'Between subsections'], ['--s9', 96, 'Above a section heading'], ['--s10', 128, 'Between major sections']
+    ];
+    const spaces = sp.map(s => ({ token: s[0], px: s[1] + ' px', w: s[1] + 'px', use: s[2] }));
+    const vals = [38, 41, 52, 61, 66, 72, 69, 63, 57, 49, 44, 58];
+    const months = ['O','N','D','J','F','M','A','M','J','J','A','S'];
+    const bars = vals.map((v, k) => ({ v: v, m: months[k], h: Math.round(v / 72 * 180) + 'px',
+      fill: k === 11 ? '#FAAF40' : (k >= 6 ? '#193661' : '#D3DEEC'), labelColor: k === 11 ? '#7A4E00' : '#4A5563' }));
+    const L = [['single', 'Single-family', '#F7DDA0'], ['multi', 'Two to four family', '#A3402B'], ['condo', 'Condominium', '#D3DEEC'], ['land', 'Land', '#5F7048']];
+    const lg = this.state.legend;
+    const legend = L.map(l => ({ label: l[1], fill: l[2], cls: lg[l[0]] ? 'chip chip-on' : 'chip', pressed: lg[l[0]] ? 'true' : 'false',
+      toggle: () => this.setState({ legend: { ...this.state.legend, [l[0]]: !this.state.legend[l[0]] } }) }));
+    const on = L.filter(l => lg[l[0]]).map(l => l[1].toLowerCase());
+    const legendSummary = on.length ? 'Showing ' + on.join(', ') + '. Swatches match the map, so the filter doubles as the key.' : 'No building types selected. The map shows areas only.';
+    const odd = this.state.run % 2 === 1;
+    const rules = [
+      { n: '01', t: 'Contrast', d: 'Body text 4.5:1 or better, large text and interface marks 3:1. Use the approved pairings only.' },
+      { n: '02', t: 'The map has a list twin', d: 'Every area, pin and result on a map is also reachable as a list, in the same order.' },
+      { n: '03', t: 'Keyboard first', d: 'Areas, pins and clusters are focusable; arrow keys move between pins; Escape closes sheets.' },
+      { n: '04', t: 'Visible focus', d: 'Gold ring with Navy halo, never removed, visible on Paper, Navy and photography.' },
+      { n: '05', t: 'Targets', d: 'At least 44 by 44 px, 48 px for primary actions and map controls.' },
+      { n: '06', t: 'Color is never alone', d: 'Materials also carry hatches and labels; states also change line weight or text.' },
+      { n: '07', t: 'Reduced motion', d: 'No flyTo, line draws or reveals when the user asks for reduced motion.' },
+      { n: '08', t: 'Describe the place', d: 'Listing photos get alt text describing the space and view, never the people who might live there.' },
+      { n: '09', t: 'Plain language', d: 'Legal and financial terms explained on first use; errors name the problem and the recovery.' },
+      { n: '10', t: 'Fair housing', d: 'No content describes residents, suggests who belongs, or ranks schools in REWAP’s own words.' }
+    ];
+    return {
+      yes: true, spaces, bars, legend, legendSummary, rules,
+      drawCls: odd ? 'draw-b' : 'draw', coordCls: odd ? 'coord-b' : 'coord-a', maskCls: odd ? 'mask-b' : 'mask-a',
+      replay: () => this.setState({ run: this.state.run + 1 }),
+      savedPressed: this.state.saved ? 'true' : 'false', saveLabel: this.state.saved ? 'Remove from saved' : 'Save this listing',
+      saveBg: this.state.saved ? '#FAAF40' : '#FFFFFF', saveFill: this.state.saved ? '#193661' : 'none',
+      saveStatus: this.state.saved ? 'Saved. It now appears in “Your Atlas” with its place and price history.' : 'Tap the save control on the plate to see its saved state.',
+      toggleSave: () => this.setState({ saved: !this.state.saved }),
+      affOpen: this.state.aff, affExpanded: this.state.aff ? 'true' : 'false', toggleAff: () => this.setState({ aff: !this.state.aff })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>REWAP Brokerage — Know where you’re moving</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--brick)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.nav a{color:var(--navy);text-decoration:none;font-weight:600;font-size:.9375rem;padding:12px 2px;border-bottom:2px solid transparent}
+.nav a:hover{border-bottom-color:var(--gold);color:var(--navy)}
+.btn{appearance:none;border:1px solid var(--navy);background:var(--navy);color:var(--paper);min-height:48px;padding:0 22px;display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;cursor:pointer;text-decoration:none;transition:background .24s var(--ease-out),color .24s var(--ease-out);box-sizing:border-box}
+.btn:hover{background:var(--navy-deep);color:var(--paper)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F39C1F;color:var(--ink)}
+.btn-line{background:transparent;color:var(--navy)}
+.btn-line:hover{background:var(--navy);color:var(--paper)}
+.input{display:flex;align-items:center;gap:10px;border:1px solid var(--navy);background:var(--white);min-height:56px;padding:0 6px 0 16px}
+.input input{border:0;outline:0;background:transparent;font:inherit;font-size:1.0625rem;color:var(--ink);width:100%;min-height:48px}
+.input input::placeholder{color:var(--slate)}
+.input:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+.area{transition:fill .48s var(--ease-out),stroke .48s var(--ease-out),stroke-width .48s var(--ease-out);cursor:pointer}
+.town-btn{appearance:none;border:0;border-right:1px solid rgba(241,242,238,.22);background:transparent;color:var(--paper);text-align:left;padding:16px 18px;min-height:64px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background .24s var(--ease-out)}
+.town-btn:hover{background:rgba(241,242,238,.08)}
+.town-on{background:var(--gold) !important;color:var(--ink)}
+.town-on .mono{color:var(--ink) !important}
+.mapgrid{position:relative}
+.panel{display:grid;grid-template-columns:300px minmax(0,1fr);border-top:1px solid rgba(241,242,238,.2)}
+.panel-id{border-right:1px solid var(--rule)}
+.panel-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.panel-facts > div{padding:16px 22px;border-bottom:1px solid var(--rule)}
+.panel-facts > div:nth-child(odd){border-right:1px solid var(--rule)}
+.panel-facts > div:nth-last-child(-n+2){border-bottom:0}
+.panel-facts dd{margin:4px 0 0;line-height:1.45;font-size:.9375rem}
+.on-dark a:hover{color:var(--gold)}
+.toggle{appearance:none;border:1px solid rgba(241,242,238,.5);background:transparent;color:var(--paper);min-height:44px;padding:0 12px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:.875rem}
+.toggle-on{background:var(--paper);color:var(--navy);border-color:var(--paper)}
+.path-row{display:grid;grid-template-columns:120px minmax(0,1.3fr) minmax(0,1fr) auto;gap:32px;align-items:baseline;padding:36px 0;border-top:1px solid var(--rule-strong);color:inherit;text-decoration:none}
+.path-row:hover .path-line{color:var(--brick)}
+.path-row:hover .path-arrow{transform:translateX(6px)}
+.path-arrow{transition:transform .3s var(--ease-out)}
+.gz{display:grid;grid-template-columns:200px 150px minmax(0,1fr) 140px;gap:24px;padding:16px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.plate{display:flex;flex-direction:column;background:var(--white);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.note{font-size:.9375rem;line-height:1.5;color:var(--slate);margin:0}
+.reveal{animation:rv .9s var(--ease-out) both}
+@keyframes rv{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.routes path{stroke-dasharray:1400;stroke-dashoffset:0;animation:drawr .9s cubic-bezier(.65,0,.35,1) both}
+@keyframes drawr{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.reveal,.routes path{animation:none}.area,.btn,.town-btn{transition:none}}
+.skip{position:absolute;left:-9999px;top:16px;z-index:20;background:var(--navy);color:var(--paper);padding:12px 16px;font-weight:600}
+.skip:focus{left:16px;color:var(--paper)}
+.skip:hover{color:var(--gold)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mark-sm{display:none}
+.mnav a{display:flex;align-items:center;min-height:52px;padding:0 20px;border-bottom:1px solid var(--rule);font-family:var(--f-serif);font-size:1.25rem;color:var(--navy);text-decoration:none}
+@media (max-width:1100px){
+  .hero{grid-template-columns:minmax(0,1fr) !important}
+  .mapgrid{grid-template-columns:minmax(0,1fr) !important}
+  .nav{display:none !important}
+  .menu-btn{display:inline-flex !important}
+}
+@media (max-width:640px){
+  .mlbl{display:none}
+}
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  .logo-lg{display:none !important}
+  .mark-sm{display:block}
+  .talk{display:none !important}
+  .towns{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  .panel,.panel-facts{grid-template-columns:minmax(0,1fr)}
+  .panel-id{border-right:0;border-bottom:1px solid var(--rule)}
+  .panel-facts > div{border-right:0 !important;border-bottom:1px solid var(--rule) !important}
+  .path-row{grid-template-columns:minmax(0,1fr);gap:10px}
+  .gz{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 16px}
+  .gz-head{display:none !important}
+  .g3,.g2{grid-template-columns:minmax(0,1fr) !important}
+  .colophon{grid-template-columns:minmax(0,1fr) !important}
+}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+
+<a class="skip" href="#atlas">Skip to the map</a>
+
+<header style="background: var(--paper); border-bottom: 1px solid var(--rule-strong); position: relative; z-index: 2;">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px;">
+    <a href="Home.dc.html" style="display: inline-flex;" aria-label="REWAP Brokerage home"><img class="logo-lg" src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 170px; height: auto; display: block;"><img class="mark-sm" src="/_blob/95565ea2cf60cff46df98f6f8649de9f" alt="REWAP Brokerage" style="width: 48px; height: 48px;"></a>
+    <nav class="nav" aria-label="Primary" style="display: flex; gap: 28px; align-items: center;">
+      <a href="#atlas">The Atlas</a>
+      <a href="Search.dc.html">Properties</a>
+      <a href="#paths">Buy</a>
+      <a href="#paths">Sell</a>
+      <a href="#paths">Invest</a>
+      <a href="#notes">Field Notes</a>
+      <a href="#meet">About</a>
+    </nav>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="Search.dc.html" aria-label="Saved places and listings" style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 1px solid var(--rule-strong);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg></a>
+      <a class="btn talk" href="#meet" style="min-height: 48px;">Talk to REWAP</a>
+      <button class="menu-btn" onClick="{{toggleMenu}}" aria-expanded="{{menuExpanded}}" aria-controls="m-nav" aria-label="{{menuLabel}}" style="display: none; width: 48px; height: 48px; border: 1px solid var(--navy); background: transparent; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+    </div>
+  </div>
+  <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+    <nav id="m-nav" class="mnav" aria-label="Primary" style="border-top: 1px solid var(--rule-strong); background: var(--paper);">
+      <a href="#atlas" onClick="{{closeMenu}}">The Atlas</a><a href="Search.dc.html">Properties</a><a href="#paths" onClick="{{closeMenu}}">Buy, sell or invest</a><a href="#notes" onClick="{{closeMenu}}">Field Notes</a><a href="#meet" onClick="{{closeMenu}}">About REWAP</a>
+      <a href="tel:+15085097759" style="background: var(--gold); color: var(--ink); font-family: var(--f-sans); font-weight: 700; font-size: 1rem; border-bottom: 0;">Call 508-509-7759</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<section aria-labelledby="hero-title" style="border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap hero" style="display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; padding-top: 56px; padding-bottom: 56px; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 40px; padding-top: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+        <h1 id="hero-title" class="reveal" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(3rem, 5vw, 4.75rem); line-height: .94; letter-spacing: -.03em; color: var(--navy); text-wrap: balance;">Know where you’re moving.</h1>
+        <p style="margin: 0; font-family: var(--f-serif); font-size: 1.375rem; line-height: 1.45; max-width: 30ch;">REWAP Brokerage maps Massachusetts region by region and town by town, so you can understand the place before you choose the property.</p>
+      </div>
+      <form role="search" style="display: flex; flex-direction: column; gap: 10px;" onSubmit="{{submit}}">
+        <label for="q" style="font-weight: 600; color: var(--navy);">Where are you looking?</label>
+        <div class="input">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
+          <input id="q" type="search" placeholder="City, town or ZIP" autocomplete="off" onInput="{{setQ}}">
+          <button class="btn" type="submit" style="min-height: 44px; padding: 0 18px;">Search</button>
+        </div>
+        <sc-if value="{{submitted}}" hint-placeholder-val="{{false}}"><a href="Search.dc.html" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center;">See results for “{{qText}}” in property search</a></sc-if>
+        <p class="note" style="font-size: .875rem;">Or choose a region on the map. Every region and town has its Sheet: a guide to its streets, housing, landmarks and commute.</p>
+      </form>
+      <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 8px 18px; padding-top: 20px; border-top: 1px solid var(--rule-strong); font-size: .9375rem;">
+        <dt class="ref">Coverage</dt><dd style="margin: 0;">All 351 Massachusetts cities and towns</dd>
+        <dt class="ref">Office</dt><dd style="margin: 0;">652 Park Ave, Worcester, MA 01603</dd>
+        <dt class="ref">Founder</dt><dd style="margin: 0;">Hong Tran, real estate lawyer</dd>
+      </dl>
+    </div>
+
+    <div id="atlas" style="background: var(--navy-deep); color: var(--paper); display: flex; flex-direction: column; min-width: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 20px; border-bottom: 1px solid rgba(241,242,238,.2);">
+        <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-family: var(--f-serif); font-size: 1.25rem;">The Massachusetts Atlas</span><span class="mono" style="color: var(--mist);">Schematic · regions and routes simplified</span></span>
+        <div role="group" aria-label="Map overlays" style="display: flex; gap: 8px;">
+          <button class="{{railCls}}" aria-pressed="{{railPressed}}" onClick="{{toggleRail}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><rect x="6" y="3" width="12" height="13"></rect><path d="M6 10h12M9 20l1.5-4M15 20l-1.5-4"></path></svg>Rail</button>
+          <button class="{{roadCls}}" aria-pressed="{{roadPressed}}" onClick="{{toggleRoad}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M8 3L5 21M16 3l3 18M12 4v3M12 10v3M12 16v3"></path></svg>Highways</button>
+        </div>
+      </div>
+      <div class="mapgrid">
+        <div style="position: relative; min-width: 0;">
+          <svg viewBox="0 0 1000 520" role="img" aria-label="Schematic map of Massachusetts divided into nine regions: Berkshires, Pioneer Valley, Central Massachusetts, MetroWest, North Shore and Merrimack Valley, Greater Boston, South Shore, South Coast, and Cape and Islands. Use the list of regions below the map to explore with a keyboard." style="width: 100%; height: auto; display: block;" onMouseLeave="{{leave}}">
+            <rect width="1000" height="520" fill="#0F2342"></rect>
+            <g class="mlbl" font-family="Archivo" font-weight="600" font-size="11" letter-spacing="1.4" fill="#AFC0D6" opacity=".7">
+              <text x="70" y="78">VERMONT</text>
+              <text x="430" y="72">NEW HAMPSHIRE</text>
+              <text x="150" y="372">CONNECTICUT</text>
+              <text x="502" y="402">RHODE ISLAND</text>
+              <text x="838" y="210">ATLANTIC OCEAN</text>
+              <text x="12" y="300" transform="rotate(-90 12 300)">NEW YORK</text>
+            </g>
+            <path class="area" d="M20 110 L 150 106 L 150 330 L 22 334 Z" fill="{{f.berkshires.fill}}" stroke="{{f.berkshires.stroke}}" stroke-width="{{f.berkshires.sw}}" onMouseEnter="{{h.berkshires}}" onClick="{{c.berkshires}}"></path>
+            <path class="area" d="M150 106 L 300 102 L 300 326 L 150 330 Z" fill="{{f.pioneer.fill}}" stroke="{{f.pioneer.stroke}}" stroke-width="{{f.pioneer.sw}}" onMouseEnter="{{h.pioneer}}" onClick="{{c.pioneer}}"></path>
+            <path class="area" d="M300 102 L 500 96 L 500 165 L 505 322 L 300 326 Z" fill="{{f.central.fill}}" stroke="{{f.central.stroke}}" stroke-width="{{f.central.sw}}" onMouseEnter="{{h.central}}" onClick="{{c.central}}"></path>
+            <path class="area" d="M500 165 L 590 160 L 600 262 L 560 322 L 505 322 Z" fill="{{f.metrowest.fill}}" stroke="{{f.metrowest.stroke}}" stroke-width="{{f.metrowest.sw}}" onMouseEnter="{{h.metrowest}}" onClick="{{c.metrowest}}"></path>
+            <path class="area" d="M500 96 L 700 88 L 745 66 L 792 92 L 822 138 L 772 166 L 700 158 L 590 160 L 500 165 Z" fill="{{f.northshore.fill}}" stroke="{{f.northshore.stroke}}" stroke-width="{{f.northshore.sw}}" onMouseEnter="{{h.northshore}}" onClick="{{c.northshore}}"></path>
+            <path class="area" d="M590 160 L 700 158 L 772 166 L 748 212 L 762 254 L 600 262 Z" fill="{{f.boston.fill}}" stroke="{{f.boston.stroke}}" stroke-width="{{f.boston.sw}}" onMouseEnter="{{h.boston}}" onClick="{{c.boston}}"></path>
+            <path class="area" d="M600 262 L 762 254 L 802 318 L 772 366 L 700 360 L 640 330 L 560 322 Z" fill="{{f.southshore.fill}}" stroke="{{f.southshore.stroke}}" stroke-width="{{f.southshore.sw}}" onMouseEnter="{{h.southshore}}" onClick="{{c.southshore}}"></path>
+            <path class="area" d="M560 322 L 640 330 L 700 360 L 772 366 L 736 412 L 664 430 L 612 438 L 588 382 Z" fill="{{f.southcoast.fill}}" stroke="{{f.southcoast.stroke}}" stroke-width="{{f.southcoast.sw}}" onMouseEnter="{{h.southcoast}}" onClick="{{c.southcoast}}"></path>
+            <path class="area" d="M772 366 L 804 350 L 872 360 L 940 372 L 966 344 L 952 300 L 926 284 L 912 298 L 934 328 L 928 352 L 872 386 L 804 396 L 764 386 Z" fill="{{f.cape.fill}}" stroke="{{f.cape.stroke}}" stroke-width="{{f.cape.sw}}" onMouseEnter="{{h.cape}}" onClick="{{c.cape}}"></path>
+            <ellipse class="area" cx="796" cy="462" rx="44" ry="13" fill="{{f.cape.fill}}" stroke="{{f.cape.stroke}}" stroke-width="{{f.cape.sw}}" onMouseEnter="{{h.cape}}" onClick="{{c.cape}}"></ellipse>
+            <ellipse class="area" cx="906" cy="478" rx="32" ry="10" fill="{{f.cape.fill}}" stroke="{{f.cape.stroke}}" stroke-width="{{f.cape.sw}}" onMouseEnter="{{h.cape}}" onClick="{{c.cape}}"></ellipse>
+            <path d="M330 136 C 344 150, 340 180, 352 196 C 340 200, 326 186, 322 166 Z" fill="#4F7A9C" pointer-events="none"></path>
+            <sc-if value="{{showRoads}}" hint-placeholder-val="{{true}}">
+              <g class="routes" fill="none" stroke-linecap="round" pointer-events="none" stroke="#AFC0D6">
+                <path d="M20 250 L 150 236 L 300 252 L 420 248 L 505 238 L 600 222 L 700 210" stroke-width="2.5"></path>
+                <path d="M212 96 L 216 334" stroke-width="2"></path>
+                <path d="M612 92 C 566 160, 566 236, 650 326" stroke-width="1.8"></path>
+                <path d="M566 92 C 468 170, 476 290, 660 360" stroke-width="1.8" stroke-dasharray="6 5"></path>
+                <path d="M588 352 L 700 374" stroke-width="1.6"></path>
+                <path d="M776 374 L 860 372 L 936 360" stroke-width="1.4"></path>
+              </g>
+              <g class="mlbl" font-family="Azeret Mono" font-size="11" fill="#0F2342" pointer-events="none">
+                <rect x="232" y="232" width="38" height="18" fill="#AFC0D6"></rect><text x="251" y="245" text-anchor="middle">I-90</text>
+                <rect x="196" y="134" width="38" height="18" fill="#AFC0D6"></rect><text x="215" y="147" text-anchor="middle">I-91</text>
+                <rect x="560" y="186" width="38" height="18" fill="#AFC0D6"></rect><text x="579" y="199" text-anchor="middle">I-95</text>
+                <rect x="496" y="249" width="46" height="18" fill="#AFC0D6"></rect><text x="519" y="262" text-anchor="middle">I-495</text>
+                <rect x="616" y="356" width="46" height="18" fill="#AFC0D6"></rect><text x="639" y="369" text-anchor="middle">I-195</text>
+                <rect x="836" y="362" width="38" height="18" fill="#AFC0D6"></rect><text x="855" y="375" text-anchor="middle">RT 6</text>
+              </g>
+            </sc-if>
+            <sc-if value="{{showRail}}" hint-placeholder-val="{{true}}">
+              <g class="routes" fill="none" pointer-events="none" stroke="#FAAF40" stroke-width="2.5">
+                <path d="M705 212 L 600 220 L 505 222 L 420 215"></path>
+                <path d="M705 212 L 560 160 L 380 122"></path>
+                <path d="M705 212 L 640 150 L 600 110"></path>
+                <path d="M705 212 L 760 150 L 772 96"></path>
+                <path d="M705 212 L 600 300 L 562 334"></path>
+                <path d="M705 212 L 760 280 L 790 318"></path>
+                <path d="M705 212 L 680 300 L 690 408"></path>
+                <path d="M680 300 L 640 410"></path>
+              </g>
+              <g fill="#FAAF40" stroke="#0F2342" stroke-width="1.5" pointer-events="none">
+                <rect x="699" y="206" width="12" height="12"></rect><rect x="374" y="116" width="10" height="10"></rect><rect x="595" y="105" width="10" height="10"></rect><rect x="767" y="91" width="10" height="10"></rect><rect x="785" y="313" width="10" height="10"></rect><rect x="685" y="403" width="10" height="10"></rect><rect x="635" y="405" width="10" height="10"></rect>
+              </g>
+              <text class="mlbl" x="718" y="217" font-family="Archivo" font-weight="700" font-size="12" fill="#FAAF40" stroke="#0F2342" stroke-width="4" stroke-linejoin="round" paint-order="stroke" pointer-events="none">Boston</text>
+            </sc-if>
+            <g class="mlbl" font-family="Archivo" font-weight="700" letter-spacing="1.4" pointer-events="none" font-size="13" text-anchor="middle" stroke="#0F2342" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+              <text x="86" y="204" fill="{{lbl.berkshires}}">BERKSHIRES</text>
+              <text x="225" y="204" fill="{{lbl.pioneer}}">PIONEER</text><text x="225" y="221" fill="{{lbl.pioneer}}">VALLEY</text>
+              <text x="396" y="168" fill="{{lbl.central}}">CENTRAL</text>
+              <text x="548" y="300" font-size="11" fill="{{lbl.metrowest}}">METROWEST</text>
+              <text x="672" y="118" fill="{{lbl.northshore}}">NORTH SHORE</text><text x="672" y="135" font-size="11" fill="{{lbl.northshore}}">&amp; MERRIMACK</text>
+              <text x="672" y="190" font-size="12" fill="{{lbl.boston}}">GREATER BOSTON</text>
+              <text x="700" y="300" font-size="12" fill="{{lbl.southshore}}">SOUTH SHORE</text>
+              <text x="664" y="396" font-size="12" fill="{{lbl.southcoast}}">SOUTH COAST</text>
+              <text x="866" y="430" font-size="12" fill="{{lbl.cape}}">CAPE &amp; ISLANDS</text>
+            </g>
+            <g pointer-events="none">
+              <circle cx="420" cy="215" r="7" fill="#FAAF40" stroke="#0F2342" stroke-width="2"></circle>
+              <circle cx="420" cy="215" r="15" fill="none" stroke="#FAAF40" stroke-width="1.4"></circle>
+              <text class="mlbl" x="420" y="194" font-family="Archivo" font-weight="700" font-size="12" fill="#F1F2EE" stroke="#0F2342" stroke-width="4" stroke-linejoin="round" paint-order="stroke" text-anchor="middle">REWAP · Worcester</text>
+            </g>
+            <g class="mlbl" transform="translate(950 70)" pointer-events="none"><path d="M0 -20 L 9 12 L 0 5 L -9 12 Z" fill="#F1F2EE"></path><text y="30" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="12" fill="#F1F2EE">N</text></g>
+          </svg>
+          <p class="sr-only" aria-live="polite">{{announce}}</p>
+        </div>
+
+      </div>
+      <div class="towns" role="group" aria-label="Regions on the map" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); border-top: 1px solid rgba(241,242,238,.2);">
+        <sc-for list="{{towns}}" as="t" hint-placeholder-count="6">
+          <button class="{{t.cls}}" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" onMouseEnter="{{t.hover}}" onFocus="{{t.hover}}" onMouseLeave="{{leave}}" onBlur="{{leave}}"><span style="font-weight: 700; font-size: 1rem;">{{t.name}}</span><span class="mono" style="color: var(--mist);">{{t.dir}}</span></button>
+        </sc-for>
+      </div>
+      <aside class="panel" style="background: var(--paper); color: var(--ink);">
+        <div class="panel-id" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; justify-content: space-between;">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h2 style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 2.25rem; line-height: 1; letter-spacing: -.02em; color: var(--navy);">{{panel.name}}</h2>
+            <span class="mono" style="color: var(--slate);">{{panel.kind}} · {{panel.coord}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <a class="btn btn-gold" href="Area.dc.html" style="justify-content: space-between;">Open the {{panel.name}} Sheet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"></path></svg></a>
+            <a href="Search.dc.html" style="font-weight: 600; font-size: .9375rem; min-height: 44px; display: inline-flex; align-items: center;">See properties in {{panel.name}}</a>
+          </div>
+        </div>
+        <dl class="panel-facts" style="margin: 0;">
+          <div><dt class="ref" style="font-size: .75rem;">Where</dt><dd>{{panel.where}}</dd></div>
+          <div><dt class="ref" style="font-size: .75rem;">Housing</dt><dd>{{panel.housing}}</dd></div>
+          <div><dt class="ref" style="font-size: .75rem;">Getting around</dt><dd>{{panel.moves}}</dd></div>
+          <div><dt class="ref" style="font-size: .75rem;">Landmarks</dt><dd>{{panel.marks}}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="paths" aria-labelledby="paths-title" class="wrap" style="padding-top: 112px; padding-bottom: 112px;">
+  <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 48px; align-items: end; margin-bottom: 48px;" class="g2">
+    <h2 id="paths-title" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(2.25rem, 4vw, 3.75rem); line-height: 1; letter-spacing: -.022em; color: var(--navy); text-wrap: balance;">Three ways in, one way of working.</h2>
+    <p style="margin: 0; font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.5; max-width: 44ch;">Whether you are buying, selling or investing, REWAP starts with the place, then the property, then the paperwork, explained by a brokerage founded by a real estate lawyer.</p>
+  </div>
+  <a class="path-row" href="#paths">
+    <span style="display: flex; align-items: center; gap: 12px;"><span style="width: 28px; height: 20px; background: var(--frame-tint); border: 1px solid var(--navy);"></span><span class="ref">Buying</span></span>
+    <span class="path-line" style="font-family: var(--f-serif); font-size: clamp(1.75rem, 2.8vw, 2.5rem); line-height: 1.1; color: var(--navy); transition: color .24s;">Read the street before you make the offer.</span>
+    <span style="line-height: 1.55; color: var(--slate);">Area Sheets, a step-by-step guide to Massachusetts offers, inspections and closings, and searches saved by place.</span>
+    <span class="path-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M14 7l5 5-5 5"></path></svg></span>
+  </a>
+  <a class="path-row" href="#paths">
+    <span style="display: flex; align-items: center; gap: 12px;"><span style="width: 28px; height: 20px; background: var(--brick); border: 1px solid var(--navy);"></span><span class="ref">Selling</span></span>
+    <span class="path-line" style="font-family: var(--f-serif); font-size: clamp(1.75rem, 2.8vw, 2.5rem); line-height: 1.1; color: var(--navy); transition: color .24s;">Price the place, not only the square footage.</span>
+    <span style="line-height: 1.55; color: var(--slate);">Comparable sales within the same building type, documents gathered before listing, and a listing page that sells the neighborhood too.</span>
+    <span class="path-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M14 7l5 5-5 5"></path></svg></span>
+  </a>
+  <a class="path-row" href="#paths" style="border-bottom: 1px solid var(--rule-strong);">
+    <span style="display: flex; align-items: center; gap: 12px;"><span style="width: 28px; height: 20px; background: var(--stone-tint); border: 1px solid var(--navy);"></span><span class="ref">Investing</span></span>
+    <span class="path-line" style="font-family: var(--f-serif); font-size: clamp(1.75rem, 2.8vw, 2.5rem); line-height: 1.1; color: var(--navy); transition: color .24s;">Know the block before the numbers.</span>
+    <span style="line-height: 1.55; color: var(--slate);">Two-to-four family and mixed-use stock across Massachusetts, from the mill cities to the suburbs, with links to the official permit and zoning records behind each block.</span>
+    <span class="path-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M14 7l5 5-5 5"></path></svg></span>
+  </a>
+</section>
+
+<section aria-labelledby="gaz-title" style="background: var(--white); border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap g2" style="padding-top: 104px; padding-bottom: 104px; display: grid; grid-template-columns: 340px minmax(0,1fr); gap: 56px;">
+    <div style="display: flex; flex-direction: column; gap: 20px;" class="gz-intro">
+      <h2 id="gaz-title" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(2.25rem, 3.4vw, 3.25rem); line-height: 1; letter-spacing: -.02em; color: var(--navy);">A gazetteer of Massachusetts.</h2>
+      <p style="margin: 0; font-family: var(--f-serif); font-size: 1.1875rem; line-height: 1.55;">Massachusetts is 351 cities and towns across nine regions, each with its own housing, streets and history. Every one gets its own Sheet, researched and dated, so you can compare places the way locals already do.</p>
+      <div role="group" aria-label="Filter the gazetteer" style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <sc-for list="{{gzFilters}}" as="g" hint-placeholder-count="5">
+          <button class="{{g.cls}}" aria-pressed="{{g.pressed}}" onClick="{{g.pick}}" style="appearance: none; min-height: 44px; padding: 0 14px; font-weight: 600; cursor: pointer;">{{g.label}}</button>
+        </sc-for>
+      </div>
+      <p class="mono" style="margin: 0; color: var(--slate);">{{gzCount}}</p>
+    </div>
+    <div>
+      <div class="gz gz-head" style="border-bottom: 1px solid var(--rule-strong); padding-top: 0;"><span class="ref">City or town</span><span class="ref">Region</span><span class="ref">Known for</span><span class="ref">Sheet</span></div>
+      <sc-for list="{{gz}}" as="n" hint-placeholder-count="12">
+        <div class="gz">
+          <a href="Area.dc.html" style="font-family: var(--f-serif); font-size: 1.25rem; font-weight: 600; text-decoration: none;">{{n.name}}</a>
+          <span class="ref" style="font-size: .75rem;">{{n.part}}</span>
+          <span style="line-height: 1.5; color: var(--ink);">{{n.known}}</span>
+          <span class="mono" style="color: var(--slate);">{{n.status}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="props-title" class="wrap" style="padding-top: 104px; padding-bottom: 104px;">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 id="props-title" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(2rem, 3.2vw, 3rem); line-height: 1; letter-spacing: -.02em; color: var(--navy);">On the map now</h2>
+      <p class="note" style="max-width: 60ch;">Properties appear inside their place: each plate links to its listing and to the Sheet for its neighborhood.</p>
+    </div>
+    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <span class="ref" style="background: var(--frame-tint); color: var(--gold-ink); padding: 6px 10px;">Sample listings · IDX not yet connected</span>
+      <a class="btn btn-line" href="Search.dc.html">Open property search</a>
+    </div>
+  </div>
+  <div class="g3" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);">
+    <sc-for list="{{props}}" as="p" hint-placeholder-count="3">
+      <article class="plate">
+        <a href="Listing.dc.html" style="display: block; aspect-ratio: 4 / 3; background: {{p.tint}}; position: relative; text-decoration: none;" aria-label="{{p.aria}}">
+          <svg viewBox="0 0 400 300" style="position: absolute; inset: 0; width: 100%; height: 100%;" aria-hidden="true"><g fill="none" stroke="#193661" stroke-opacity=".35" stroke-width="1"><path d="M0 220 L 400 180"></path><path d="M60 0 L 90 300"></path><rect x="140" y="70" width="150" height="110" transform="rotate(-6 215 125)"></rect></g><rect x="160" y="88" width="110" height="74" transform="rotate(-6 215 125)" fill="#193661" fill-opacity=".14" stroke="#193661"></rect></svg>
+          <span class="mono" style="position: absolute; left: 12px; bottom: 10px; color: var(--navy);">Photo · [listing image]</span>
+        </a>
+        <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.75rem; color: var(--ink); letter-spacing: -.01em;">$[000,000]</span>
+            <span class="ref" style="font-size: .75rem;">{{p.type}}</span>
+          </div>
+          <a href="Listing.dc.html" style="font-weight: 600; color: var(--ink); text-decoration: none;">[00] Example Street</a>
+          <span class="ref" style="font-size: .75rem;">{{p.place}}</span>
+          <span class="tnum" style="display: flex; gap: 14px; flex-wrap: wrap; font-size: .9375rem; color: var(--slate);"><span>[0] bd</span><span>[0] ba</span><span>[0,000] sq ft</span></span>
+          <span class="mono" style="color: var(--slate); margin-top: auto; padding-top: 10px; border-top: 1px solid var(--rule);">Listed by [Brokerage] · MLS #[00000000]</span>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<section id="notes" class="on-dark" aria-labelledby="notes-title" style="background: var(--navy); color: var(--paper);">
+  <div class="wrap g2" style="padding-top: 104px; padding-bottom: 104px; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+        <h2 id="notes-title" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(2.25rem, 3.6vw, 3.25rem); line-height: 1; letter-spacing: -.02em;">Field Notes</h2>
+        <span class="mono" style="color: var(--mist);">Planned topics · first issues in preparation</span>
+      </div>
+      <a href="#notes" style="color: var(--paper); text-decoration: none; display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: 28px; padding: 28px 0; border-top: 1px solid rgba(241,242,238,.3); border-bottom: 1px solid rgba(241,242,238,.3);" class="g2">
+        <span style="display: flex; flex-direction: column; gap: 14px;">
+                    <span style="font-family: var(--f-serif); font-size: clamp(1.75rem, 2.6vw, 2.375rem); line-height: 1.12; letter-spacing: -.012em;">How to read a three-decker before you make an offer</span>
+          <span style="color: var(--mist); line-height: 1.55; max-width: 56ch;">Porches, separate utilities, egress, roof and foundation: what to look at, what to ask, and which records to pull at the registry before you sign anything.</span>
+          <span class="mono" style="color: var(--gold);">Field guide · in preparation</span>
+        </span>
+        <svg viewBox="0 0 220 200" aria-hidden="true" style="width: 100%;"><g fill="none" stroke="#AFC0D6" stroke-width="1.2"><rect x="50" y="30" width="120" height="160"></rect><path d="M50 83h120M50 136h120"></path><path d="M30 30h160"></path><rect x="62" y="44" width="22" height="30"></rect><rect x="136" y="44" width="22" height="30"></rect><rect x="62" y="97" width="22" height="30"></rect><rect x="136" y="97" width="22" height="30"></rect><rect x="62" y="150" width="22" height="30"></rect><rect x="98" y="156" width="24" height="34"></rect><rect x="136" y="150" width="22" height="30"></rect></g><path d="M50 83h120M50 136h120" stroke="#FAAF40" stroke-width="2"></path></svg>
+      </a>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{notes}}" as="n" hint-placeholder-count="3">
+          <a href="#notes" style="color: var(--paper); text-decoration: none; display: grid; grid-template-columns: 140px minmax(0,1fr); gap: 24px; padding: 20px 0; border-bottom: 1px solid rgba(241,242,238,.2);">
+            <span class="ref" style="color: var(--mist); padding-top: 6px;">{{n.kind}}</span>
+            <span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--f-serif); font-size: 1.375rem; line-height: 1.25;">{{n.title}}</span><span class="mono" style="color: var(--mist);">{{n.by}}</span></span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+    <aside aria-labelledby="readings-title" style="display: flex; flex-direction: column; gap: 0; align-self: start; background: var(--paper); color: var(--ink);">
+      <div style="padding: 22px 24px; border-bottom: 1px solid var(--rule-strong); display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+        <h3 id="readings-title" style="margin: 0; font-family: var(--f-serif); font-size: 1.625rem; color: var(--navy);">Market Readings</h3>
+        <span class="mono" style="color: var(--slate);">Massachusetts</span>
+      </div>
+      <div style="padding: 18px 24px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px;"><span class="ref" style="font-size: .75rem;">Median sale price</span><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2rem; color: var(--slate);">—</span></div>
+      <div style="padding: 18px 24px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px;"><span class="ref" style="font-size: .75rem;">Median days on market</span><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2rem; color: var(--slate);">—</span></div>
+      <div style="padding: 18px 24px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px;"><span class="ref" style="font-size: .75rem;">Active listings</span><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2rem; color: var(--slate);">—</span></div>
+      <div style="padding: 18px 24px 22px; background: var(--brick-tint); display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-weight: 700; color: var(--navy);">Readings go live with the MLS feed.</span>
+        <span style="font-size: .9375rem; line-height: 1.5;">Each figure will show its source, period and number of sales. Until then, REWAP publishes no market numbers at all.</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="meet" aria-labelledby="meet-title" class="wrap" style="padding-top: 112px; padding-bottom: 112px;">
+  <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap: 64px; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <h2 id="meet-title" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(2.25rem, 4vw, 3.75rem); line-height: 1; letter-spacing: -.022em; color: var(--navy); text-wrap: balance;">A brokerage that reads the fine print, and the street.</h2>
+      <p style="margin: 0; font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.55; max-width: 46ch;">REWAP Brokerage was founded in Worcester by Hong Tran, a real estate lawyer, and works with clients across Massachusetts. That background shapes how REWAP works: careful with documents, clear about obligations, and specific about places.</p>
+      <div style="display: grid; grid-template-columns: 160px minmax(0,1fr); gap: 24px; align-items: end; padding-top: 24px; border-top: 1px solid var(--rule-strong);">
+        <div style="aspect-ratio: 4 / 5; background: var(--stone-tint); border: 1px solid var(--rule-strong); display: flex; align-items: flex-end; padding: 10px;"><span class="mono" style="color: var(--navy);">Portrait · [to be supplied]</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-family: var(--f-serif); font-size: 1.625rem; font-weight: 600; color: var(--navy);">Hong Tran</span>
+          <span style="font-weight: 600;">Founder · Real estate lawyer</span>
+          <span class="note">[Founder biography to be supplied and approved by Hong Tran]</span>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border: 1.5px solid var(--navy); background: var(--white);">
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); border-bottom: 1px solid var(--navy);" class="g2">
+          <div style="padding: 22px 24px; border-right: 1px solid var(--navy); display: flex; flex-direction: column; gap: 6px;"><span class="ref">Office</span><span style="font-weight: 600; line-height: 1.4;">652 Park Ave<br>Worcester, MA 01603</span></div>
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px;"><span class="ref">Contact</span><a href="tel:+15085097759" class="tnum" style="font-weight: 600; min-height: 28px;">508-509-7759</a><a href="mailto:hongtran@lehonglaw.com" style="font-weight: 600; word-break: break-all;">hongtran@lehonglaw.com</a></div>
+        </div>
+        <div style="padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <span style="font-family: var(--f-serif); font-size: 1.375rem; color: var(--navy); max-width: 26ch; line-height: 1.25;">Start with a conversation about the place you have in mind.</span>
+          <a class="btn btn-gold" href="tel:+15085097759">Call REWAP</a>
+        </div>
+      </div>
+      <div style="border: 1.5px solid var(--navy); background: var(--white); display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);" class="g2">
+        <div style="padding: 20px 24px; border-right: 1px solid var(--navy); display: flex; flex-direction: column; gap: 6px;">
+          <span class="ref">Affiliated group</span>
+          <span style="font-family: var(--f-serif); font-weight: 600; font-size: 1.5rem; color: var(--navy); line-height: 1.1;">The Oberdorfer Group</span>
+          <a href="#meet" style="font-weight: 600; font-size: .9375rem; min-height: 44px; display: inline-flex; align-items: center;">Learn about the group</a>
+        </div>
+        <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 6px;">
+          <span class="ref">Brokerage of record</span>
+          <span style="font-weight: 700; color: var(--navy);">REWAP Brokerage LLC</span>
+          <span class="note" style="font-size: .875rem;">The group’s licensees operate under REWAP Brokerage LLC.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="on-dark" style="background: var(--navy-deep); color: var(--paper);">
+  <div class="wrap colophon" style="padding-top: 72px; padding-bottom: 40px; display: grid; grid-template-columns: minmax(0,1.2fr) repeat(3, minmax(0,1fr)); gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="background: var(--paper); padding: 12px 16px; align-self: flex-start;"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 160px; display: block;"></div>
+      <p style="margin: 0; font-family: var(--f-serif); font-size: 1.25rem; line-height: 1.4; max-width: 28ch;">We understand the place behind the property.</p>
+    </div>
+    <nav aria-label="Area Sheets" style="display: flex; flex-direction: column; gap: 10px;">
+      <span class="ref" style="color: var(--mist);">Regions</span>
+      <a href="Area.dc.html" style="color: var(--paper);">Berkshires</a><a href="Area.dc.html" style="color: var(--paper);">Pioneer Valley</a><a href="Area.dc.html" style="color: var(--paper);">Central Massachusetts</a><a href="Area.dc.html" style="color: var(--paper);">MetroWest</a><a href="Area.dc.html" style="color: var(--paper);">North Shore</a><a href="Area.dc.html" style="color: var(--paper);">Greater Boston</a><a href="Area.dc.html" style="color: var(--paper);">South Shore</a><a href="Area.dc.html" style="color: var(--paper);">South Coast</a><a href="Area.dc.html" style="color: var(--paper);">Cape &amp; Islands</a>
+    </nav>
+    <nav aria-label="Site" style="display: flex; flex-direction: column; gap: 10px;">
+      <span class="ref" style="color: var(--mist);">Atlas</span>
+      <a href="Search.dc.html" style="color: var(--paper);">Property search</a><a href="#paths" style="color: var(--paper);">Buying</a><a href="#paths" style="color: var(--paper);">Selling</a><a href="#paths" style="color: var(--paper);">Investing</a><a href="#notes" style="color: var(--paper);">Field Notes</a>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <span class="ref" style="color: var(--mist);">Office</span>
+      <span style="line-height: 1.5;">652 Park Ave<br>Worcester, MA 01603</span>
+      <a href="tel:+15085097759" style="color: var(--paper);" class="tnum">508-509-7759</a>
+      <span class="mono" style="color: var(--mist);">42.26° N · 71.80° W</span>
+    </div>
+  </div>
+  <div class="wrap" style="padding-bottom: 40px;">
+    <div style="border-top: 1px solid rgba(241,242,238,.25); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--mist); font-size: .8125rem; line-height: 1.5;">
+      <span>© 2026 REWAP Brokerage LLC · Licensed real estate brokerage, Massachusetts · Lic. #[to be supplied] · Equal Housing Opportunity</span>
+      <span>Listing data © [MLS PIN], deemed reliable but not guaranteed · Map data © OpenStreetMap contributors, MassGIS</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 'central', hover: null, rail: true, roads: true, gz: 'all', menu: false, q: '', submitted: false, announce: '' }; }
+  renderVals() {
+    const A = {
+      berkshires: { name: 'Berkshires', kind: 'Region', dir: 'Far west', coord: 'Pittsfield · North Adams · Great Barrington',
+        where: 'The far west of the state, between the Taconic Range and the Hoosac Range, bordering New York.',
+        housing: 'Village centers and historic houses, farmhouses on open land, and mill-era homes in the small cities.',
+        moves: 'The Mass Pike crosses the south; Route 7 runs north to south through the valley.',
+        marks: 'Mount Greylock, the state’s highest point; Tanglewood; MASS MoCA.' },
+      pioneer: { name: 'Pioneer Valley', kind: 'Region', dir: 'West', coord: 'Springfield · Holyoke · Northampton · Amherst',
+        where: 'The Connecticut River valley in western Massachusetts.',
+        housing: 'Multifamily and mill-era housing in Springfield and Holyoke, Victorian college-town streets, and farmland.',
+        moves: 'I-91 follows the river; the Mass Pike crosses east to west; Amtrak at Springfield.',
+        marks: 'The Five Colleges, the Basketball Hall of Fame, the Connecticut River.' },
+      central: { name: 'Central Massachusetts', kind: 'Region · home office', dir: 'Center', coord: 'Worcester · Fitchburg · Leominster',
+        where: 'The middle of the state, anchored by Worcester, the second-largest city in New England.',
+        housing: 'Three-deckers and mill buildings in the cities, established suburbs, and hill towns with larger lots.',
+        moves: 'Worcester and Fitchburg commuter rail lines; the Mass Pike, I-290, I-190 and I-495 at the eastern edge.',
+        marks: 'Quabbin Reservoir, Wachusett Mountain, Polar Park in Worcester.' },
+      metrowest: { name: 'MetroWest', kind: 'Region', dir: 'West of Boston', coord: 'Framingham · Natick · Marlborough',
+        where: 'The suburbs and small cities between Route 128 and I-495, west of Boston.',
+        housing: 'Colonials and capes, newer subdivisions, and condominiums near downtowns and highway corridors.',
+        moves: 'The Mass Pike and Route 9 east to west; I-495 on the outer edge; commuter rail through Framingham.',
+        marks: 'Lake Cochituate, the Sudbury River, Garden in the Woods.' },
+      northshore: { name: 'North Shore & Merrimack Valley', kind: 'Region', dir: 'Northeast', coord: 'Lowell · Lawrence · Salem · Newburyport',
+        where: 'The coast north of Boston and the Merrimack River cities near New Hampshire.',
+        housing: 'Colonial-era houses in the coastal towns, and mill-city multifamily along the Merrimack.',
+        moves: 'I-95, I-93 and I-495; commuter rail to Lowell, Haverhill, Newburyport and Rockport.',
+        marks: 'Lowell National Historical Park, Cape Ann, Salem’s historic waterfront.' },
+      boston: { name: 'Greater Boston', kind: 'Region', dir: 'East', coord: 'Boston · Cambridge · Somerville · Quincy',
+        where: 'The capital and the dense cities and neighborhoods inside Route 128.',
+        housing: 'Row houses and brownstones, triple-deckers, and condominiums in converted and new buildings.',
+        moves: 'The MBTA subway and the hub of every commuter rail line; I-93, I-90 and Route 128.',
+        marks: 'Boston Common, the Freedom Trail, the Charles River.' },
+      southshore: { name: 'South Shore', kind: 'Region', dir: 'Southeast', coord: 'Plymouth · Hingham · Brockton',
+        where: 'The coast from Boston Harbor south to Plymouth, and the towns inland from it.',
+        housing: 'Historic coastal homes, capes and colonials, and multifamily in the older cities.',
+        moves: 'Route 3 and Route 24; commuter rail lines toward Kingston, Greenbush and Brockton.',
+        marks: 'Plymouth waterfront, World’s End in Hingham.' },
+      southcoast: { name: 'South Coast', kind: 'Region', dir: 'South', coord: 'New Bedford · Fall River · Dartmouth',
+        where: 'Buzzards Bay and the coast between Rhode Island and Cape Cod.',
+        housing: 'Mill-city triple-deckers and multifamily, and coastal villages.',
+        moves: 'I-195, Route 24 and Route 140; commuter rail to New Bedford and Fall River.',
+        marks: 'New Bedford Whaling National Historical Park, Battleship Cove.' },
+      cape: { name: 'Cape & Islands', kind: 'Region', dir: 'Southeast coast', coord: 'Barnstable · Falmouth · Provincetown · Nantucket',
+        where: 'Cape Cod, Martha’s Vineyard and Nantucket.',
+        housing: 'Capes and shingled cottages, year-round neighborhoods and seasonal homes.',
+        moves: 'Route 6 and Route 28 on the Cape; ferries to the islands from Woods Hole and Hyannis.',
+        marks: 'Cape Cod National Seashore, the island harbors.' }
+    };
+    const order = ['berkshires', 'pioneer', 'central', 'metrowest', 'northshore', 'boston', 'southshore', 'southcoast', 'cape'];
+    const { sel, hover } = this.state;
+    const active = hover || sel;
+    const f = {}, h = {}, c = {}, lbl = {};
+    order.forEach(k => {
+      const isSel = k === sel, isHov = k === hover && !isSel;
+      f[k] = isSel ? { fill: 'rgba(250,175,64,.18)', stroke: '#FAAF40', sw: 3 }
+           : isHov ? { fill: 'rgba(247,221,160,.22)', stroke: '#F7DDA0', sw: 2.5 }
+           : { fill: 'rgba(241,242,238,.04)', stroke: '#AFC0D6', sw: 1.2 };
+      lbl[k] = isSel ? '#FAAF40' : '#F1F2EE';
+      h[k] = () => this.setState({ hover: k });
+      c[k] = () => this.setState({ sel: k, hover: null, announce: A[k].name + ' selected. ' + A[k].where });
+    });
+    const towns = order.map(k => ({ name: A[k].name, dir: A[k].dir, cls: k === sel ? 'town-btn town-on' : 'town-btn', pressed: k === sel ? 'true' : 'false',
+      pick: () => this.setState({ sel: k, hover: null, announce: A[k].name + ' selected. ' + A[k].where }), hover: () => this.setState({ hover: k }) }));
+
+    const G = [
+      ['Pittsfield', 'Berkshires', 'Berkshire County’s largest city; Park Square and the lakes north of downtown.', 'Sheet planned', 'berkshires'],
+      ['Great Barrington', 'Berkshires', 'A South County town center on Route 7.', 'Sheet planned', 'berkshires'],
+      ['Springfield', 'Pioneer Valley', 'The valley’s largest city; Amtrak at Union Station; the Basketball Hall of Fame.', 'Sheet planned', 'pioneer'],
+      ['Northampton', 'Pioneer Valley', 'A downtown Main Street and Smith College.', 'Sheet planned', 'pioneer'],
+      ['Worcester', 'Central', 'New England’s second-largest city; Union Station; Polar Park.', 'Sheet planned', 'central'],
+      ['Fitchburg', 'Central', 'A Nashua River mill city at the end of the Fitchburg Line.', 'Sheet planned', 'central'],
+      ['Framingham', 'MetroWest', 'A city on Route 9 and the Mass Pike, with commuter rail downtown.', 'Sheet planned', 'metrowest'],
+      ['Boston', 'Greater Boston', 'The capital, from Back Bay row houses to Dorchester triple-deckers.', 'Sheet planned', 'boston'],
+      ['Cambridge', 'Greater Boston', 'Harvard and MIT, and the squares along the Red Line.', 'Sheet planned', 'boston'],
+      ['Lowell', 'North Shore', 'A Merrimack River mill city; Lowell National Historical Park.', 'Sheet planned', 'northshore'],
+      ['Salem', 'North Shore', 'A historic waterfront and the McIntire district.', 'Sheet planned', 'northshore'],
+      ['Plymouth', 'South Shore', 'The largest municipality by area in Massachusetts; the waterfront.', 'Sheet planned', 'southshore'],
+      ['New Bedford', 'South Coast', 'A working harbor; the Whaling National Historical Park.', 'Sheet planned', 'southcoast'],
+      ['Falmouth', 'Cape & Islands', 'An Upper Cape town; ferries from Woods Hole.', 'Sheet planned', 'cape']
+    ];
+    const F = [['all', 'All'], ['berkshires', 'Berkshires'], ['pioneer', 'Pioneer Valley'], ['central', 'Central'], ['metrowest', 'MetroWest'], ['northshore', 'North Shore'], ['boston', 'Greater Boston'], ['southshore', 'South Shore'], ['southcoast', 'South Coast'], ['cape', 'Cape & Islands']];
+    const gzSel = this.state.gz;
+    const gz = G.filter(g => gzSel === 'all' || g[4] === gzSel).map(g => ({ name: g[0], part: g[1], known: g[2], status: g[3] }));
+    const gzFilters = F.map(x => ({ label: x[1], pressed: x[0] === gzSel ? 'true' : 'false',
+      cls: x[0] === gzSel ? 'gzf-on' : 'gzf', pick: () => this.setState({ gz: x[0] }) }));
+    gzFilters.forEach(x => { x.cls = x.pressed === 'true' ? 'btn' : 'btn btn-line'; });
+
+    const props = [
+      { tint: '#F7DDA0', type: 'Single-family', place: 'Worcester · Tatnuck', aria: 'Sample listing in Tatnuck, Worcester' },
+      { tint: '#EDCFC6', type: 'Three-family', place: 'Lowell · Highlands', aria: 'Sample listing in the Highlands, Lowell' },
+      { tint: '#D3DEEC', type: 'Condominium', place: 'Falmouth · Upper Cape', aria: 'Sample listing in Falmouth' }
+    ];
+    const notes = [
+      { kind: 'Buying', title: 'What a Massachusetts purchase and sale agreement commits you to', by: 'Proposed author: Hong Tran' },
+      { kind: 'Place', title: 'Mill cities, compared: Lowell, Worcester, Holyoke and Fall River', by: 'Area research' },
+      { kind: 'Selling', title: 'Selling an older home: the documents to gather before you list', by: 'Seller guide' },
+      { kind: 'Commute', title: 'Beyond Route 128: how far the commuter rail lines reach', by: 'Commute series' }
+    ];
+    return {
+      f, h, c, lbl, towns, panel: A[active],
+      leave: () => this.setState({ hover: null }),
+      showRail: this.state.rail, showRoads: this.state.roads,
+      railCls: this.state.rail ? 'toggle toggle-on' : 'toggle', roadCls: this.state.roads ? 'toggle toggle-on' : 'toggle',
+      railPressed: this.state.rail ? 'true' : 'false', roadPressed: this.state.roads ? 'true' : 'false',
+      toggleRail: () => this.setState({ rail: !this.state.rail }), toggleRoad: () => this.setState({ roads: !this.state.roads }),
+      gz, gzFilters, gzCount: gz.length + ' of ' + G.length + ' places shown · all 351 cities and towns get Sheets',
+      props, notes,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ submitted: true }); },
+      setQ: (e) => this.setState({ q: e && e.target ? e.target.value : '', submitted: false }),
+      qText: this.state.q || 'Massachusetts', submitted: this.state.submitted,
+      announce: this.state.announce,
+      menuOpen: this.state.menu, menuExpanded: String(this.state.menu), menuLabel: this.state.menu ? 'Close menu' : 'Open menu',
+      toggleMenu: () => this.setState({ menu: !this.state.menu }), closeMenu: () => this.setState({ menu: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

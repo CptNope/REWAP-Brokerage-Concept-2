@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Property search — Worcester — REWAP Brokerage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 4px var(--navy)}
+button{font:inherit;color:inherit}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.ctl{appearance:none;border:1px solid var(--rule-strong);background:var(--white);color:var(--navy);min-height:44px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:.9375rem;white-space:nowrap}
+.ctl:hover{border-color:var(--navy)}
+.ctl-on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+.ctl-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.mat{width:18px;height:13px;border:1px solid var(--navy)}
+.res{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;padding:14px 20px;border-bottom:1px solid var(--rule);background:var(--white);transition:background .24s var(--ease-out);cursor:pointer;text-decoration:none;color:inherit}
+.res:hover,.res-hot{background:#FBF3DE}
+.pin{position:absolute;transform:translate(-50%,-100%);appearance:none;border:1px solid var(--paper);background:var(--navy);color:var(--paper);font-stretch:75%;font-weight:700;font-size:.875rem;padding:5px 8px;min-height:30px;min-width:56px;cursor:pointer;box-shadow:0 4px 12px rgba(15,35,66,.22);transition:background .24s var(--ease-out),transform .24s var(--ease-out)}
+.pin::after{content:"";position:absolute;left:50%;bottom:-6px;width:10px;height:10px;background:inherit;transform:translateX(-50%) rotate(45deg);border-right:1px solid var(--paper);border-bottom:1px solid var(--paper)}
+.pin::before{content:"";position:absolute;inset:-8px -4px}
+.pin-hot{background:var(--gold);color:var(--ink);border-color:var(--ink);transform:translate(-50%,-100%) scale(1.08);z-index:3}
+.pin-hot::after{border-color:var(--ink)}
+.pin-dim{opacity:.35}
+.cluster{position:absolute;transform:translate(-50%,-50%);appearance:none;width:52px;height:52px;border-radius:50%;background:var(--navy);color:var(--paper);border:3px solid var(--paper);font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 4px 12px rgba(15,35,66,.25)}
+.mapbtn{appearance:none;width:44px;height:44px;background:var(--white);border:1px solid var(--rule-strong);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--navy)}
+.toast a:hover{color:var(--paper)}
+.toast{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:12px 18px;display:flex;gap:14px;align-items:center;font-size:.9375rem;box-shadow:0 8px 24px rgba(15,35,66,.3);animation:tin .4s var(--ease-out) both;z-index:5}
+@keyframes tin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.draw-line{stroke-dasharray:6 5;animation:march 1.2s linear infinite}
+@keyframes march{to{stroke-dashoffset:-22}}
+.skip{position:absolute;left:-9999px;top:16px;z-index:20;background:var(--navy);color:var(--paper);padding:12px 16px;font-weight:600}
+.skip:focus{left:16px;color:var(--paper)}
+@media (prefers-reduced-motion:reduce){.draw-line,.toast{animation:none}.pin,.res{transition:none}}
+@media (max-width:900px){
+  .split{grid-template-columns:minmax(0,1fr) !important}
+  .map-col{display:none !important}
+  .legend-row{overflow-x:auto;flex-wrap:nowrap !important}
+  .top-search{display:none !important}
+}
+</style>
+</helmet>
+
+<div style="height: 100vh; min-height: 720px; display: flex; flex-direction: column; background: var(--paper); position: relative;">
+  <a class="skip" href="#results">Skip to results</a>
+
+  <header style="display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-bottom: 1px solid var(--rule-strong); background: var(--paper);">
+    <a href="Home.dc.html" aria-label="REWAP Brokerage home" style="display: inline-flex;"><img src="/_blob/95565ea2cf60cff46df98f6f8649de9f" alt="REWAP Brokerage" style="width: 48px; height: 48px; display: block;"></a>
+    <div class="top-search" style="flex: 1; max-width: 560px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--navy); background: var(--white); min-height: 48px; padding: 0 8px 0 14px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
+      <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--stone-tint); padding: 4px 6px 4px 10px; font-weight: 600; font-size: .875rem; color: var(--navy);">Worcester<button aria-label="Remove Worcester" style="appearance: none; border: 0; background: transparent; width: 40px; height: 40px; margin: -6px -6px -6px 0; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 12 12" stroke="#193661" stroke-width="1.6"><path d="M2 2l8 8M10 2l-8 8"></path></svg></button></span>
+      <label for="sq" style="position: absolute; left: -9999px;">Add a place</label>
+      <input id="sq" placeholder="Add a town, neighborhood or ZIP" style="border: 0; outline: 0; background: transparent; font: inherit; font-size: .9375rem; flex: 1; min-height: 44px; color: var(--ink);">
+    </div>
+    <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
+      <button class="ctl" onClick="{{saveSearch}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="{{saveFill}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>{{saveLabel}}</button>
+      <a class="ctl ctl-on" href="Home.dc.html#meet" style="text-decoration: none;">Talk to REWAP</a>
+    </div>
+  </header>
+
+  <div class="legend-row" role="toolbar" aria-label="Legend: filters" style="display: flex; align-items: center; gap: 10px; padding: 10px 20px; border-bottom: 1px solid var(--rule-strong); background: var(--white); flex-wrap: wrap;">
+    <span class="ref" style="margin-right: 4px;">Legend</span>
+    <button class="ctl">Price · Any<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+    <button class="ctl">Beds · 2+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+    <span style="width: 1px; height: 28px; background: var(--rule-strong); margin: 0 4px;"></span>
+    <sc-for list="{{types}}" as="t" hint-placeholder-count="4">
+      <button class="{{t.cls}}" aria-pressed="{{t.pressed}}" onClick="{{t.toggle}}"><span class="mat" style="background: {{t.fill}};"></span>{{t.label}}</button>
+    </sc-for>
+    <span style="width: 1px; height: 28px; background: var(--rule-strong); margin: 0 4px;"></span>
+    <button class="ctl">More filters</button>
+    <span class="ref" style="margin-left: auto; background: var(--frame-tint); color: var(--gold-ink); padding: 6px 10px;">Demo data · not live listings</span>
+  </div>
+
+  <div class="split" style="flex: 1; min-height: 0; display: grid; grid-template-columns: 480px minmax(0, 1fr);">
+    <section aria-labelledby="res-h" style="display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--rule-strong); background: var(--paper);">
+      <div style="padding: 16px 20px 14px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--rule-strong);">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <h1 id="res-h" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: 1.5rem; color: var(--navy);">{{heading}}</h1>
+          <span class="mono tnum" style="color: var(--slate);">{{count}}</span>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; font-size: .875rem; font-weight: 600; color: var(--navy);">Sort
+          <select style="font: inherit; border: 1px solid var(--rule-strong); background: var(--white); min-height: 44px; padding: 0 8px; color: var(--ink);"><option>Newest</option><option>Price, low to high</option><option>Price, high to low</option></select>
+        </label>
+      </div>
+      <sc-if value="{{drawApplied}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 12px 20px; background: var(--frame-tint); border-bottom: 1px solid var(--rule-strong); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <span style="font-size: .9375rem; color: var(--ink);"><strong>Drawn area:</strong> West Side shape</span>
+          <button class="ctl" onClick="{{clearDraw}}">Clear shape</button>
+        </div>
+      </sc-if>
+      <div id="results" tabindex="-1" style="flex: 1; min-height: 0; overflow-y: auto;" role="list">
+        <sc-for list="{{results}}" as="r" hint-placeholder-count="6">
+          <div role="listitem"><a class="{{r.cls}}" href="Listing.dc.html" onMouseEnter="{{r.hover}}" onFocus="{{r.hover}}" onMouseLeave="{{unhover}}" onBlur="{{unhover}}">
+            <span style="aspect-ratio: 4 / 3; background: {{r.tint}}; position: relative; display: block; border: 1px solid var(--rule);"><span class="mono" style="position: absolute; left: 6px; bottom: 4px; color: var(--navy); font-size: .6875rem;">Photo</span></span>
+            <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;"><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.375rem; color: var(--ink);">{{r.price}}</span><span class="ref" style="font-size: .6875rem;">{{r.type}}</span></span>
+              <span style="font-weight: 600; font-size: .9375rem; color: var(--ink);">{{r.addr}}</span>
+              <span class="ref" style="font-size: .6875rem;">{{r.place}}</span>
+              <span class="tnum" style="font-size: .875rem; color: var(--slate);">{{r.facts}}</span>
+              <span class="mono" style="color: var(--slate); font-size: .6875rem;">{{r.oh}}</span>
+            </span>
+          </a></div>
+        </sc-for>
+        <sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+          <div style="padding: 32px 24px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-family: var(--f-serif); font-size: 1.375rem; color: var(--navy);">Nothing matches inside this view.</span>
+            <span style="color: var(--slate); line-height: 1.5;">Turn a building type back on in the Legend, or clear the drawn shape. The Area Sheets still cover every neighborhood here.</span>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <section class="map-col" aria-label="Map of results" style="position: relative; min-width: 0; overflow: hidden; background: #E3E6E0;">
+      <svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%;" aria-hidden="true">
+        <rect width="1000" height="700" fill="#E3E6E0"></rect>
+        <g fill="#D8DCD5"><rect x="80" y="60" width="160" height="110"></rect><rect x="270" y="50" width="200" height="120"></rect><rect x="500" y="40" width="180" height="140"></rect><rect x="90" y="210" width="150" height="160"></rect><rect x="270" y="210" width="190" height="150"></rect><rect x="490" y="220" width="190" height="130"></rect><rect x="100" y="410" width="140" height="170"></rect><rect x="270" y="400" width="200" height="180"></rect><rect x="500" y="390" width="170" height="190"></rect></g>
+        <path d="M720 0 C 700 120, 760 220, 740 330 S 700 520, 760 700 L 830 700 C 780 520, 810 360, 800 300 S 770 120, 790 0 Z" fill="#4F7A9C"></path>
+        <path d="M120 600 L 230 590 L 250 680 L 110 690 Z" fill="#D7DEC6" stroke="#5F7048" stroke-width=".8"></path>
+        <path d="M300 230 L 420 222 L 430 330 L 306 340 Z" fill="#D7DEC6" stroke="#5F7048" stroke-width=".8"></path>
+        <g stroke="#FFFFFF" fill="none"><path d="M0 190 L 1000 175" stroke-width="12"></path><path d="M255 0 L 265 700" stroke-width="10"></path><path d="M485 0 L 490 700" stroke-width="10"></path><path d="M0 390 L 1000 380" stroke-width="9"></path><path d="M0 600 L 700 590" stroke-width="7"></path></g>
+        <g stroke="#AFC0D6" fill="none" stroke-width="1"><path d="M0 190 L 1000 175"></path><path d="M255 0 L 265 700"></path><path d="M485 0 L 490 700"></path></g>
+        <path d="M0 40 L 960 40 L 940 700" fill="none" stroke="#193661" stroke-width="1.2" stroke-dasharray="10 4" opacity=".6"></path>
+        <g font-family="Archivo" font-weight="700" font-size="13" letter-spacing="1.6" fill="#3D5A80"><text x="96" y="76">TATNUCK</text><text x="520" y="70">DOWNTOWN</text><text x="104" y="376">WEST SIDE</text><text x="508" y="246">GRAFTON HILL</text><text x="284" y="428">MAIN SOUTH</text><text x="510" y="566">VERNON HILL</text><text x="322" y="282" fill="#3D5A80">ELM PARK</text></g>
+        <text x="750" y="380" font-family="Archivo" font-weight="700" font-size="12" letter-spacing="1.4" fill="#FFFFFF" transform="rotate(-82 760 380)">LAKE QUINSIGAMOND</text>
+        <sc-if value="{{showRail}}" hint-placeholder-val="{{false}}">
+          <path d="M560 300 L 700 330 L 1000 360" fill="none" stroke="#FAAF40" stroke-width="5"></path>
+          <rect x="552" y="292" width="16" height="16" fill="#FAAF40" stroke="#121A2B" stroke-width="1.5"></rect>
+          <text x="576" y="290" font-family="Archivo" font-weight="700" font-size="13" fill="#121A2B">Union Station</text>
+        </sc-if>
+        <sc-if value="{{drawing}}" hint-placeholder-val="{{false}}">
+          <path d="M80 80 L 300 60 L 330 250 L 260 420 L 90 400 Z" fill="rgba(250,175,64,.16)" stroke="#121A2B" stroke-width="2.5" class="draw-line"></path>
+          <g fill="#FAAF40" stroke="#121A2B" stroke-width="1.5"><rect x="74" y="74" width="12" height="12"></rect><rect x="294" y="54" width="12" height="12"></rect><rect x="324" y="244" width="12" height="12"></rect><rect x="254" y="414" width="12" height="12"></rect><rect x="84" y="394" width="12" height="12"></rect></g>
+        </sc-if>
+      </svg>
+
+      <sc-if value="{{clustered}}" hint-placeholder-val="{{false}}">
+        <sc-for list="{{clusters}}" as="c" hint-placeholder-count="3">
+          <button class="cluster" style="left: {{c.left}}; top: {{c.top}};" onClick="{{zoomIn}}" aria-label="{{c.aria}}">{{c.n}}</button>
+        </sc-for>
+      </sc-if>
+      <sc-if value="{{expanded}}" hint-placeholder-val="{{true}}">
+        <sc-for list="{{pins}}" as="p" hint-placeholder-count="10">
+          <button class="{{p.cls}}" style="left: {{p.left}}; top: {{p.top}};" onClick="{{p.pick}}" onMouseEnter="{{p.hover}}" onMouseLeave="{{unhover}}" aria-label="{{p.aria}}" aria-pressed="{{p.pressed}}">{{p.short}}</button>
+        </sc-for>
+      </sc-if>
+
+      <div style="position: absolute; top: 16px; left: 16px; display: flex; gap: 8px; flex-wrap: wrap; max-width: calc(100% - 120px);">
+        <button class="{{drawCls}}" onClick="{{toggleDraw}}" aria-pressed="{{drawPressed}}" style="box-shadow: 0 8px 24px rgba(15,35,66,.18);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M5 7l6-3 9 4-2 10-11 2z" stroke-dasharray="2.5 2"></path></svg>{{drawLabel}}</button>
+        <sc-if value="{{drawPending}}" hint-placeholder-val="{{false}}">
+          <button class="ctl ctl-gold" onClick="{{applyDraw}}" style="box-shadow: 0 8px 24px rgba(15,35,66,.18);">Search inside this shape</button>
+        </sc-if>
+        <button class="{{railCls}}" onClick="{{toggleRail}}" aria-pressed="{{railPressed}}" style="box-shadow: 0 8px 24px rgba(15,35,66,.18);">Commuter rail</button>
+      </div>
+
+      <div style="position: absolute; top: 16px; right: 16px; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(15,35,66,.18);">
+        <button class="mapbtn" onClick="{{zoomIn}}" aria-label="Zoom in"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M12 5v14M5 12h14"></path></svg></button>
+        <button class="mapbtn" onClick="{{zoomOut}}" aria-label="Zoom out" style="border-top: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M5 12h14"></path></svg></button>
+        <button class="mapbtn" aria-label="Show my location" style="border-top: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg></button>
+      </div>
+
+      <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
+        <div style="position: absolute; right: 16px; bottom: 56px; width: 340px; background: var(--white); border: 1.5px solid var(--navy); box-shadow: 0 8px 24px rgba(15,35,66,.18); display: grid; grid-template-columns: 110px minmax(0,1fr);">
+          <span style="background: {{sel.tint}}; display: block; min-height: 110px;"></span>
+          <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+            <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.25rem;">{{sel.price}}</span>
+            <span style="font-weight: 600; font-size: .875rem;">{{sel.addr}}</span>
+            <span class="ref" style="font-size: .6875rem;">{{sel.place}}</span>
+            <div style="display: flex; gap: 12px; margin-top: 4px;"><a href="Listing.dc.html" style="font-weight: 600; font-size: .875rem;">View listing</a><a href="Area.dc.html" style="font-weight: 600; font-size: .875rem;">Area Sheet</a></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="position: absolute; left: 16px; bottom: 16px; background: var(--white); border: 1px solid var(--rule-strong); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 8px 24px rgba(15,35,66,.12);">
+        <span class="ref" style="font-size: .6875rem;">This view</span>
+        <span style="font-family: var(--f-serif); font-size: 1.125rem; color: var(--navy);">Worcester, West Side to Downtown</span>
+        <a href="Area.dc.html" style="font-weight: 600; font-size: .875rem;">Read the Sheets for this view</a>
+      </div>
+      <span class="mono" style="position: absolute; right: 16px; bottom: 16px; color: var(--slate); background: rgba(241,242,238,.85); padding: 2px 6px;">© OpenStreetMap contributors · MassGIS · schematic demo</span>
+
+      <div role="status" aria-live="polite" style="position: absolute; left: 0; right: 0; bottom: {{toastBottom}}; height: 0;">
+        <sc-if value="{{toast}}" hint-placeholder-val="{{false}}">
+          <div class="toast" style="bottom: 0;"><span>{{toastText}}</span><a href="Home.dc.html" style="color: var(--gold); font-weight: 600;">Your Atlas</a><button onClick="{{closeToast}}" aria-label="Dismiss" style="appearance: none; border: 0; background: transparent; color: var(--paper); width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.6"><path d="M2 2l8 8M10 2l-8 8"></path></svg></button></div>
+        </sc-if>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { hover: null, sel: 'a3', draw: 'off', rail: false, zoom: 2, saved: false, toast: false, types: { single: true, multi: true, condo: true, land: false } };
+  }
+  autoHide() { clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: false }), 4500); }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const tint = { single: '#F7DDA0', multi: '#EDCFC6', condo: '#D3DEEC', land: '#D7DEC6' };
+    const tname = { single: 'Single-family', multi: 'Three-family', condo: 'Condominium', land: 'Land' };
+    const L = [
+      ['a1', 'single', '$412,000', '$412K', 'Sample 01 · Tatnuck', 'Worcester · Tatnuck', '3 bd · 2 ba · 1,540 sq ft', 18, 20, true, 'Open house Sat 11–1'],
+      ['a2', 'multi', '$689,000', '$689K', 'Sample 02 · Elm Park', 'Worcester · Elm Park', '9 bd · 3 ba · 3 units', 34, 24, true, ''],
+      ['a3', 'single', '$529,000', '$529K', 'Sample 03 · West Side', 'Worcester · West Side', '4 bd · 2.5 ba · 2,210 sq ft', 20, 46, true, 'Open house Sun 12–2'],
+      ['a4', 'condo', '$298,000', '$298K', 'Sample 04 · Downtown', 'Worcester · Downtown', '2 bd · 2 ba · 1,050 sq ft', 58, 24, false, ''],
+      ['a5', 'multi', '$615,000', '$615K', 'Sample 05 · Grafton Hill', 'Worcester · Grafton Hill', '7 bd · 3 ba · 3 units', 60, 46, false, ''],
+      ['a6', 'condo', '$344,000', '$344K', 'Sample 06 · Canal District', 'Worcester · Canal District', '1 bd · 1 ba · 880 sq ft', 52, 54, false, ''],
+      ['a7', 'single', '$375,000', '$375K', 'Sample 07 · Main South', 'Worcester · Main South', '3 bd · 1.5 ba · 1,380 sq ft', 36, 70, false, ''],
+      ['a8', 'multi', '$579,000', '$579K', 'Sample 08 · Vernon Hill', 'Worcester · Vernon Hill', '8 bd · 3 ba · 3 units', 58, 74, false, ''],
+      ['a9', 'single', '$468,000', '$468K', 'Sample 09 · Tatnuck', 'Worcester · Tatnuck', '3 bd · 2 ba · 1,690 sq ft', 12, 36, true, ''],
+      ['a10', 'land', '$129,000', '$129K', 'Sample 10 · West Side', 'Worcester · West Side', '0.41 acre lot', 26, 58, true, '']
+    ];
+    const s = this.state;
+    const applied = s.draw === 'applied';
+    const vis = L.filter(l => s.types[l[1]] && (!applied || l[9]));
+    const hot = (id) => id === s.hover || id === s.sel;
+    const results = vis.map(l => ({ id: l[0], price: l[2], addr: l[4], place: l[5], facts: l[6], type: tname[l[1]], tint: tint[l[1]], oh: l[10] ? l[10] : 'Listed by [Brokerage] · MLS #[demo]',
+      cls: hot(l[0]) ? 'res res-hot' : 'res', hover: () => this.setState({ hover: l[0] }) }));
+    const pins = vis.map(l => ({ left: l[7] + '%', top: l[8] + '%', short: l[3], aria: l[2] + ', ' + l[5], pressed: l[0] === s.sel ? 'true' : 'false',
+      cls: hot(l[0]) ? 'pin pin-hot' : 'pin', pick: () => this.setState({ sel: l[0] }), hover: () => this.setState({ hover: l[0] }) }));
+    const groups = [
+      { left: '24%', top: '32%', ids: ['a1','a2','a3','a9','a10'] },
+      { left: '57%', top: '40%', ids: ['a4','a5','a6'] },
+      { left: '47%', top: '72%', ids: ['a7','a8'] }
+    ];
+    const visIds = vis.map(v => v[0]);
+    const clusters = groups.map(g => ({ left: g.left, top: g.top, n: String(g.ids.filter(i => visIds.includes(i)).length) }))
+      .filter(c => c.n !== '0').map(c => ({ ...c, aria: c.n + ' properties here. Zoom in to see them.' }));
+    const selL = L.find(l => l[0] === s.sel && visIds.includes(l[0]));
+    const typeKeys = ['single', 'multi', 'condo', 'land'];
+    const types = typeKeys.map(k => ({ label: tname[k], fill: tint[k], cls: s.types[k] ? 'ctl ctl-on' : 'ctl', pressed: String(s.types[k]),
+      toggle: () => this.setState({ types: { ...this.state.types, [k]: !this.state.types[k] } }) }));
+    const drawLabel = s.draw === 'off' ? 'Draw area' : (s.draw === 'drawing' ? 'Cancel drawing' : 'Redraw area');
+    return {
+      results, pins, clusters, types,
+      heading: applied ? 'Inside your shape' : 'Worcester',
+      count: vis.length + (vis.length === 1 ? ' demo property' : ' demo properties') + ' in this view',
+      empty: vis.length === 0,
+      clustered: s.zoom === 1, expanded: s.zoom === 2,
+      zoomIn: () => this.setState({ zoom: 2 }), zoomOut: () => this.setState({ zoom: 1, sel: null }),
+      unhover: () => this.setState({ hover: null }),
+      hasSel: !!selL && s.zoom === 2,
+      sel: selL ? { price: selL[2], addr: selL[4], place: selL[5], tint: tint[selL[1]] } : { price: '', addr: '', place: '', tint: '#fff' },
+      drawing: s.draw !== 'off', drawPending: s.draw === 'drawing', drawApplied: applied,
+      drawCls: s.draw === 'off' ? 'ctl' : 'ctl ctl-on', drawPressed: String(s.draw !== 'off'), drawLabel,
+      toggleDraw: () => this.setState({ draw: s.draw === 'off' ? 'drawing' : (s.draw === 'drawing' ? 'off' : 'drawing') }),
+      applyDraw: () => { this.setState({ draw: 'applied', toast: true, toastText: 'Shape applied. Save it to get new matches inside it.' }); this.autoHide(); },
+      clearDraw: () => this.setState({ draw: 'off', toast: false }),
+      showRail: s.rail, railCls: s.rail ? 'ctl ctl-on' : 'ctl', railPressed: String(s.rail), toggleRail: () => this.setState({ rail: !s.rail }),
+      saveLabel: s.saved ? 'Search saved' : 'Save search', saveFill: s.saved ? 'currentColor' : 'none',
+      saveSearch: () => { this.setState({ saved: !s.saved, toast: !s.saved, toastText: 'Search saved with its map area. New matches will arrive by email.' }); this.autoHide(); },
+      closeToast: () => this.setState({ toast: false }),
+      toastBottom: (!!selL && s.zoom === 2) ? '190px' : '24px',
+      toast: s.toast, toastText: s.toastText || ''
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shrewsbury, MA — Area Sheet — REWAP Brokerage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Azeret+Mono:wght@400;500&amp;family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A2B;--navy:#193661;--navy-deep:#0F2342;--gold:#FAAF40;--gold-ink:#7A4E00;
+  --paper:#F1F2EE;--paper-2:#E3E6E0;--white:#FFFFFF;
+  --brick:#A3402B;--brick-tint:#EDCFC6;--frame-tint:#F7DDA0;--stone:#7F9BBE;--stone-ink:#3D5A80;--stone-tint:#D3DEEC;
+  --slate:#4A5563;--lichen:#5F7048;--lichen-tint:#D7DEC6;--water:#4F7A9C;--mist:#AFC0D6;
+  --rule:rgba(25,54,97,.2);--rule-strong:rgba(25,54,97,.6);
+  --f-serif:"Brygada 1918",Georgia,serif;--f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:var(--navy);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--brick)}
+.on-dark a:hover,footer a:hover{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 5px var(--navy)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 48px;box-sizing:border-box}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em}
+.ref{font-stretch:72%;font-weight:600;font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-ink)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.note{font-size:.9375rem;line-height:1.5;color:var(--slate);margin:0}
+.btn{appearance:none;border:1px solid var(--navy);background:var(--navy);color:var(--paper);min-height:48px;padding:0 22px;display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;cursor:pointer;text-decoration:none;box-sizing:border-box;transition:background .24s var(--ease-out)}
+.btn:hover{background:var(--navy-deep);color:var(--paper)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F39C1F;color:var(--ink)}
+.btn-line{background:transparent;color:var(--navy)}
+.btn-line:hover{background:var(--navy);color:var(--paper)}
+.layout{display:grid;grid-template-columns:232px minmax(0,1fr);gap:56px}
+.toc{position:sticky;top:24px;align-self:start;display:flex;flex-direction:column;border-top:1px solid var(--rule-strong)}
+.toc a{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--rule);text-decoration:none;font-weight:600;font-size:.9375rem;color:var(--slate);min-height:24px}
+.toc a:hover{color:var(--navy)}
+.toc .on{color:var(--navy);border-bottom:2px solid var(--gold)}
+.sec{padding:80px 0 88px;border-top:1px solid var(--rule-strong);scroll-margin-top:24px}
+.sec:first-child{border-top:0;padding-top:0}
+.h2{font-family:var(--f-serif);font-weight:600;font-size:clamp(2rem,3.4vw,3rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 20px;color:var(--navy);text-wrap:balance}
+.lede{font-family:var(--f-serif);font-size:1.3125rem;line-height:1.55;max-width:58ch;margin:0}
+.prose{font-family:var(--f-serif);font-size:1.125rem;line-height:1.65;max-width:64ch;margin:0}
+.row{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:28px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.toggle{appearance:none;border:1px solid var(--navy);background:var(--white);color:var(--navy);min-height:44px;padding:0 12px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:.875rem}
+.toggle-on{background:var(--navy);color:var(--paper)}
+.typ{display:flex;flex-direction:column;gap:12px;padding:22px 22px 26px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--white)}
+.skip{position:absolute;left:-9999px;top:16px;z-index:20;background:var(--navy);color:var(--paper);padding:12px 16px;font-weight:600}
+.skip:hover{color:var(--gold)}
+.skip:focus{left:16px;color:var(--paper)}
+@media (max-width:960px){
+  .hdr-line{display:none !important}
+  .logo-lg{width:130px !important}
+  .wrap{padding:0 20px}
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  .toc{position:static;flex-direction:row;overflow-x:auto;gap:18px;border-top:0;border-bottom:1px solid var(--rule-strong);margin-bottom:40px;white-space:nowrap}
+  .toc a{border-bottom:0}
+  .row{grid-template-columns:minmax(0,1fr);gap:6px}
+  .g2,.g3,.g4{grid-template-columns:minmax(0,1fr) !important}
+  .head-grid{grid-template-columns:minmax(0,1fr) !important}
+}
+</style>
+</helmet>
+
+<div style="background: var(--paper); min-height: 100vh;">
+
+<a class="skip" href="#overview">Skip to the Sheet</a>
+<header style="background: var(--paper); border-bottom: 1px solid var(--rule-strong);">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px;">
+    <a href="Home.dc.html" style="display: inline-flex;" aria-label="REWAP Brokerage home"><img class="logo-lg" src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 170px; display: block;"></a>
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
+      <a class="btn btn-line hdr-line" href="Search.dc.html">Properties in Shrewsbury</a>
+      <a class="btn" href="Home.dc.html#meet">Talk to REWAP</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="on-dark" aria-labelledby="town" style="background: var(--navy); color: var(--paper);">
+  <div class="wrap" style="padding-top: 28px; padding-bottom: 0;">
+    <nav aria-label="Breadcrumb"><ol style="list-style: none; margin: 0; padding: 0; display: flex; gap: 10px; font-size: .875rem; color: var(--mist); flex-wrap: wrap;"><li><a href="Home.dc.html" style="color: var(--mist);">The Atlas</a></li><li aria-hidden="true">/</li><li><a href="Home.dc.html#atlas" style="color: var(--mist);">Central Massachusetts</a></li><li aria-hidden="true">/</li><li aria-current="page" style="color: var(--paper);">Shrewsbury</li></ol></nav>
+    <div class="head-grid" style="display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 48px; padding: 56px 0 0; align-items: end;">
+      <div style="display: flex; flex-direction: column; gap: 22px; padding-bottom: 56px;">
+        <h1 id="town" style="margin: 0; font-family: var(--f-serif); font-weight: 600; font-size: clamp(3.5rem, 8vw, 7rem); line-height: .9; letter-spacing: -.035em;">Shrewsbury</h1>
+        <p style="margin: 0; font-family: var(--f-serif); font-size: 1.375rem; line-height: 1.5; max-width: 40ch; color: var(--paper);">A lake town on Worcester’s eastern edge, where Route 9 crosses Lake Quinsigamond and residential streets of many eras spread east from the shore.</p>
+        <span class="mono" style="color: var(--mist);">Town · Central Massachusetts · Worcester County · 42.30° N · 71.71° W</span>
+      </div>
+      <dl style="margin: 0; background: var(--paper); color: var(--ink); display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); border: 1.5px solid var(--paper);" class="g2">
+        <div style="padding: 16px 18px; border-right: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong);"><dt class="ref" style="font-size: .6875rem;">Sheet</dt><dd style="margin: 4px 0 0; font-weight: 600;">D-02 · Shrewsbury</dd></div>
+        <div style="padding: 16px 18px; border-bottom: 1px solid var(--rule-strong);"><dt class="ref" style="font-size: .6875rem;">Prepared by</dt><dd style="margin: 4px 0 0; font-weight: 600;">REWAP Brokerage LLC</dd></div>
+        <div style="padding: 16px 18px; border-right: 1px solid var(--rule-strong);"><dt class="ref" style="font-size: .6875rem;">Researched</dt><dd class="mono" style="margin: 4px 0 0; font-size: .875rem;">[Month YYYY]</dd></div>
+        <div style="padding: 16px 18px;"><dt class="ref" style="font-size: .6875rem;">Last reviewed</dt><dd class="mono" style="margin: 4px 0 0; font-size: .875rem;">[Month YYYY]</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<div class="wrap layout" style="padding-top: 64px;">
+  <nav class="toc" aria-label="On this Sheet">
+    <sc-for list="{{toc}}" as="t" hint-placeholder-count="9">
+      <a href="{{t.href}}" class="{{t.cls}}" onClick="{{t.pick}}"><span>{{t.label}}</span><span class="mono" style="color: var(--stone-ink);">{{t.n}}</span></a>
+    </sc-for>
+  </nav>
+
+  <div style="min-width: 0;">
+    <section id="overview" class="sec" aria-labelledby="ov">
+      <h2 class="h2" id="ov">Overview</h2>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 40px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 22px;">
+          <p class="lede">Shrewsbury sits directly east of Worcester, separated from the city by Lake Quinsigamond. Route 9 crosses the lake and runs through the middle of town; Route 20 follows the south and I-290 cuts across the north.</p>
+          <p class="prose">For buyers, the town reads in layers: lakeside streets on the western edge, the town center and common, and residential neighborhoods built across several decades beyond them. This Sheet explains those layers, how people get around, and where the everyday landmarks are.</p>
+        </div>
+        <dl style="margin: 0; border-top: 1px solid var(--rule-strong);">
+          <div style="display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule);"><dt class="ref">Borders</dt><dd style="margin: 0; line-height: 1.5;">Worcester, Boylston, Northborough, Westborough, Grafton</dd></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule);"><dt class="ref">Water</dt><dd style="margin: 0; line-height: 1.5;">Lake Quinsigamond, Flint Pond</dd></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule);"><dt class="ref">Main roads</dt><dd style="margin: 0; line-height: 1.5;">Route 9, Route 20, Route 140, I-290</dd></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule);"><dt class="ref">Nearest rail</dt><dd style="margin: 0; line-height: 1.5;">Grafton, Westborough and Worcester Union Station on the Worcester Line</dd></div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule);"><dt class="ref">Official</dt><dd style="margin: 0; line-height: 1.5;"><a href="#overview">Town of Shrewsbury website</a> · <a href="#overview">Assessor’s records</a></dd></div>
+        </dl>
+      </div>
+
+      <figure style="margin: 40px 0 0; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <figcaption style="font-weight: 700; color: var(--navy);">Shrewsbury, schematic</figcaption>
+          <div role="group" aria-label="Map layers" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="{{lyRoadsCls}}" aria-pressed="{{lyRoadsP}}" onClick="{{tRoads}}">Roads</button>
+            <button class="{{lyParksCls}}" aria-pressed="{{lyParksP}}" onClick="{{tParks}}">Parks and water</button>
+            <button class="{{lyMarksCls}}" aria-pressed="{{lyMarksP}}" onClick="{{tMarks}}">Landmarks</button>
+          </div>
+        </div>
+        <svg viewBox="0 0 1000 460" role="img" aria-label="Schematic map of Shrewsbury: Lake Quinsigamond on the western border, Route 9 across the middle, Route 20 to the south, I-290 to the north, with Dean Park, the town center and the Artemas Ward House marked." style="width: 100%; display: block; background: var(--paper-2); border: 1px solid var(--rule-strong);">
+          <path d="M140 40 L 520 20 L 860 60 L 940 220 L 880 420 L 520 440 L 210 420 L 120 260 Z" fill="#F1F2EE" stroke="#193661" stroke-width="1.5"></path>
+          <g fill="none" stroke="#193661" stroke-opacity=".12" stroke-width="1"><path d="M300 40 L 320 430"></path><path d="M460 30 L 470 440"></path><path d="M620 30 L 640 440"></path><path d="M780 50 L 790 425"></path><path d="M130 150 L 900 130"></path><path d="M150 330 L 910 320"></path></g>
+          <sc-if value="{{lyParks}}" hint-placeholder-val="{{true}}">
+            <path d="M150 30 C 120 110, 170 170, 150 240 S 120 360, 170 440 L 205 440 C 160 360, 196 290, 186 230 S 160 110, 186 30 Z" fill="#4F7A9C"></path>
+            <path d="M170 380 C 210 370, 250 390, 262 420 C 230 436, 196 434, 172 420 Z" fill="#4F7A9C"></path>
+            <rect x="470" y="196" width="60" height="44" fill="#D7DEC6" stroke="#5F7048"></rect>
+            <text x="84" y="250" font-family="Archivo" font-weight="700" font-size="11" letter-spacing="1.2" fill="#3D5A80" transform="rotate(-90 84 250)" text-anchor="middle">LAKE QUINSIGAMOND</text>
+            <text x="270" y="448" font-family="Archivo" font-weight="700" font-size="11" letter-spacing="1.2" fill="#3D5A80">FLINT POND</text>
+          </sc-if>
+          <sc-if value="{{lyRoads}}" hint-placeholder-val="{{true}}">
+            <g fill="none" stroke-linecap="round">
+              <path d="M0 220 L 1000 200" stroke="#FFFFFF" stroke-width="9"></path><path d="M0 220 L 1000 200" stroke="#193661" stroke-width="2"></path>
+              <path d="M0 390 L 1000 360" stroke="#FFFFFF" stroke-width="7"></path><path d="M0 390 L 1000 360" stroke="#193661" stroke-width="1.5"></path>
+              <path d="M0 90 L 400 70 L 1000 40" stroke="#FFFFFF" stroke-width="10"></path><path d="M0 90 L 400 70 L 1000 40" stroke="#193661" stroke-width="2.5"></path>
+              <path d="M560 0 L 540 460" stroke="#FFFFFF" stroke-width="6"></path><path d="M560 0 L 540 460" stroke="#193661" stroke-width="1.2"></path>
+            </g>
+            <g font-family="Azeret Mono" font-size="12" fill="#F1F2EE">
+              <rect x="300" y="196" width="54" height="20" fill="#193661"></rect><text x="327" y="210" text-anchor="middle">RT 9</text>
+              <rect x="680" y="356" width="60" height="20" fill="#193661"></rect><text x="710" y="370" text-anchor="middle">RT 20</text>
+              <rect x="700" y="38" width="60" height="20" fill="#193661"></rect><text x="730" y="52" text-anchor="middle">I-290</text>
+              <rect x="556" y="270" width="64" height="20" fill="#193661"></rect><text x="588" y="284" text-anchor="middle">RT 140</text>
+            </g>
+          </sc-if>
+          <sc-if value="{{lyMarks}}" hint-placeholder-val="{{true}}">
+            <g font-family="Archivo" font-weight="700" font-size="13" fill="#121A2B">
+              <circle cx="560" cy="160" r="8" fill="#FAAF40" stroke="#121A2B" stroke-width="1.5"></circle><text x="576" y="156">Town center</text>
+              <circle cx="500" cy="218" r="6" fill="#5F7048" stroke="#121A2B" stroke-width="1"></circle><text x="420" y="262">Dean Park</text>
+              <circle cx="760" cy="120" r="6" fill="#193661"></circle><text x="776" y="125">Artemas Ward House</text>
+              <circle cx="214" cy="212" r="6" fill="#193661"></circle><text x="228" y="248">White City site, Route 9</text>
+            </g>
+          </sc-if>
+          <text x="980" y="440" text-anchor="end" font-family="Azeret Mono" font-size="11" fill="#4A5563">Schematic · positions approximate</text>
+          <g transform="translate(950 50)"><path d="M0 -18 L 8 10 L 0 4 L -8 10 Z" fill="#193661"></path><text y="26" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="11" fill="#193661">N</text></g>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="housing" class="sec" aria-labelledby="hc">
+      <h2 class="h2" id="hc">Housing character</h2>
+      <p class="lede" style="margin-bottom: 36px;">The town’s housing is mostly detached and wood-frame, with condominium and townhouse communities along the main roads. Knowing the type tells you what to inspect.</p>
+      <div class="g4" style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);">
+        <div class="typ">
+          <svg viewBox="0 0 160 90" aria-hidden="true" style="width: 100%; max-width: 160px;"><g fill="none" stroke="#193661" stroke-width="1.4"><path d="M10 84h140"></path><path d="M24 84V46h112v38"></path><path d="M18 48 80 14l62 34"></path><rect x="72" y="58" width="16" height="26"></rect><rect x="38" y="56" width="16" height="14"></rect><rect x="106" y="56" width="16" height="14"></rect><path d="M60 30h40v-8"></path></g></svg>
+          <span style="font-family: var(--f-serif); font-size: 1.375rem; font-weight: 600; color: var(--navy);">Capes</span>
+          <span class="note">Steep roofs and dormers. Ask about insulation in the knee walls and the age of the roof.</span>
+        </div>
+        <div class="typ">
+          <svg viewBox="0 0 160 90" aria-hidden="true" style="width: 100%; max-width: 160px;"><g fill="none" stroke="#193661" stroke-width="1.4"><path d="M10 84h140"></path><path d="M28 84V34h104v50"></path><path d="M22 36 80 10l58 26"></path><rect x="72" y="62" width="16" height="22"></rect><rect x="40" y="42" width="14" height="14"></rect><rect x="106" y="42" width="14" height="14"></rect><rect x="40" y="64" width="14" height="14"></rect><rect x="106" y="64" width="14" height="14"></rect><rect x="73" y="42" width="14" height="14"></rect></g></svg>
+          <span style="font-family: var(--f-serif); font-size: 1.375rem; font-weight: 600; color: var(--navy);">Colonials</span>
+          <span class="note">Two full stories, common in newer subdivisions. Compare lot sizes and the age of mechanicals.</span>
+        </div>
+        <div class="typ">
+          <svg viewBox="0 0 160 90" aria-hidden="true" style="width: 100%; max-width: 160px;"><g fill="none" stroke="#193661" stroke-width="1.4"><path d="M6 84h148"></path><path d="M14 84V54h132v30"></path><path d="M8 56 30 40h100l22 16"></path><rect x="62" y="64" width="14" height="20"></rect><rect x="26" y="62" width="24" height="12"></rect><rect x="96" y="62" width="34" height="12"></rect></g></svg>
+          <span style="font-family: var(--f-serif); font-size: 1.375rem; font-weight: 600; color: var(--navy);">Ranches</span>
+          <span class="note">Single-level homes, many mid-century. Check original electrical and heating systems.</span>
+        </div>
+        <div class="typ">
+          <svg viewBox="0 0 160 90" aria-hidden="true" style="width: 100%; max-width: 160px;"><g fill="none" stroke="#193661" stroke-width="1.4"><path d="M6 84h148"></path><path d="M12 84V40l24-16 24 16v44"></path><path d="M60 84V40l24-16 24 16v44"></path><path d="M108 84V40l24-16 24 16v44"></path><rect x="28" y="62" width="14" height="22"></rect><rect x="76" y="62" width="14" height="22"></rect><rect x="124" y="62" width="14" height="22"></rect></g></svg>
+          <span style="font-family: var(--f-serif); font-size: 1.375rem; font-weight: 600; color: var(--navy);">Condominiums</span>
+          <span class="note">Townhouse and garden-style communities. Read the master deed, budget and reserve study.</span>
+        </div>
+      </div>
+      <div style="margin-top: 28px; padding: 22px 26px; background: var(--white); border: 1px solid var(--rule-strong); display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 14px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#193661" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><rect x="5" y="3" width="14" height="18"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg>
+        <p style="margin: 0; line-height: 1.6;"><strong style="color: var(--navy);">From the lawyer’s desk.</strong> Before an offer on any older or lakeside property, confirm whether it is on town sewer or a private septic system, and check for recorded easements on the deed and plot plan at the Worcester District Registry of Deeds.</p>
+      </div>
+    </section>
+
+    <section id="market" class="sec" aria-labelledby="ms">
+      <h2 class="h2" id="ms">Market snapshot</h2>
+      <p class="lede" style="margin-bottom: 32px;">Readings for Shrewsbury, by property type. Every figure carries its source, period and number of sales.</p>
+      <div class="g3" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border: 1px solid var(--rule-strong); background: var(--white);">
+        <div style="padding: 22px 24px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;"><span class="ref">Median sale price · single-family</span><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2.5rem; color: var(--slate);">—</span><span class="mono" style="color: var(--slate);">[MLS PIN] · [period] · n=[000]</span></div>
+        <div style="padding: 22px 24px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;"><span class="ref">Median sale price · condominium</span><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2.5rem; color: var(--slate);">—</span><span class="mono" style="color: var(--slate);">[MLS PIN] · [period] · n=[000]</span></div>
+        <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px;"><span class="ref">Median days on market</span><span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 2.5rem; color: var(--slate);">—</span><span class="mono" style="color: var(--slate);">[MLS PIN] · [period] · n=[000]</span></div>
+      </div>
+      <p class="note" style="margin-top: 14px;">Empty until the MLS feed is connected. REWAP does not publish estimated or sample market figures on live Sheets.</p>
+    </section>
+
+    <section id="commute" class="sec" aria-labelledby="cm">
+      <h2 class="h2" id="cm">Commuting</h2>
+      <p class="lede" style="margin-bottom: 28px;">Travel times are measured by REWAP at a stated time of day and re-checked when the Sheet is reviewed.</p>
+      <div style="border-top: 1px solid var(--rule-strong);">
+        <div class="row"><span style="font-weight: 700; color: var(--navy);">Downtown Worcester</span><span style="line-height: 1.5;">West on Route 9 across the lake, or I-290 from the north of town.</span><span class="mono tnum" style="color: var(--slate);">[00] min · weekday 8 am · measured [date]</span></div>
+        <div class="row"><span style="font-weight: 700; color: var(--navy);">Boston by rail</span><span style="line-height: 1.5;">Worcester Line from Grafton or Westborough station, or from Union Station in Worcester.</span><span class="mono tnum" style="color: var(--slate);">Per MBTA schedule · [checked date]</span></div>
+        <div class="row"><span style="font-weight: 700; color: var(--navy);">Boston by car</span><span style="line-height: 1.5;">Route 9 east, or I-290 to I-495 and the Mass Pike.</span><span class="mono tnum" style="color: var(--slate);">[00] min · weekday 8 am · measured [date]</span></div>
+        <div class="row"><span style="font-weight: 700; color: var(--navy);">Route 9 corridor</span><span style="line-height: 1.5;">Retail and offices toward Westborough and Framingham.</span><span class="mono tnum" style="color: var(--slate);">[00] min · measured [date]</span></div>
+      </div>
+    </section>
+
+    <section id="landmarks" class="sec" aria-labelledby="lm">
+      <h2 class="h2" id="lm">Landmarks and parks</h2>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0; border-top: 1px solid var(--rule-strong);">
+        <div style="padding: 24px 28px 24px 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--f-serif); font-size: 1.5rem; font-weight: 600; color: var(--navy);">Lake Quinsigamond</span><span class="note">The long lake on the Worcester line, with the Route 9 crossing and the shoreline neighborhoods that face it.</span></div>
+        <div style="padding: 24px 0 24px 28px; border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--f-serif); font-size: 1.5rem; font-weight: 600; color: var(--navy);">Dean Park</span><span class="note">The town’s main park near the center.</span></div>
+        <div style="padding: 24px 28px 24px 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--f-serif); font-size: 1.5rem; font-weight: 600; color: var(--navy);">Artemas Ward House</span><span class="note">The homestead of the Revolutionary War general, a museum property in town.</span></div>
+        <div style="padding: 24px 0 24px 28px; border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--f-serif); font-size: 1.5rem; font-weight: 600; color: var(--navy);">White City</span><span class="note">Site of the lakeside amusement park of the early twentieth century, now a shopping plaza on Route 9.</span></div>
+      </div>
+    </section>
+
+    <section id="commercial" class="sec" aria-labelledby="cd">
+      <h2 class="h2" id="cd">Commercial districts</h2>
+      <p class="prose">Most everyday shopping runs along Route 9, from the lake crossing eastward, with a second corridor on Route 20 to the south. The town center around the common holds civic buildings and smaller businesses. A full district guide, with recent and proposed development drawn from public planning records, is in preparation.</p>
+    </section>
+
+    <section id="schools" class="sec" aria-labelledby="sc">
+      <h2 class="h2" id="sc">Schools</h2>
+      <p class="prose">REWAP links to official school information rather than rating schools. District profiles, enrollment and assessment data are published by the Massachusetts Department of Elementary and Secondary Education.</p>
+      <a class="btn btn-line" href="#schools" style="margin-top: 20px;">Official district profile<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></a>
+    </section>
+
+    <section id="properties" class="sec" aria-labelledby="pr">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 28px;">
+        <h2 class="h2" id="pr" style="margin: 0;">Properties in Shrewsbury</h2>
+        <span class="ref" style="background: var(--frame-tint); color: var(--gold-ink); padding: 6px 10px;">Sample listings · IDX not yet connected</span>
+      </div>
+      <div class="g3" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);">
+        <sc-for list="{{props}}" as="p" hint-placeholder-count="3">
+          <article style="background: var(--white); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column;">
+            <a href="Listing.dc.html" style="display: block; aspect-ratio: 16 / 10; background: {{p.tint}}; position: relative;" aria-label="{{p.aria}}"><span class="mono" style="position: absolute; left: 12px; bottom: 10px; color: var(--navy);">Photo · [listing image]</span></a>
+            <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px;">
+              <span class="tnum" style="font-stretch: 75%; font-weight: 700; font-size: 1.5rem;">$[000,000]</span>
+              <a href="Listing.dc.html" style="font-weight: 600; color: var(--ink); text-decoration: none;">[00] Example Road</a>
+              <span class="ref" style="font-size: .75rem;">{{p.place}}</span>
+              <span class="mono" style="color: var(--slate); padding-top: 8px; border-top: 1px solid var(--rule);">Listed by [Brokerage] · MLS #[00000000]</span>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+      <a class="btn" href="Search.dc.html" style="margin-top: 24px;">Search all of Shrewsbury on the map</a>
+    </section>
+
+    <section id="sources" class="sec" aria-labelledby="so">
+      <h2 class="h2" id="so">Sources and method</h2>
+      <div class="g2" style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 40px;">
+        <ul style="margin: 0; padding-left: 20px; line-height: 1.7;">
+          <li>Town of Shrewsbury: assessor, planning and municipal records</li>
+          <li>MassGIS: town boundaries, parcels, open space and water</li>
+          <li>MBTA: Worcester Line schedules</li>
+          <li>MLS PIN via IDX: listings and Readings</li>
+          <li>Massachusetts DESE: school profiles</li>
+        </ul>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <p class="note">Sheets are written by REWAP from public records and first-hand visits, reviewed at least twice a year, and dated. Corrections are logged at the end of the Sheet.</p>
+          <p class="note">This Sheet describes places, buildings and services. It does not describe residents or recommend areas based on who lives there.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="nb" style="padding-bottom: 104px;">
+      <h2 class="h2" id="nb">Neighboring Sheets</h2>
+      <div class="g4" style="display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); border-top: 1px solid var(--rule-strong);">
+        <a href="Home.dc.html#atlas" style="padding: 18px 16px 18px 0; border-bottom: 1px solid var(--rule); text-decoration: none; display: flex; flex-direction: column; gap: 4px;"><span style="font-family: var(--f-serif); font-size: 1.375rem; font-weight: 600;">Worcester</span><span class="mono" style="color: var(--slate);">West · Sheet</span></a>
+        <a href="Home.dc.html#atlas" style="padding: 18px 16px; border-bottom: 1px solid var(--rule); text-decoration: none; display: flex; flex-direction: column; gap: 4px;"><span style="font-family: var(--f-serif); font-size: 1.375rem; font-weight: 600;">Grafton</span><span class="mono" style="color: var(--slate);">South · Sheet</span></a>
+        <span style="padding: 18px 16px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px; color: var(--slate);"><span style="font-family: var(--f-serif); font-size: 1.375rem;">Boylston</span><span class="mono">North · planned</span></span>
+        <span style="padding: 18px 16px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px; color: var(--slate);"><span style="font-family: var(--f-serif); font-size: 1.375rem;">Northborough</span><span class="mono">Northeast · planned</span></span>
+        <span style="padding: 18px 16px; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px; color: var(--slate);"><span style="font-family: var(--f-serif); font-size: 1.375rem;">Westborough</span><span class="mono">East · planned</span></span>
+      </div>
+    </section>
+  </div>
+</div>
+</main>
+
+<footer style="background: var(--navy-deep); color: var(--paper);">
+  <div class="wrap" style="padding-top: 48px; padding-bottom: 48px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center;">
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <div style="background: var(--paper); padding: 10px 14px;"><img src="/_blob/3affeedba6a8e06ff490ab248ea48c72" alt="REWAP Brokerage" style="width: 140px; display: block;"></div>
+      <span style="color: var(--mist); font-size: .875rem; line-height: 1.5;">REWAP Brokerage LLC · 652 Park Ave, Worcester, MA 01603 · Equal Housing Opportunity</span>
+    </div>
+    <span class="mono" style="color: var(--mist);">Sheet D-02 · Shrewsbury · v[0.0]</span>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sec: 'overview', roads: true, parks: true, marks: true }; }
+  renderVals() {
+    const T = [['overview','Overview'],['housing','Housing character'],['market','Market snapshot'],['commute','Commuting'],['landmarks','Landmarks and parks'],['commercial','Commercial districts'],['schools','Schools'],['properties','Properties'],['sources','Sources and method']];
+    const toc = T.map((t, k) => ({ href: '#' + t[0], label: t[1], n: String(k + 1).padStart(2, '0'), cls: this.state.sec === t[0] ? 'on' : '', pick: () => this.setState({ sec: t[0] }) }));
+    const s = this.state;
+    const cls = (b) => b ? 'toggle toggle-on' : 'toggle';
+    return {
+      toc,
+      lyRoads: s.roads, lyParks: s.parks, lyMarks: s.marks,
+      lyRoadsCls: cls(s.roads), lyParksCls: cls(s.parks), lyMarksCls: cls(s.marks),
+      lyRoadsP: String(s.roads), lyParksP: String(s.parks), lyMarksP: String(s.marks),
+      tRoads: () => this.setState({ roads: !s.roads }), tParks: () => this.setState({ parks: !s.parks }), tMarks: () => this.setState({ marks: !s.marks }),
+      props: [
+        { tint: '#D3DEEC', place: 'Shrewsbury · near Lake Quinsigamond', aria: 'Sample listing near Lake Quinsigamond' },
+        { tint: '#F7DDA0', place: 'Shrewsbury · off Route 9', aria: 'Sample listing off Route 9' },
+        { tint: '#D7DEC6', place: 'Shrewsbury · east of the center', aria: 'Sample listing east of the town center' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
